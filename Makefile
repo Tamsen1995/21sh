@@ -5,6 +5,7 @@ NAME = 21sh
 SRC = src/main.c \
 	src/init_env.c \
 	src/init_shell.c \
+	src/free_shell.c \
 
 
 OBJ = $(addsuffix .o, $(basename $(SRC)))

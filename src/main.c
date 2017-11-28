@@ -11,7 +11,7 @@ int main(int ac, char **av, char **envv)
     // Some kind of loop
     // make sure to pair every malloc with a free
     // The get_next_line could be useful in order to get a buffer
-
+    free_shell(shell);
     return(0);
 }
 
