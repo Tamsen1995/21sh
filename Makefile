@@ -3,6 +3,8 @@ FLAGS = -Wall -Wextra -Werror -I includes
 LIBFT = libft/libft.a
 NAME = 21sh
 SRC = src/main.c \
+	src/init_env.c \
+	src/init_shell.c \
 
 
 OBJ = $(addsuffix .o, $(basename $(SRC)))
