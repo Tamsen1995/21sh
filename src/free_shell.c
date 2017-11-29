@@ -1,4 +1,4 @@
-#include "../includes/twenty_one_sh.h"
+#include "../includes/ft_sh.h"
 
 /*
 ** Takes in an env_var and frees it

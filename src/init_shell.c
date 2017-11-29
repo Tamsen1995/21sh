@@ -1,4 +1,4 @@
-#include "../includes/twenty_one_sh.h"
+#include "../includes/ft_sh.h"
 
 // initiaing the shell and the data required for it
 t_shell     *init_shell(int ac, char **av, char **envv)

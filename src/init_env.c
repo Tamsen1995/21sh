@@ -1,4 +1,4 @@
-#include "../includes/twenty_one_sh.h"
+#include "../includes/ft_sh.h"
 
 // allocates a new environment variables list element
 t_env       *ft_new_env(char *name, char *value)
