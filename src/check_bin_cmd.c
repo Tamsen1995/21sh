@@ -19,7 +19,7 @@ T_BOOL        check_bin_dirs(t_shell *shell)
     bin_dirs = ft_strsplit(shell->path_var, ':');
     while (bin_dirs[i])
     {
-        if (check_directory(bin_dirs[i], shell->args[0]) == TRUE)
+        if (check_directory(bin_dirs[i], shell->cmds->args[0]) == TRUE)
         {
             if (shell->bin_dir) // Whenever the bin_dir has already been allocated I have to free it before re-assigning it
                 ft_strfree(shell->bin_dir);

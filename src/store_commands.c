@@ -12,6 +12,7 @@ t_cmds      *ft_new_cmd(char *command)
         fatal("Error: could not allocate env var list elem in ft_new_env");
     new->next = NULL;
     new->prev = NULL;
+    new->args = NULL;
     new->args = ft_strsplit(command, ' ');
     return (new);
 }

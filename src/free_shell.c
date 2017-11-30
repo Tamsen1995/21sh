@@ -35,24 +35,6 @@ void        free_env(t_env *env)
 }
 
 /*
-** frees the argument variables of the shell
-*/
-
-void        free_args(t_shell *shell)
-{
-    int i;
-
-    i = 0;
-    if (!shell)
-        fatal("Error in (free_args)");
-    while (shell->args[i])
-    {
-        free(shell->args[i]);
-        i++;
-    }
-}
-
-/*
 ** Takes in the shell and frees it
 */
 
@@ -64,6 +46,9 @@ void        free_shell(t_shell *shell)
         free_env(shell->env);
     if (shell->bin_dir != NULL)
         ft_strfree(shell->bin_dir);
+
+// TODO        free_cmds_list(shell);
+
     free(shell);
     shell = NULL;
     // More might be implemented later as we add more variables onto the shell
