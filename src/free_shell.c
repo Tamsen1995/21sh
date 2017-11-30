@@ -40,14 +40,22 @@ void        free_env(t_env *env)
 ** the linked list
 */
 
-// NOT IN HEADER YET
-void            free_cmd(t_cmds *cmd);
+// NOT IN HEADER 
+void            free_cmd(t_cmds *cmd)
+{
+    if (cmd->args)
+        free_twod_arr(cmd->args);
+    if (cmd)
+        free(cmd);
+    cmd = NULL;
+}
 
 
 /*
 ** A function which free the list of commands in the shell backwards
 */
 
+// NOT IN HEADER
 void        free_cmds_list(t_shell *shell)
 {
     t_cmds *tmp;
