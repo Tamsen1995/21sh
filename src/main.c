@@ -53,25 +53,27 @@ void        sh_loop(t_shell *shell, char **envv)
     line = NULL;
     while (status == 1) 
     {
-        shell->args = NULL;
         ft_putstr("tamshell$> ");
         get_next_line(0, &buf);
 
         line = replace_tabs(buf);
-        shell->args = ft_strsplit(line, ' '); // This needs to look different as individual arrays will have to be put into a linked list
         shell->cmds = store_commands(line);
 
-        // This area will have to be reconstructed
 
-        shell->argc = count_args(shell->args);
-        status = sh_execute(envv, shell);
-
+        // iterating through the shell->cmds list
+        while (shell->cmds)
+        {
+            shell->argc = count_args(shell->cmds->args);
+            status = sh_execute(envv, shell);
+           // ft_putstr(shell->cmds->args[0]);
+            shell->cmds = shell->cmds->next;
+        }
         ///////////////////////////////////
 
         ft_strfree(line);
         ft_strfree(buf);
-        free_twod_arr(shell->args);
     }
+    // TODO free the shell->cmds list
 }
 
 /*

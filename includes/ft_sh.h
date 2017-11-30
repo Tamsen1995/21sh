@@ -51,7 +51,6 @@ typedef struct		s_shell
 	** linked list of commands each holding a simple args array
 	*/
 
-	char			**args; // This will be replaced with a list of commands
 	struct s_cmds	*cmds; // a list of commands
 
 

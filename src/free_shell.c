@@ -35,24 +35,6 @@ void        free_env(t_env *env)
 }
 
 /*
-** frees the argument variables of the shell
-*/
-
-void        free_args(t_shell *shell)
-{
-    int i;
-
-    i = 0;
-    if (!shell)
-        fatal("Error in (free_args)");
-    while (shell->args[i])
-    {
-        free(shell->args[i]);
-        i++;
-    }
-}
-
-/*
 ** Takes in the shell and frees it
 */
 
