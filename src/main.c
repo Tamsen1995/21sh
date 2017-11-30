@@ -61,10 +61,13 @@ void        sh_loop(t_shell *shell, char **envv)
         shell->args = ft_strsplit(line, ' '); // This needs to look different as individual arrays will have to be put into a linked list
         shell->cmds = store_commands(line);
 
-
+        // This area will have to be reconstructed
 
         shell->argc = count_args(shell->args);
         status = sh_execute(envv, shell);
+
+        ///////////////////////////////////
+
         ft_strfree(line);
         ft_strfree(buf);
         free_twod_arr(shell->args);
