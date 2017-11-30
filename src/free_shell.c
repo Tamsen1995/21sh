@@ -46,6 +46,9 @@ void        free_shell(t_shell *shell)
         free_env(shell->env);
     if (shell->bin_dir != NULL)
         ft_strfree(shell->bin_dir);
+
+// TODO        free_cmds_list(shell);
+
     free(shell);
     shell = NULL;
     // More might be implemented later as we add more variables onto the shell

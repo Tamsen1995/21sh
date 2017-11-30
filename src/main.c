@@ -59,21 +59,16 @@ void        sh_loop(t_shell *shell, char **envv)
         line = replace_tabs(buf);
         shell->cmds = store_commands(line);
 
-
-        // iterating through the shell->cmds list
         while (shell->cmds)
         {
             shell->argc = count_args(shell->cmds->args);
             status = sh_execute(envv, shell);
-           // ft_putstr(shell->cmds->args[0]);
             shell->cmds = shell->cmds->next;
         }
-        ///////////////////////////////////
-
+        
         ft_strfree(line);
         ft_strfree(buf);
     }
-    // TODO free the shell->cmds list
 }
 
 /*
