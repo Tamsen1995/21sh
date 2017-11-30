@@ -28,16 +28,49 @@ typedef struct		s_env
 	char			*value;
 }					t_env;
 
+
+/*
+** a  linked list of commands here
+*/ 
+
+typedef struct		s_cmds
+{
+	struct s_cmds	*next;
+	struct s_cmds	*prev;
+	char 			**args;
+}					t_cmds;
+
+
+
 typedef struct		s_shell
 {
 	int				argc; // Amount of arguments passed into my shell
-	char			**args;
+
+	/*
+	** Maybe instead of a simple args array we'll have a
+	** linked list of commands each holding a simple args array
+	*/
+
+	char			**args; // This will be replaced with a list of commands
+	struct s_cmds	*cmds; // a list of commands
+
+
 	struct s_env	*env; // The environment variables
 	char			*path_var; // The value of PATH
 	char			*bin_dir; // the binary folder in which the sought after CURRENT command is
 	// Add more data variables later
 }					t_shell;
 
+/*
+** 21sh starting here
+*/
+
+t_cmds      *store_commands(const char *commands);
+
+
+/*
+** 21sh ending here
+*/
 
 T_BOOL				check_builtin_path(t_shell *shell);
 int					exec_builtin(t_shell *shell);

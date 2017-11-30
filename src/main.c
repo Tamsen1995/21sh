@@ -57,16 +57,11 @@ void        sh_loop(t_shell *shell, char **envv)
         ft_putstr("tamshell$> ");
         get_next_line(0, &buf);
 
-        // This is my current "tokenization". It only splits by strings
         line = replace_tabs(buf);
-        shell->args = ft_strsplit(line, ' ');
+        shell->args = ft_strsplit(line, ' '); // This needs to look different as individual arrays will have to be put into a linked list
+        shell->cmds = store_commands(line);
 
-        /*
-        ** If there is a ; command line seperator present I must
-        ** store the individual commands, including their arguments
-        ** in some kind of data structure so that after a second
-        ** iteration of program loop, these commands can then be executed
-        */
+
 
         shell->argc = count_args(shell->args);
         status = sh_execute(envv, shell);
