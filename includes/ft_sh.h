@@ -44,20 +44,15 @@ typedef struct		s_cmds
 
 typedef struct		s_shell
 {
-	int				argc; // Amount of arguments passed into my shell
+	int					argc; // Amount of arguments passed into my shell (for each individual command)
+	struct s_cmds		*cmds; // a list of commands
+	struct s_env		*env; // The environment variables
+	char				*path_var; // The value of PATH
+	char				*bin_dir; // the binary folder in which the sought after CURRENT command is
+	struct winsize		*sz;
+	struct termios		*termold;
+	struct termios		*term;
 
-	/*
-	** Maybe instead of a simple args array we'll have a
-	** linked list of commands each holding a simple args array
-	*/
-
-	struct s_cmds	*cmds; // a list of commands
-
-
-	struct s_env	*env; // The environment variables
-	char			*path_var; // The value of PATH
-	char			*bin_dir; // the binary folder in which the sought after CURRENT command is
-	// Add more data variables later
 }					t_shell;
 
 /*
