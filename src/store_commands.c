@@ -48,7 +48,7 @@ void		ft_add_cmd(t_cmds **begin_list, char *command)
 ** returns a list with commands and their arguments
 */
 
-t_cmds      *store_commands(const char *commands)
+t_cmds      *store_commands(char *commands)
 {
     char    **cmds_arr; // an array to temporarily store the commands inside
     t_cmds  *ret;
@@ -58,6 +58,16 @@ t_cmds      *store_commands(const char *commands)
     ret = NULL;
     i = 0;
     cmds_arr = ft_strsplit(commands, ';');
+
+    // If there aren't several commands we just return the
+    // initial one
+    
+    if (!cmds_arr)
+    {
+        ft_add_cmd(&ret, commands);
+        return (ret);
+    }
+    
     while (cmds_arr[i]) // while there are potential commands
     {
         ft_add_cmd(&ret, cmds_arr[i]);

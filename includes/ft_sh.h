@@ -53,13 +53,15 @@ typedef struct		s_shell
 	struct termios		*termold;
 	struct termios		*term;
 
+
+
 }					t_shell;
 
 /*
 ** 21sh starting here
 */
 
-t_cmds      *store_commands(const char *commands);
+t_cmds      *store_commands(char *commands);
 
 
 /*

@@ -1,5 +1,25 @@
 #include "../includes/ft_sh.h"
 
+
+/*
+** A testing function to test if the previous pointer was properly implemented
+*/
+
+void        testing_prev(t_env *env)
+{
+    t_env *tmp;
+
+    tmp = env;
+    while (tmp->next)
+        tmp = tmp->next;
+    while (tmp->prev)
+    {
+        ft_putendl(tmp->name);
+        tmp = tmp->prev;
+    }
+}
+
+
 int         count_args(char **args)
 {
     int argc;
@@ -25,7 +45,8 @@ char        *replace_tabs(char *buf)
 
     i = 0;
     line = NULL;
-    line = ft_strdup(buf);
+    if (!(line = ft_strdup(buf)))
+        return (NULL);
     while (line[i])
     {
         if (line[i] == '\t')
@@ -34,6 +55,37 @@ char        *replace_tabs(char *buf)
     }
     return (line);
 }
+
+
+/*
+
+** This routine will read the characters of the line buffer
+** check them into a linked list
+** make sure of the cursor position (check for its position and modify it)
+** insert text at the appropiate line
+** attune the terminal in a way which will make the reading all the characters possible
+
+** Display the initial contents of the text buffer on the screen.
+** Get a keystroke from the user.
+** If the keystroke is a command (like delete or backspace), dispatch or carry out that command.
+** If the keystroke is a character, insert it into the text buffer (or replace the current character if not in insert mode).
+** Display the updated contents of the text buffer on the screen.
+*/
+char        *prompt_loop(void)
+{
+
+    char *buf;
+
+    buf = NULL; // TESTING
+    ft_putstr("tamshell$> ");
+    get_next_line(0, &buf);
+    // somewhere here I need to check for input
+    // to see if there is an arrow key  I need to be able
+    // to read. This will constitute for the cursor movement
+
+    return (buf);
+}
+
 
 /*
 ** the main loop of the program
@@ -53,41 +105,28 @@ void        sh_loop(t_shell *shell, char **envv)
     line = NULL;
     while (status == 1) 
     {
-        ft_putstr("tamshell$> ");
-        get_next_line(0, &buf);
 
+        buf = prompt_loop();
+        
         line = replace_tabs(buf);
         shell->cmds = store_commands(line);
 
+        // Executes the list of commands that was given to the program
+        // This list of commands is seperated by the ";" sign
         while (shell->cmds)
         {
             shell->argc = count_args(shell->cmds->args);
             status = sh_execute(envv, shell);
             shell->cmds = shell->cmds->next;
         }
-        
+
+        ////////////////////////////////////
+
         ft_strfree(line);
         ft_strfree(buf);
     }
 }
 
-/*
-** A testing function to test if the previous pointer was properly implemented
-*/
-
-void        testing_prev(t_env *env)
-{
-    t_env *tmp;
-
-    tmp = env;
-    while (tmp->next)
-        tmp = tmp->next;
-    while (tmp->prev)
-    {
-        ft_putendl(tmp->name);
-        tmp = tmp->prev;
-    }
-}
 
 /*
 ** Initiating the shell

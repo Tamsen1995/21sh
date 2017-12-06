@@ -45,20 +45,28 @@ char			*make_bin_cmd(t_shell *shell)
 void			cmd_not_found(t_shell *shell)
 {
 	shell = NULL; //TESTING
-	/*
+
 
 	char *command;
 
 	command = NULL;
-	if (!shell || !shell->args[0])
-		fatal("Error in (cmd_not_found");
-	ft_putstr("tamshell: command not found: ");
-	ft_putendl(shell->args[0]);
-	free_twod_arr(shell->args);
-	free_shell(shell); 
 	
-	*/
+	ft_putendl("TESTING"); //TESTING
 
+	int i = 0;
+	while (shell->cmds->args[i])
+	{
+		ft_putendl(shell->cmds->args[i]); //TESTING
+		i++;
+	}
+
+
+	if (!shell->cmds || !shell->cmds->args[0])
+		fatal("Error in (cmd_not_found)");
+	ft_putstr("tamshell: command not found: ");
+	ft_putendl(shell->cmds->args[0]);
+	free_twod_arr(shell->cmds->args);
+	free_shell(shell); 
 	exit(-1);
 }
 
@@ -76,6 +84,7 @@ int				sh_launch(char **envv, t_shell *shell)
 
 	command = NULL;
 	pid = fork();
+
 	if (check_bin_cmd(shell) == TRUE)
 		command = make_bin_cmd(shell);
 	else if (check_bin_path(shell) == TRUE)
