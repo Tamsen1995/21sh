@@ -1,6 +1,9 @@
 #ifndef FT_SH_H
 # define FT_SH_H
 
+#include <termcap.h>
+#include <termios.h>
+#include <sys/ioctl.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdlib.h>
@@ -41,7 +44,6 @@ typedef struct		s_cmds
 }					t_cmds;
 
 
-
 typedef struct		s_shell
 {
 	int					argc; // Amount of arguments passed into my shell (for each individual command)
@@ -52,8 +54,6 @@ typedef struct		s_shell
 	struct winsize		*sz;
 	struct termios		*termold;
 	struct termios		*term;
-
-
 
 }					t_shell;
 
