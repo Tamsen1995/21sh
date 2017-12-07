@@ -44,24 +44,10 @@ char			*make_bin_cmd(t_shell *shell)
 
 void			cmd_not_found(t_shell *shell)
 {
-	shell = NULL; //TESTING
-
-
 	char *command;
 
 	command = NULL;
-	
-	ft_putendl("TESTING"); //TESTING
-
-	int i = 0;
-	while (shell->cmds->args[i])
-	{
-		ft_putendl(shell->cmds->args[i]); //TESTING
-		i++;
-	}
-
-
-	if (!shell->cmds || !shell->cmds->args[0])
+	if (!shell || !shell->cmds->args[0])
 		fatal("Error in (cmd_not_found)");
 	ft_putstr("tamshell: command not found: ");
 	ft_putendl(shell->cmds->args[0]);

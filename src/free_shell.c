@@ -69,7 +69,7 @@ void        free_cmds_list(t_shell *shell)
         tmp = tmp->prev;
         free_cmd(tmp->next);
     }
-    free_cmd(tmp);
+    //   free_cmd(tmp); // fenceposting
 }
 
 /*

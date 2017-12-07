@@ -119,9 +119,7 @@ void        sh_loop(t_shell *shell, char **envv)
             status = sh_execute(envv, shell);
             shell->cmds = shell->cmds->next;
         }
-
         ////////////////////////////////////
-
         ft_strfree(line);
         ft_strfree(buf);
     }
