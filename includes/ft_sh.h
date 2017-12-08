@@ -44,7 +44,7 @@ typedef struct		s_buf
 {
 	struct s_buf	*next;
 	struct s_buf	*prev;
-	char 			*key;
+	char 			key;
 }					t_buf;
 
 
@@ -105,7 +105,7 @@ int					sh_launch(char **envv, t_shell *shell);
 int					sh_cd(char **args, t_shell *shell);
 int					sh_exit(void);
 int					sh_echo(char **args);
-t_shell  		   *init_shell(int ac, char **av, char **envv);
-void				prompt_loop(void);
+t_shell				*init_shell(int ac, char **av, char **envv);
+char				*prompt_loop(void);
 
 #endif

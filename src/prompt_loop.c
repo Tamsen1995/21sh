@@ -13,6 +13,7 @@ t_buf      *ft_new_buf(char *key)
         fatal("Error: could not allocate env var list elem in ft_new_env");
     new->next = NULL;
     new->prev = NULL;
+    new->key = NULL;
     new->key = ft_strdup(key);
     return (new);
 }
@@ -93,7 +94,7 @@ char        *stringify_buffer(t_buf  *buffer)
     ret = NULL;
     tmp = NULL;
     i = 0;
-    if (!buffer)
+    if (buffer == NULL)
         fatal("error in (stringify_buffer)");
     i = list_len(buffer);
     ret = ft_strnew(i); // allocating a new string
@@ -116,13 +117,12 @@ char        *stringify_buffer(t_buf  *buffer)
 
 */
 
-void        prompt_loop(void)
+char            *prompt_loop(void)
 {
 
 	char		buf[KEY_BUF_SIZE + 1];
     char        *cmd_line; // the command line to be returned
     t_buf       *buffer; // The list of the strings, to be the potential commands
-
 
     buffer = NULL;
     ft_putstr("tamshell$> "); // prompt
@@ -132,12 +132,13 @@ void        prompt_loop(void)
         read(STDIN_FILENO, buf, KEY_BUF_SIZE);
         ft_add_buf(&buffer, buf);
     }
+
+    ft_putendl(buffer->key); // TESTING
+
     // making the buffer a string
     cmd_line = stringify_buffer(buffer);
 
-    ft_putendl(cmd_line); // TESTING
 
-    exit(-1); // TESTING
     // get_next_line(0, &buf);
     // somewhere here I need to check for input
     // to see if there is an arrow key  I need to be able
@@ -146,5 +147,5 @@ void        prompt_loop(void)
     // if ()
       //  print_selected(shell);
 
-//   return (cmd_line);
+    return (cmd_line);
 }
