@@ -58,24 +58,22 @@ void        print_list(t_buf *buffer)
 }
 
 /*
-** This routine will read the characters of the line buffer
-** check them into a linked list
-** make sure of the cursor position (check for its position and modify it)
-** insert text at the appropiate line
-** attune the terminal in a way which will make reading all the characters possible
 
 ** Display the initial contents of the text buffer on the screen.
 ** Get a keystroke from the user.
 ** If the keystroke is a command (like delete or backspace), dispatch or carry out that command.
 ** If the keystroke is a character, insert it into the text buffer (or replace the current character if not in insert mode).
 ** Display the updated contents of the text buffer on the screen.
+
 */
 
 void        prompt_loop(void)
 {
 
 	char		buf[KEY_BUF_SIZE + 1];
+    char        *cmd_line; // the command line to be returned
     t_buf       *buffer; // The list of the strings, to be the potential commands
+
 
     buffer = NULL;
     ft_putstr("tamshell$> "); // prompt
@@ -85,7 +83,6 @@ void        prompt_loop(void)
 
         ft_bzero(buf, KEY_BUF_SIZE + 1);
         read(STDIN_FILENO, buf, KEY_BUF_SIZE);
-
         ft_add_buf(&buffer, buf);
 
 
@@ -98,6 +95,9 @@ void        prompt_loop(void)
     print_list(buffer); // TESTING
 
     exit(-1); // TESTING
+
+    // making the buffer a string
+    stringify(buffer);
 
     // get_next_line(0, &buf);
     // somewhere here I need to check for input
