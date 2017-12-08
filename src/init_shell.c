@@ -24,8 +24,6 @@ void            apply_mode(t_shell *shell)
 
 }
 
-
-
 /*
 ** makes a new shell which should
 ** be set into raw mode 
@@ -33,7 +31,6 @@ void            apply_mode(t_shell *shell)
 
 t_shell         *make_shell(t_shell *shell)
 {
-
 
     if (!(shell->sz = (struct winsize *)malloc(sizeof(struct winsize) * 1)))
         fatal("Can't allocate size struct (make_shell)");
@@ -47,13 +44,18 @@ t_shell         *make_shell(t_shell *shell)
         fatal("Could not get attributes for terminal (make_shell)");
     ioctl(0, TIOCGWINSZ, shell->sz);
 	tputs(tgetstr("vi", NULL), 1, putintc);
-    shell->term->c_lflag &= ~(ECHO);
+    //shell->term->c_lflag &= ~(ECHO);
     shell->term->c_lflag &= ~(ICANON);
     apply_mode(shell);
     return (shell);
 }
 
-// initiaing the shell and the data required for it
+/*
+** initiating the shell and the data required for it
+** setting the shell into what I believe to be canonical
+** mode
+*/
+
 t_shell     *init_shell(int ac, char **av, char **envv)
 {
     t_shell *shell;
@@ -69,11 +71,12 @@ t_shell     *init_shell(int ac, char **av, char **envv)
     shell->path_var = NULL;
     shell->bin_dir = NULL;
     shell = make_shell(shell);
-    return (shell); // TESTING
+    return (shell);
 }
 
 
 /*
+
 ** since the shell variable in this one is
 ** static it will remember the state of the shell
 ** in between function calls

@@ -16,11 +16,13 @@
 #include "../includes/ft_ls.h"
 
 
+# define MAX_BUF_SIZE 2048
 # define BUFF_SIZE 8
 # define BIN "/bin/"
-#define T_BOOL int
-#define TRUE 1
-#define FALSE 0
+# define T_BOOL int
+# define KEY_BUF_SIZE	6
+# define TRUE 1
+# define FALSE 0
 
 // This list determines the current state of the shell
 typedef struct		s_env
@@ -30,6 +32,21 @@ typedef struct		s_env
 	char			*name;
 	char			*value;
 }					t_env;
+
+/*
+** this list will serve as a buffer for
+** potential commands
+** each character represents a keystroke 
+** made into the terminal
+*/ 
+
+typedef struct		s_buf
+{
+	struct s_buf	*next;
+	struct s_buf	*prev;
+	char 			*key;
+}					t_buf;
+
 
 
 /*
@@ -89,5 +106,6 @@ int					sh_cd(char **args, t_shell *shell);
 int					sh_exit(void);
 int					sh_echo(char **args);
 t_shell  		   *init_shell(int ac, char **av, char **envv);
+void				prompt_loop(void);
 
 #endif

@@ -21,6 +21,7 @@ SRC = src/main.c \
 	src/builtins/builtins.c \
 	src/helpers/check_directory.c \
 	src/check_bin_path.c \
+	src/prompt_loop.c \
 
 OBJ = $(addsuffix .o, $(basename $(SRC)))
 
@@ -31,7 +32,7 @@ $(LIBFT):
 
 $(NAME):$(LIBFT) $(NAME) $(OBJ)
 	@echo "building binary file"
-	$(CC) $(FLAGS) $(SRC) -o $(NAME) -I -lft $(LIBFT)
+	$(CC) $(FLAGS) $(SRC) -o $(NAME) -I -lft $(LIBFT) -ltermcap
 
 %.o: %.c ft_ls.h
 		clang $(FLAG) -c $< -o $@
