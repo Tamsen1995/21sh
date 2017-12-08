@@ -58,6 +58,55 @@ void        print_list(t_buf *buffer)
 }
 
 /*
+** iterates through an entire list
+** and finds out the length of it
+*/
+
+int         list_len(t_buf *buffer)
+{
+    int     i;
+    t_buf   *tmp;
+
+    i = 0;
+    tmp = NULL;
+    if (!buffer)
+        fatal("error in (list_len)");
+    tmp = buffer;
+    while (tmp)
+    {
+        i++;
+        tmp = tmp->next;
+    }
+    return (i);
+}
+
+/*
+** stringifies the linked list of commands
+*/
+
+char        *stringify_buffer(t_buf  *buffer)
+{
+    char    *ret;
+    int     i;
+    t_buf   *tmp;
+
+    ret = NULL;
+    tmp = NULL;
+    i = 0;
+    if (!buffer)
+        fatal("error in (stringify_buffer)");
+    i = list_len(buffer);
+    ret = ft_strnew(i); // allocating a new string
+    tmp = buffer;
+    while (tmp) // iteratively concatenate the string
+    {
+        ret = ft_strcat(ret, tmp->key);
+        tmp = tmp->next;
+    }
+    return (ret);
+}
+
+/*
 
 ** Display the initial contents of the text buffer on the screen.
 ** Get a keystroke from the user.
@@ -79,34 +128,23 @@ void        prompt_loop(void)
     ft_putstr("tamshell$> "); // prompt
     while (buf[0] != 10)
     {
-        // ft_putendl(""); // prompt
-
         ft_bzero(buf, KEY_BUF_SIZE + 1);
         read(STDIN_FILENO, buf, KEY_BUF_SIZE);
         ft_add_buf(&buffer, buf);
-
-
-
-        //TODO for every new buffer input, make a new list element
-
-        // get_next_line(STDIN_FILENO, &buf);
-        // ft_putstr(buf);
     }
-    print_list(buffer); // TESTING
+    // making the buffer a string
+    cmd_line = stringify_buffer(buffer);
+
+    ft_putendl(cmd_line); // TESTING
 
     exit(-1); // TESTING
-
-    // making the buffer a string
-    stringify(buffer);
-
     // get_next_line(0, &buf);
     // somewhere here I need to check for input
     // to see if there is an arrow key  I need to be able
     // to read. This will constitute for the cursor movement
 
-
     // if ()
       //  print_selected(shell);
 
-//    return (buf);
+//   return (cmd_line);
 }

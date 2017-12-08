@@ -83,7 +83,7 @@ void        sh_loop(t_shell *shell, char **envv)
     {
         prompt_loop(); // void for now because for testing purposes
 
-        // if (isatty(STDIN_FILENO))
+        // if (isatty(STDIN_FILENO)) // I'm  not sure when to use this
          //   ft_putendl("Testing");
 
         /*
