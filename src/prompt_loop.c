@@ -119,7 +119,7 @@ char            *prompt_loop(void)
         ft_add_buf(&buffer, buf);
 
      //   ft_putstr(buf); // TESTING
-      //  tputs(tgetstr("up", NULL), 0, putintc);
+        tputs(tgetstr("ll", NULL), 0, putintc);
 
 
         // somewhere here I need to check for input
