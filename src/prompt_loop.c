@@ -121,6 +121,7 @@ char            *prompt_loop(void)
      //   ft_putstr(buf); // TESTING
     //    tputs(tgetstr("ll", NULL), 0, putintc);
         tputs(tgetstr("vs", NULL), 0, putintc);
+    //    tputs(tgetstr("le", NULL), 0, putintc); // moves the cursor to the left
 
 
         // somewhere here I need to check for input
