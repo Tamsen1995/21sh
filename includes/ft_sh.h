@@ -81,8 +81,8 @@ typedef struct		s_shell
 ** 21sh starting here
 */
 
-t_cmds      *store_commands(char *commands);
-
+t_cmds      	*store_commands(char *commands);
+int             putintc(int c);
 
 /*
 ** 21sh ending here

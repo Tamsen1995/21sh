@@ -80,11 +80,11 @@ void        free_shell(t_shell *shell)
 {
     if (!shell)
         fatal("No shell to be freed in (free_shell)");
-    if (shell->env != NULL)
+    if (shell->env)
         free_env(shell->env);
-    if (shell->bin_dir != NULL)
+    if (shell->bin_dir)
         ft_strfree(shell->bin_dir);
-    if (shell->cmds != NULL)
+    if (shell->cmds)
         free_cmds_list(shell);
     free(shell);
     shell = NULL;

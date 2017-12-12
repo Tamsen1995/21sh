@@ -107,8 +107,8 @@ char            *prompt_loop(void)
 {
 
 	char		buf[KEY_BUF_SIZE + 1];
-    char        *cmd_line; // the command line to be returned
-    t_buf       *buffer; // The list of the strings, to be the potential commands
+    char        *cmd_line;
+    t_buf       *buffer;
 
     buffer = NULL;
     ft_putstr("tamshell$> "); // prompt
@@ -117,6 +117,10 @@ char            *prompt_loop(void)
         ft_bzero(buf, KEY_BUF_SIZE + 1);
         read(STDIN_FILENO, buf, KEY_BUF_SIZE);
         ft_add_buf(&buffer, buf);
+
+     //   ft_putstr(buf); // TESTING
+      //  tputs(tgetstr("up", NULL), 0, putintc);
+
 
         // somewhere here I need to check for input
         // to see if there is an arrow key  I need to be able

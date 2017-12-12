@@ -52,7 +52,10 @@ void			cmd_not_found(t_shell *shell)
 	ft_putstr("tamshell: command not found: ");
 	ft_putendl(shell->cmds->args[0]);
 	free_twod_arr(shell->cmds->args);
-	free_shell(shell); 
+
+	free_shell(shell);  // in the case of two commands, and one not being found, 
+	// there is a pointer which is being freed which shouldn't
+	
 	exit(-1);
 }
 

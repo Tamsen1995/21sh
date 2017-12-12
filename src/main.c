@@ -91,6 +91,8 @@ void        sh_loop(t_shell *shell, char **envv)
     line = NULL;
     while (status == 1) 
     {
+        // line edition happens in prompt_loop, fires off the buffer of commands
+        // once commands have been typed in
         buf = prompt_loop();
 
         // if (isatty(STDIN_FILENO)) // I'm  not sure when to use this.
