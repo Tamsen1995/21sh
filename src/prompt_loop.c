@@ -44,20 +44,6 @@ void		ft_add_buf(t_buf **begin_list, char *key)
 }
 
 
-// TESTING purposes
-void        print_list(t_buf *buffer)
-{
-    t_buf *tmp;
-
-    tmp = buffer;
-    while (tmp)
-    {
-        ft_putstr(tmp->key);
-        tmp = tmp->next;
-    }
-
-}
-
 /*
 ** iterates through an entire list
 ** and finds out the length of it
@@ -99,7 +85,7 @@ char        *stringify_buffer(t_buf  *buffer)
     i = list_len(buffer);
     ret = ft_strnew(i); // allocating a new string
     tmp = buffer;
-    while (tmp) // iteratively concatenate the string
+    while (tmp->next) // iteratively concatenate the string
     {
         ret = ft_strcat(ret, tmp->key);
         tmp = tmp->next;
@@ -131,18 +117,23 @@ char            *prompt_loop(void)
         ft_bzero(buf, KEY_BUF_SIZE + 1);
         read(STDIN_FILENO, buf, KEY_BUF_SIZE);
         ft_add_buf(&buffer, buf);
-    }
 
-    ft_putendl(buffer->key); // TESTING
+        // somewhere here I need to check for input
+        // to see if there is an arrow key  I need to be able
+        // to read. This will constitute for the cursor movement
+
+        // The output of the user's input shall be made here
+        // if there is any kind of cursor movement then the cursor on the screen shall move
+
+
+    }
 
     // making the buffer a string
     cmd_line = stringify_buffer(buffer);
 
 
+
     // get_next_line(0, &buf);
-    // somewhere here I need to check for input
-    // to see if there is an arrow key  I need to be able
-    // to read. This will constitute for the cursor movement
 
     // if ()
       //  print_selected(shell);

@@ -44,13 +44,16 @@ typedef struct		s_buf
 {
 	struct s_buf	*next;
 	struct s_buf	*prev;
-	char 			key;
+	char 			*key;
 }					t_buf;
 
 
 
 /*
 ** a  linked list of commands here
+** each command is a 2d array
+** storing the command itself as well as its
+** parameters
 */ 
 
 typedef struct		s_cmds
