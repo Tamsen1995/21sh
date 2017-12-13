@@ -21,6 +21,7 @@ SRC = src/main.c \
 	src/builtins/builtins.c \
 	src/helpers/check_directory.c \
 	src/helpers/putintc.c \
+	src/helpers/print_list.c \
 	src/prompt/prompt_loop.c \
 	src/check_bin_path.c \
 

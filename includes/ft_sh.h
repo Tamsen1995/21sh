@@ -16,6 +16,10 @@
 #include "../includes/ft_ls.h"
 
 
+# define K_UP			"\x1b\x5b\x41\x0\x0\x0"
+# define K_DOWN			"\x1b\x5b\x42\x0\x0\x0"
+# define K_RIGHT		"\x1b\x5b\x43\x0\x0\x0"
+# define K_LEFT			"\x1b\x5b\x44\x0\x0\x0"
 # define MAX_BUF_SIZE 2048
 # define BUFF_SIZE 8
 # define BIN "/bin/"
@@ -80,9 +84,9 @@ typedef struct		s_shell
 ** 21sh starting here
 */
 
-t_cmds      	*store_commands(char *commands);
-int             putintc(int c);
-
+t_cmds      		*store_commands(char *commands);
+int             	putintc(int c);
+void				print_buffer(t_buf *buffer);
 /*
 ** 21sh ending here
 */

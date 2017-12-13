@@ -32,7 +32,7 @@ t_shell         *make_shell(t_shell *shell)
         fatal("Could not get attributes for terminal (make_shell)");
     ioctl(0, TIOCGWINSZ, shell->sz);
 	tputs(tgetstr("vi", NULL), 1, putintc);
-    //shell->term->c_lflag &= ~(ECHO);
+    shell->term->c_lflag &= ~(ECHO);
     shell->term->c_lflag &= ~(ICANON);
     apply_mode(shell);
     return (shell);
