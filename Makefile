@@ -20,8 +20,9 @@ SRC = src/main.c \
 	src/builtins/builtin_unsetenv.c \
 	src/builtins/builtins.c \
 	src/helpers/check_directory.c \
+	src/helpers/putintc.c \
+	src/prompt/prompt_loop.c \
 	src/check_bin_path.c \
-	src/prompt_loop.c \
 
 OBJ = $(addsuffix .o, $(basename $(SRC)))
 

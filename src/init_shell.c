@@ -1,18 +1,6 @@
 #include "../includes/ft_sh.h"
 
 /*
-** inputs an arbitrary int into
-** the stdin
-*/
-
-int             putintc(int c)
-{
-    write(STDIN_FILENO, &c, 1);
-    return (0);
-}
-
-
-/*
 ** applied the set flags of the termios struct
 ** onto the terminal
 */
@@ -73,7 +61,6 @@ t_shell     *init_shell(int ac, char **av, char **envv)
     shell = make_shell(shell);
     return (shell);
 }
-
 
 /*
 

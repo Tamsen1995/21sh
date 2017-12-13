@@ -1,5 +1,4 @@
-#include "../includes/ft_sh.h"
-
+#include "../../includes/ft_sh.h"
 
 /*
 ** allocates a new environment variables list element
@@ -14,6 +13,7 @@ t_buf      *ft_new_buf(char *key)
     new->next = NULL;
     new->prev = NULL;
     new->key = NULL;
+    new->cursor = FALSE;
     new->key = ft_strdup(key);
     return (new);
 }
@@ -112,17 +112,20 @@ char            *prompt_loop(void)
 
     buffer = NULL;
     ft_putstr("tamshell$> "); // prompt
+
+    tputs(tgetstr("vs", NULL), 0, putintc);
+
+    // if the buffer equals
+    // to enter
     while (buf[0] != 10)
     {
         ft_bzero(buf, KEY_BUF_SIZE + 1);
         read(STDIN_FILENO, buf, KEY_BUF_SIZE);
         ft_add_buf(&buffer, buf);
 
-     //   ft_putstr(buf); // TESTING
-    //    tputs(tgetstr("ll", NULL), 0, putintc);
-        tputs(tgetstr("vs", NULL), 0, putintc);
-    //    tputs(tgetstr("le", NULL), 0, putintc); // moves the cursor to the left
-
+        // ft_putstr(buf); // TESTING
+        // tputs(tgetstr("ll", NULL), 0, putintc);
+        // tputs(tgetstr("le", NULL), 0, putintc); // moves the cursor to the left
 
         // somewhere here I need to check for input
         // to see if there is an arrow key  I need to be able
@@ -130,19 +133,8 @@ char            *prompt_loop(void)
 
         // The output of the user's input shall be made here
         // if there is any kind of cursor movement then the cursor on the screen shall move
-
-
     }
-
-    // making the buffer a string
     cmd_line = stringify_buffer(buffer);
-
-
-
-    // get_next_line(0, &buf);
-
-    // if ()
-      //  print_selected(shell);
-
+    // get_next_line(0, &buf); 
     return (cmd_line);
 }

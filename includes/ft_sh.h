@@ -44,10 +44,9 @@ typedef struct		s_buf
 {
 	struct s_buf	*next;
 	struct s_buf	*prev;
+	T_BOOL			cursor;
 	char 			*key;
 }					t_buf;
-
-
 
 /*
 ** a  linked list of commands here
