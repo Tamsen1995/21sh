@@ -128,13 +128,6 @@ void            check_input(t_buf *buffer)
         // each value is correlated to a function pointer
         // return this function pointer and execute
 
-        
-        /*
-        ** if (buf[0] == 27 && buf[1] == 91 && buf[2] == 68 && buf[3] == 0)
-        **     cursor_left(shell);
-        ** if (buf[0] == 27 && buf[1] == 91 && buf[2] == 67 && buf[3] == 0)
-        **     cursor_right(shell);
-        */
 
 
 
@@ -158,40 +151,23 @@ char            *prompt_loop(void)
     t_buf       *buffer;
 
     buffer = NULL;
-    ft_putstr("tamshell$> "); // prompt
 
     tputs(tgetstr("vs", NULL), 0, putintc);
 
     // if the buffer equals
     // to enter which is 10
+    ft_putstr("tamshell$> ");
     while (buf[0] != 10)
     {
         ft_bzero(buf, KEY_BUF_SIZE + 1);
         read(STDIN_FILENO, buf, KEY_BUF_SIZE);
         ft_add_buf(&buffer, buf);
         
+        // edit the buffer according to action requested
         check_input(buffer); // WIP
 
-       
-   
-
-
-
-
-
-
-
-
-    //`ce'
-        //String of commands to clear from the cursor to the end of the current line.
-    //`dl'
-        //String to delete the line the cursor is on.
-    //`LE'
-        // String to move cursor left n columns.
-    //`nd'
-        //String to move the cursor right one column.
-
-
+        // print the edited buffer
+        print_buffer(buffer);
 
         // ft_putstr(buf); // TESTING
         // tputs(tgetstr("ll", NULL), 0, putintc);
