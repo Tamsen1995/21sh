@@ -100,7 +100,7 @@ char        *stringify_buffer(t_buf  *buffer)
 ** might have to be executed
 */
 
-void            check_input(t_buf *buffer) // WIP
+void            check_input(t_buf *buffer, char *buf) // WIP
 {
     t_buf *tmp;
      // the action keys for the line
@@ -110,22 +110,9 @@ void            check_input(t_buf *buffer) // WIP
     if (!buffer)
         fatal("Error in (check_input)");
     tmp = buffer;
-    while (tmp)
-    {
 
-        cursor_movement(tmp->key, buffer); // LAST
-       
-
-
-        // have an array of values which require execution
-        // each value is correlated to a function pointer
-        // return this function pointer and execute
-
-
-
-
-        tmp = tmp->next;
-    }
+    cursor_movement(buf, buffer);
+    // TODO other actions
 }
 
 /*
@@ -154,10 +141,14 @@ char            *prompt_loop(void) // WIP
     {
         ft_bzero(buf, KEY_BUF_SIZE + 1);
         read(STDIN_FILENO, buf, KEY_BUF_SIZE);
-        ft_add_buf(&buffer, buf);
-        
+
+
         // edit the buffer according to action requested
-        check_input(buffer); // WIP
+        check_input(buffer, buf); // WIP
+        if (term_action(buf) == TRUE) // WIP
+            ft_add_buf(&buffer, buf);
+        
+
 
         // print the edited buffer
         print_buffer(buffer);
