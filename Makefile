@@ -23,6 +23,7 @@ SRC = src/main.c \
 	src/helpers/putintc.c \
 	src/helpers/print_list.c \
 	src/prompt/prompt_loop.c \
+	src/prompt/line_edition/cursor_movement.c \
 	src/check_bin_path.c \
 
 OBJ = $(addsuffix .o, $(basename $(SRC)))

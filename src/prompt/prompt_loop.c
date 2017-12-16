@@ -95,17 +95,12 @@ char        *stringify_buffer(t_buf  *buffer)
 }
 
 
-
-// This is a function pointer which shall point
-// to the move left function
-void (*p_move_left)(t_buf *buffer);
-
 /*
 ** checks the buffer linked list for actions which 
 ** might have to be executed
 */
 
-void            check_input(t_buf *buffer)
+void            check_input(t_buf *buffer) // WIP
 {
     t_buf *tmp;
      // the action keys for the line
@@ -118,11 +113,9 @@ void            check_input(t_buf *buffer)
     while (tmp)
     {
 
-        if (ft_strcmp(tmp->key, K_LEFT) == 0) 
-        {
-            ft_putendl("Testing");
-            exit(-1); // TESTING
-        }
+        cursor_movement(tmp->key, buffer); // LAST
+       
+
 
         // have an array of values which require execution
         // each value is correlated to a function pointer
@@ -143,7 +136,7 @@ void            check_input(t_buf *buffer)
 ** Display the updated contents of the text buffer on the screen.
 */
 
-char            *prompt_loop(void)
+char            *prompt_loop(void) // WIP
 {
 
 	char		buf[KEY_BUF_SIZE + 1];
