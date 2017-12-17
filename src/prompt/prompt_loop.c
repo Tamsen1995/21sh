@@ -19,6 +19,21 @@ void            check_input(t_buf *buffer, char *buf) // WIP
     // TODO other actions
 }
 
+
+t_line         *init_line()
+{
+    t_line *line;
+
+    line = NULL;
+    if (!(line = malloc(sizeof(t_line) * 1)))
+        fatal("");
+    line->buffer = NULL;
+    line->cursor = NULL;
+    line->prompt = "tamsshell $> ";
+    line->prompt_len = ft_strlen(line->prompt);
+    return (line);
+}
+
 /*
 ** Display the initial contents of the text buffer on the screen.
 ** Get a keystroke from the user.
@@ -32,38 +47,23 @@ char            *prompt_loop(void) // WIP
 
 	char		buf[KEY_BUF_SIZE + 1];
     char        *cmd_line;
-    t_buf       *buffer;
-    char        *prompt;
+    t_line      *line;
 
-    buffer = NULL;
-    prompt = "tamshell$> ";
+    line = init_line();
     tputs(tgetstr("vs", NULL), 0, putintc);
-    ft_putstr(prompt);
+    ft_putstr(line->prompt);
     while (buf[0] != 10)
     {
         ft_bzero(buf, KEY_BUF_SIZE + 1);
         read(STDIN_FILENO, buf, KEY_BUF_SIZE);
-
-
         // edit the buffer according to action requested
-        check_input(buffer, buf); // WIP
+        check_input(line->buffer, buf); // WIP
         if (term_action(buf) == FALSE) // WIP
-            ft_add_buf(&buffer, buf);
+            ft_add_buf(&line->buffer, buf);
         if (term_action(buf) == FALSE) // WIP
-            print_buffer(buffer);
-        // print the edited buffer
-
-        // ft_putstr(buf); // TESTING
-        // tputs(tgetstr("ll", NULL), 0, putintc);
-
-        // somewhere here I need to check for input
-        // to see if there is an arrow key  I need to be able
-        // to read. This will constitute for the cursor movement
-
-        // The output of the user's input shall be made here
-        // if there is any kind of cursor movement then the cursor on the screen shall move
+            print_buffer(line->buffer);
     }
-    cmd_line = stringify_buffer(buffer);
+    cmd_line = stringify_buffer(line->buffer);
     // get_next_line(0, &buf); 
     return (cmd_line);
 }

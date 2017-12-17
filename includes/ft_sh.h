@@ -28,14 +28,17 @@
 # define TRUE 1
 # define FALSE 0
 
-// This list determines the current state of the shell
-typedef struct		s_env
+/*
+** cursor linked list
+** every element represents a potential cursor position
+*/
+
+typedef struct			s_cursor
 {
-	struct s_env	*next;
-	struct s_env	*prev;
-	char			*name;
-	char			*value;
-}					t_env;
+	struct s_cursor		*next;
+	struct s_cursor		*prev;
+	T_BOOL				cursor;
+}						t_cursor;
 
 /*
 ** this list will serve as a buffer for
@@ -48,9 +51,21 @@ typedef struct		s_buf
 {
 	struct s_buf	*next;
 	struct s_buf	*prev;
-	T_BOOL			cursor;
 	char 			*key;
 }					t_buf;
+
+/*
+** struct responsible for the line edition
+** in the prompt
+*/
+
+typedef struct			s_line
+{	
+	struct s_buf		*buffer;
+	struct s_cursor		*cursor;
+	char				*prompt;
+	int					prompt_len;
+}						t_line;
 
 /*
 ** a  linked list of commands here
@@ -66,6 +81,17 @@ typedef struct		s_cmds
 	char 			**args;
 }					t_cmds;
 
+/*
+** This list indicates the env variables of the shell
+*/
+
+typedef struct		s_env
+{
+	struct s_env	*next;
+	struct s_env	*prev;
+	char			*name;
+	char			*value;
+}					t_env;
 
 typedef struct		s_shell
 {
