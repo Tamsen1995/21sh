@@ -12,10 +12,9 @@ void            check_input(t_buf *buffer, char *buf) // WIP
     // editing such as the arrow keys
 
     tmp = NULL;
-    if (!buffer)
+    if (!buffer || !buf)
         return ;
     tmp = buffer;
-
     cursor_movement(buf, buffer);
     // TODO other actions
 }
@@ -34,14 +33,12 @@ char            *prompt_loop(void) // WIP
 	char		buf[KEY_BUF_SIZE + 1];
     char        *cmd_line;
     t_buf       *buffer;
+    char        *prompt;
 
     buffer = NULL;
-
+    prompt = "tamshell$> ";
     tputs(tgetstr("vs", NULL), 0, putintc);
-
-    // if the buffer equals
-    // to enter which is 10
-    ft_putstr("tamshell$> ");
+    ft_putstr(prompt);
     while (buf[0] != 10)
     {
         ft_bzero(buf, KEY_BUF_SIZE + 1);
@@ -50,13 +47,11 @@ char            *prompt_loop(void) // WIP
 
         // edit the buffer according to action requested
         check_input(buffer, buf); // WIP
-        if (term_action(buf) == TRUE) // WIP
+        if (term_action(buf) == FALSE) // WIP
             ft_add_buf(&buffer, buf);
-        
-
-
+        if (term_action(buf) == FALSE) // WIP
+            print_buffer(buffer);
         // print the edited buffer
-        print_buffer(buffer);
 
         // ft_putstr(buf); // TESTING
         // tputs(tgetstr("ll", NULL), 0, putintc);

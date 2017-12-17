@@ -16,7 +16,7 @@ int         list_len(t_buf *buffer)
     if (!buffer)
         fatal("error in (list_len)");
     tmp = buffer;
-    while (tmp)
+    while (tmp->next)
     {
         i++;
         tmp = tmp->next;
@@ -37,13 +37,12 @@ t_buf      *ft_new_buf(char *key)
     new->next = NULL;
     new->prev = NULL;
     new->key = NULL;
-    new->cursor = TRUE;
     new->key = ft_strdup(key);
     return (new);
 }
 
 /* 
-** iterates to the end of the cmd list
+** iterates to the end of the buf key list
 ** and then adds the value to it
 */
 
@@ -62,7 +61,6 @@ void		ft_add_buf(t_buf **begin_list, char *key)
         tmp = *begin_list;
         while (tmp->next)
             tmp = tmp->next;
-        tmp->cursor = FALSE;
         tmp->next = ft_new_buf(key);
         tmp->next->prev = tmp;
     }

@@ -13,7 +13,7 @@ char        *stringify_buffer(t_buf  *buffer)
     ret = NULL;
     tmp = NULL;
     i = 0;
-    if (buffer == NULL)
+    if (!buffer)
         fatal("error in (stringify_buffer)");
     i = list_len(buffer);
     ret = ft_strnew(i); // allocating a new string

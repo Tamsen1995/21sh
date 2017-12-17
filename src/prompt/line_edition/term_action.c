@@ -8,7 +8,7 @@
 T_BOOL          term_action(char *buf)
 {
     if (!buf)
-        fatal("Error: (term_action)");
+        return (FALSE);
     if (ft_strcmp(buf, K_LEFT) == 0)
         return (TRUE);
     // if (ft_strcmp(buf, K_RIGHT) == 0)

@@ -1,55 +1,74 @@
 #include "../../includes/ft_sh.h"
 
 /*
-** returns the amount of elements within
-** a linked list
+** counts the amount of columns the cursor is away
+** from the end of the buffer
 */
 
-int         count_linked_list(t_buf *buffer)
+int         get_cursor_pos(t_buf *buffer)
 {
-    int i;
+    int ret;
     t_buf *tmp;
 
     tmp = NULL;
-    i = 0;
+    ret = 0;
     if (!buffer)
-        fatal("Error (count_linked_list)");
+        fatal("Error (get_cursor_pos)");
     tmp = buffer;
+    while (tmp && tmp->next && tmp->cursor == FALSE)
+        tmp = tmp->next;
     while (tmp->next)
     {
-        i++;
+        ret++;
         tmp = tmp->next;
     }
-    return (i);
+    return (ret);
+}
+
+/*
+** clears the current line of the prompt
+** before re - outputting the line buffer
+*/
+
+void        clear_prompt_line() // WIP
+{
+    //tputs(tgetstr("cl", NULL), 0, putintc);
+    //tputs(tgetstr("cd", NULL), 0, putintc);
+    tputs(tgetstr("ce", NULL), 0, putintc);
+
+  
 }
 
 /*
 ** outputs the linked list which represents the buffer
 ** of keystrokes inputted by the user
+** re-outputs buffer, thus also repositioning
+** the cursor
 */
 
 void        print_buffer(t_buf *buffer)
 {
     t_buf   *tmp;
-    int     n;
     int     i;
+    int     n;
 
-    tmp = NULL;
-    n = 0;
     i = 0;
+    n = 0;
+    tmp = NULL;
     if (!buffer)
         return ;
-    n = count_linked_list(buffer);
+    n = list_len(buffer);
 
-    // moving the cursor back to the prompt
     while (i < n)
-    {
+    { 
         tputs(tgetstr("le", NULL), 0, putintc);
         i++;
     }
 
-    // re-outputs buffer, thus also repositioning
-    // the cursor
+    clear_prompt_line(); // TESTING
+
+
+
     tmp = buffer;
     while (tmp)
     {
