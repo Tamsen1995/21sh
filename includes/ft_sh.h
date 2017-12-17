@@ -28,6 +28,19 @@
 # define TRUE 1
 # define FALSE 0
 
+
+
+/*	
+struct winsize
+{
+  unsigned short ws_row;	// rows, in characters 
+  unsigned short ws_col;	// columns, in characters 
+  unsigned short ws_xpixel;	// horizontal size, pixels 
+  unsigned short ws_ypixel;	// vertical size, pixels 
+};
+*/
+
+
 /*
 ** cursor linked list
 ** every element represents a potential cursor position
@@ -63,6 +76,7 @@ typedef struct			s_line
 {	
 	struct s_buf		*buffer;
 	struct s_cursor		*cursor;
+	struct winsize		*sz;
 	char				*prompt;
 	int					prompt_len;
 }						t_line;
@@ -113,7 +127,7 @@ typedef struct		s_shell
 t_cmds      		*store_commands(char *commands);
 int             	putintc(int c);
 void				print_buffer(t_buf *buffer);
-void         		cursor_movement(char *key, t_buf *buffer); // WIP
+void         		cursor_movement(char *key, t_line *line); // WIP
 T_BOOL        		term_action(char *buf);
 
 /*

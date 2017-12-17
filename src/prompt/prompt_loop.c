@@ -5,20 +5,28 @@
 ** might have to be executed
 */
 
-void            check_input(t_buf *buffer, char *buf) // WIP
+void            check_input(t_line *line, char *buf) // WIP
 {
-    t_buf *tmp;
-     // the action keys for the line
-    // editing such as the arrow keys
-
-    tmp = NULL;
-    if (!buffer || !buf)
+    if (!line)
+        fatal("Error (check_input)");
+    if (!line->buffer || !buf)
         return ;
-    tmp = buffer;
-    cursor_movement(buf, buffer);
+    cursor_movement(buf, line);
     // TODO other actions
 }
 
+
+struct winsize		*get_win_size()
+{
+    struct winsize *ret;
+
+    if (!(ret = (struct winsize *)malloc(sizeof(struct winsize) * 1)))
+        fatal("Can't allocate size struct (make_shell)");
+    ioctl(0, TIOCGWINSZ, ret);
+
+    // TODO: free ret
+    return (ret);
+}
 
 t_line         *init_line()
 {
@@ -31,6 +39,13 @@ t_line         *init_line()
     line->cursor = NULL;
     line->prompt = "tamsshell $> ";
     line->prompt_len = ft_strlen(line->prompt);
+    line->sz = get_win_size();
+
+    // printf("%d\n", line->sz->ws_col);
+    
+    // initiate the cursor with the help of
+    // prompt len and the column size
+
     return (line);
 }
 
@@ -57,13 +72,15 @@ char            *prompt_loop(void) // WIP
         ft_bzero(buf, KEY_BUF_SIZE + 1);
         read(STDIN_FILENO, buf, KEY_BUF_SIZE);
         // edit the buffer according to action requested
-        check_input(line->buffer, buf); // WIP
+        check_input(line, buf); // WIP
         if (term_action(buf) == FALSE) // WIP
             ft_add_buf(&line->buffer, buf);
         if (term_action(buf) == FALSE) // WIP
             print_buffer(line->buffer);
     }
     cmd_line = stringify_buffer(line->buffer);
-    // get_next_line(0, &buf); 
+
+    // TODO free all of line here
+
     return (cmd_line);
 }

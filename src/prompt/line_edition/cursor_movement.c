@@ -14,9 +14,11 @@ void        move_left() // WIP
 ** Takes care of potential cursor movement
 */
 
-void          cursor_movement(char *key, t_buf *buffer) // WIP
+void          cursor_movement(char *key, t_line *line) // WIP
 {
-    if (!key || !buffer)
+    if (!line)
+        fatal("Error (cursor_movement)");
+    if (!key || !line->buffer)
         return ;
     if (ft_strcmp(key, K_LEFT) == 0)
         move_left();
