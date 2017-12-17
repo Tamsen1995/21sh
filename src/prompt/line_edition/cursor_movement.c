@@ -23,6 +23,7 @@ void        move_left(t_buf *buffer) // WIP
 /*
 ** Takes care of potential cursor movement
 */
+
 void          cursor_movement(char *key, t_buf *buffer) // WIP
 {
     if (ft_strcmp(key, K_LEFT) == 0)

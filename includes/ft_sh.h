@@ -87,7 +87,16 @@ typedef struct		s_shell
 t_cmds      		*store_commands(char *commands);
 int             	putintc(int c);
 void				print_buffer(t_buf *buffer);
-void          cursor_movement(char *key, t_buf *buffer); // WIP
+void         		cursor_movement(char *key, t_buf *buffer); // WIP
+T_BOOL        		term_action(char *buf);
+
+/*
+** line buffer/edition functions:
+*/
+
+void				ft_add_buf(t_buf **begin_list, char *key);
+char     		   	*stringify_buffer(t_buf  *buffer);
+int					list_len(t_buf *buffer);
 
 /*
 ** 21sh ending here

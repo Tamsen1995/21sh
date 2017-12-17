@@ -38,7 +38,7 @@ void        print_buffer(t_buf *buffer)
     n = 0;
     i = 0;
     if (!buffer)
-        fatal("Error in (print_buffer)");
+        return ;
     n = count_linked_list(buffer);
 
     // moving the cursor back to the prompt
