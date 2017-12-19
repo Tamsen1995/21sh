@@ -127,7 +127,8 @@ typedef struct		s_shell
 t_cmds      		*store_commands(char *commands);
 int             	putintc(int c);
 void				print_buffer(t_buf *buffer);
-void         		cursor_movement(char *key, t_line *line); // WIP
+void         		cursor_movement(char *key, t_line *line);
+t_cursor    	   *init_cursor(int win_size);
 T_BOOL        		term_action(char *buf);
 
 /*

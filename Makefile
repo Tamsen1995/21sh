@@ -26,6 +26,7 @@ SRC = src/main.c \
 	src/prompt/line_edition/line_buffer/ft_add_buf.c \
 	src/prompt/line_edition/line_buffer/stringify_buffer.c \
 	src/prompt/line_edition/cursor_movement.c \
+	src/prompt/line_edition/init_cursor.c \
 	src/prompt/line_edition/term_action.c \
 	src/check_bin_path.c \
 
