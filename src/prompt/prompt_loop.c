@@ -28,6 +28,9 @@ struct winsize		*get_win_size()
     return (ret);
 }
 
+/*
+** initializes the struct necessary for line edition
+*/
 
 t_line         *init_line()
 {
@@ -39,9 +42,9 @@ t_line         *init_line()
     line->buffer = NULL;
     line->cursor = NULL;
     line->prompt = "tamsshell $> ";
-    line->prompt_len = ft_strlen(line->prompt);
     line->sz = get_win_size();
     line->cursor = init_cursor((int)line->sz->ws_col);
+    line->first_c = get_first_c(line);
     return (line);
 }
 
@@ -53,7 +56,7 @@ t_line         *init_line()
 ** Display the updated contents of the text buffer on the screen.
 */
 
-char            *prompt_loop(void) // WIP
+char            *prompt_loop(void)
 {
 
 	char		buf[KEY_BUF_SIZE + 1];

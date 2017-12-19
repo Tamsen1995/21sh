@@ -76,9 +76,9 @@ typedef struct			s_line
 {	
 	struct s_buf		*buffer;
 	struct s_cursor		*cursor;
+	struct s_cursor		*first_c; // the cursor cannot go past this ever because this is where the prompt starts
 	struct winsize		*sz;
 	char				*prompt;
-	int					prompt_len;
 }						t_line;
 
 /*
@@ -130,6 +130,7 @@ void				print_buffer(t_buf *buffer);
 void         		cursor_movement(char *key, t_line *line);
 t_cursor    	   *init_cursor(int win_size);
 T_BOOL        		term_action(char *buf);
+t_cursor			*get_first_c(t_line *line);
 
 /*
 ** line buffer/edition functions:
