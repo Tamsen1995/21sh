@@ -49,6 +49,19 @@ t_line         *init_line()
 }
 
 /*
+** function which frees the line edition
+** structure
+*/
+
+void            free_line_struct(t_line *line)
+{
+    if (!line)
+        fatal("Error (free_line_struct)");
+    // TODO finish function
+}
+
+
+/*
 ** Display the initial contents of the text buffer on the screen.
 ** Get a keystroke from the user.
 ** If the keystroke is a command (like delete or backspace), dispatch or carry out that command.
@@ -79,8 +92,6 @@ char            *prompt_loop(void)
         }
     }
     cmd_line = stringify_buffer(line->buffer);
-
-    // TODO free all of line here
-
+    // free_line_struct(line);
     return (cmd_line);
 }
