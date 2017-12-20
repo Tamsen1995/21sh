@@ -82,28 +82,30 @@ t_buf       *get_cur_buffer(t_line *line)
 
 void           del_buf_elem(t_line *line)
 {
-    t_buf *buf_elem; // buffer element at which the buffer is positioned
+    t_buf *del_elem; // buffer element at which the buffer is positioned
 
     
-    t_buf *del;
+    t_buf *prev;
 
-    buf_elem = NULL;
-    del = NULL;
+    del_elem = NULL;
+    prev = NULL;
     if (!line)
         fatal ("Error (del_buf_elem)");
-    buf_elem = get_cur_buffer(line);
+    del_elem = get_cur_buffer(line);
+    if (del_elem->ind == line->buffer->ind)
+        return ; // if it is the first element
+    prev = line->buffer; // putting previous to the head of the list
+    del_elem = del_elem->prev;
+    while (prev->next != NULL && prev->next->ind != del_elem->ind)
+        prev = prev->next;
+    if (!prev->next)
+        fatal("No such elem in (del_buf_elem)");
+    prev->next = prev->next->next;
+    ft_strfree(del_elem->key);
+    free(del_elem);
 
-   // if (!buf_elem-) 
-     //   return ;
-  //  del_this = buf_elem->prev;
-    //del_this->prev->next = del_this->next;
-   // del_this->next->prev = del_this->prev;
-   // line->last_c = line->last_c->prev;
-  //  line->current_c = line->current_c->prev;
-  //  ft_strfree(del_this->key);
-    //free(del_this);
-
-
+    line->last_c = line->last_c->prev;
+    line->current_c = line->current_c->prev;
 
     tputs(tgetstr("le", NULL), 0, putintc);
 
