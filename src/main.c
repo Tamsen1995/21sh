@@ -44,6 +44,7 @@ char        *replace_tabs(char *buf)
 
     i = 0;
     line = NULL;
+
     if (!(line = ft_strdup(buf)))
         return (NULL);
     while (line[i])
@@ -55,16 +56,14 @@ char        *replace_tabs(char *buf)
     return (line);
 }
 
-
-
 /*
 ** the main loop of the program
-** intialize a prompt for the user
-** Read a command from the standard input
-** Parse it, meaning we seperate the command into a program and a set of arguments
+** intializes a prompt for the user
+** Reads a command from the standard input
+** Parses it, meaning we seperate the command into a program and a set of arguments
 */
 
-void        sh_loop(t_shell *shell, char **envv)
+void        sh_loop(t_shell *shell, char **envv) // WIP
 {
     int status;
     char *line;
@@ -73,23 +72,15 @@ void        sh_loop(t_shell *shell, char **envv)
     status = 1;
     buf = NULL;
     line = NULL;
-
-    /////
-    shell = NULL;
-    envv = NULL;
-    /////
-
     while (status == 1) 
     {
-        prompt_loop(); // void for now because for testing purposes
+        // line edition happens in prompt_loop, fires off the buffer of commands
+        // once commands have been typed in
+        buf = prompt_loop();
 
-        // if (isatty(STDIN_FILENO))
+        // if (isatty(STDIN_FILENO)) // I'm  not sure when to use this.
+        // It tests whether the stdin refers to a terminal or not
          //   ft_putendl("Testing");
-
-        /*
-
-        // This part is the controller for command
-        // execution
 
         line = replace_tabs(buf);
         shell->cmds = store_commands(line);
@@ -104,7 +95,7 @@ void        sh_loop(t_shell *shell, char **envv)
         }
         ////////////////////////////////////
         ft_strfree(line);
-        */
+      
         // ft_strfree(buf);
     }
 }
