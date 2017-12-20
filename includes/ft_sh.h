@@ -78,6 +78,7 @@ typedef struct			s_line
 	struct s_buf		*buffer;
 	struct s_cursor		*cursor;
 	struct s_cursor		*first_c; // the cursor cannot go past this ever because this is where the prompt starts
+	struct s_cursor		*last_c; // last possible cursor position
 	struct s_cursor		*current_c;
 	struct winsize		*sz;
 	char				*prompt;

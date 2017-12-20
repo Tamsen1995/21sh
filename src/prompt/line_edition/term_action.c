@@ -11,7 +11,7 @@ T_BOOL          term_action(char *buf)
         return (FALSE);
     if (ft_strcmp(buf, K_LEFT) == 0)
         return (TRUE);
-    // if (ft_strcmp(buf, K_RIGHT) == 0)
-        // move_right(buffer);
+    if (ft_strcmp(buf, K_RIGHT) == 0)
+        return (TRUE);
     return (FALSE);
 }
