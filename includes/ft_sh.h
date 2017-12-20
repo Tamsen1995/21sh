@@ -141,7 +141,6 @@ t_cursor			*get_first_c(t_line *line);
 void				ft_add_buf(t_buf **begin_list, char *key);
 char     		   	*stringify_buffer(t_buf  *buffer);
 int					list_len(t_buf *buffer);
-
 void				free_line_struct(t_line *line); // Freeing the struct
 
 
