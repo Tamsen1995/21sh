@@ -56,23 +56,6 @@ char        *replace_tabs(char *buf)
     return (line);
 }
 
-
-
-
-// TESTING purposes
-void        print_list(t_cmds *list)
-{
-    t_cmds *tmp;
-
-    tmp = list;
-    while (tmp)
-    {
-        ft_putendl(tmp->args[0]);
-        tmp = tmp->next;
-    }
-
-}
-
 /*
 ** the main loop of the program
 ** intializes a prompt for the user
@@ -80,7 +63,7 @@ void        print_list(t_cmds *list)
 ** Parses it, meaning we seperate the command into a program and a set of arguments
 */
 
-void        sh_loop(t_shell *shell, char **envv)
+void        sh_loop(t_shell *shell, char **envv) // WIP
 {
     int status;
     char *line;

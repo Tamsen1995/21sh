@@ -1,18 +1,6 @@
 #include "../includes/ft_sh.h"
 
 /*
-** inputs an arbitrary int into
-** the stdin
-*/
-
-int             putintc(int c)
-{
-    write(STDIN_FILENO, &c, 1);
-    return (0);
-}
-
-
-/*
 ** applied the set flags of the termios struct
 ** onto the terminal
 */
@@ -44,7 +32,7 @@ t_shell         *make_shell(t_shell *shell)
         fatal("Could not get attributes for terminal (make_shell)");
     ioctl(0, TIOCGWINSZ, shell->sz);
 	tputs(tgetstr("vi", NULL), 1, putintc);
-    //shell->term->c_lflag &= ~(ECHO);
+    shell->term->c_lflag &= ~(ECHO);
     shell->term->c_lflag &= ~(ICANON);
     apply_mode(shell);
     return (shell);
@@ -73,7 +61,6 @@ t_shell     *init_shell(int ac, char **av, char **envv)
     shell = make_shell(shell);
     return (shell);
 }
-
 
 /*
 
