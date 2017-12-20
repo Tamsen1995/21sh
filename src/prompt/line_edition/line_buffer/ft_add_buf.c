@@ -25,7 +25,7 @@ int         list_len(t_buf *buffer)
 }
 
 /*
-** allocates a new environment variables list element
+** allocates a new buffer list element
 */
 
 t_buf      *ft_new_buf(char *key)

@@ -5,18 +5,48 @@
 ** might have to be executed
 */
 
-void            check_input(t_buf *buffer, char *buf) // WIP
+void            check_input(t_line *line, char *buf) // WIP
 {
-    t_buf *tmp;
-     // the action keys for the line
-    // editing such as the arrow keys
-
-    tmp = NULL;
-    if (!buffer || !buf)
+    if (!line)
+        fatal("Error (check_input)");
+    if (!line->buffer || !buf)
         return ;
-    tmp = buffer;
-    cursor_movement(buf, buffer);
+    cursor_movement(buf, line);
     // TODO other actions
+}
+
+
+struct winsize		*get_win_size()
+{
+    struct winsize *ret;
+
+    if (!(ret = (struct winsize *)malloc(sizeof(struct winsize) * 1)))
+        fatal("Can't allocate size struct (make_shell)");
+    ioctl(0, TIOCGWINSZ, ret);
+
+    // TODO: free ret
+    return (ret);
+}
+
+/*
+** initializes the struct necessary for line edition
+*/
+
+t_line         *init_line()
+{
+    t_line *line;
+
+    line = NULL;
+    if (!(line = malloc(sizeof(t_line) * 1)))
+        fatal("");
+    line->buffer = NULL;
+    line->cursor = NULL;
+    line->prompt = "tamshell $> ";
+    line->sz = get_win_size();
+    line->cursor = init_cursor((int)line->sz->ws_col);
+    line->first_c = get_first_c(line);
+    line->current_c = line->first_c;
+    return (line);
 }
 
 /*
@@ -27,43 +57,28 @@ void            check_input(t_buf *buffer, char *buf) // WIP
 ** Display the updated contents of the text buffer on the screen.
 */
 
-char            *prompt_loop(void) // WIP
+char            *prompt_loop(void)
 {
-
 	char		buf[KEY_BUF_SIZE + 1];
     char        *cmd_line;
-    t_buf       *buffer;
-    char        *prompt;
+    t_line      *line;
 
-    buffer = NULL;
-    prompt = "tamshell$> ";
+    line = init_line();
     tputs(tgetstr("vs", NULL), 0, putintc);
-    ft_putstr(prompt);
+    ft_putstr(line->prompt);
     while (buf[0] != 10)
     {
         ft_bzero(buf, KEY_BUF_SIZE + 1);
         read(STDIN_FILENO, buf, KEY_BUF_SIZE);
-
-
-        // edit the buffer according to action requested
-        check_input(buffer, buf); // WIP
+        check_input(line, buf); // WIP // edit the buffer according to action requested
         if (term_action(buf) == FALSE) // WIP
-            ft_add_buf(&buffer, buf);
-        if (term_action(buf) == FALSE) // WIP
-            print_buffer(buffer);
-        // print the edited buffer
-
-        // ft_putstr(buf); // TESTING
-        // tputs(tgetstr("ll", NULL), 0, putintc);
-
-        // somewhere here I need to check for input
-        // to see if there is an arrow key  I need to be able
-        // to read. This will constitute for the cursor movement
-
-        // The output of the user's input shall be made here
-        // if there is any kind of cursor movement then the cursor on the screen shall move
+        {
+            ft_add_buf(&line->buffer, buf);
+            print_buffer(line->buffer);
+            line->current_c = line->current_c->next;
+        }
     }
-    cmd_line = stringify_buffer(buffer);
-    // get_next_line(0, &buf); 
+    cmd_line = stringify_buffer(line->buffer);
+    free_line_struct(line);
     return (cmd_line);
 }

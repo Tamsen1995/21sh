@@ -28,14 +28,31 @@
 # define TRUE 1
 # define FALSE 0
 
-// This list determines the current state of the shell
-typedef struct		s_env
+
+
+/*	
+struct winsize
 {
-	struct s_env	*next;
-	struct s_env	*prev;
-	char			*name;
-	char			*value;
-}					t_env;
+  unsigned short ws_row;	// rows, in characters 
+  unsigned short ws_col;	// columns, in characters 
+  unsigned short ws_xpixel;	// horizontal size, pixels 
+  unsigned short ws_ypixel;	// vertical size, pixels 
+};
+*/
+
+
+/*
+** cursor linked list
+** every element represents a potential cursor position
+*/
+
+typedef struct			s_cursor
+{
+	struct s_cursor		*next;
+	struct s_cursor		*prev;
+	int					c_ind; // cursor index
+	T_BOOL				cursor;
+}						t_cursor;
 
 /*
 ** this list will serve as a buffer for
@@ -48,9 +65,23 @@ typedef struct		s_buf
 {
 	struct s_buf	*next;
 	struct s_buf	*prev;
-	T_BOOL			cursor;
 	char 			*key;
 }					t_buf;
+
+/*
+** struct responsible for the line edition
+** in the prompt
+*/
+
+typedef struct			s_line
+{	
+	struct s_buf		*buffer;
+	struct s_cursor		*cursor;
+	struct s_cursor		*first_c; // the cursor cannot go past this ever because this is where the prompt starts
+	struct s_cursor		*current_c;
+	struct winsize		*sz;
+	char				*prompt;
+}						t_line;
 
 /*
 ** a  linked list of commands here
@@ -66,6 +97,17 @@ typedef struct		s_cmds
 	char 			**args;
 }					t_cmds;
 
+/*
+** This list indicates the env variables of the shell
+*/
+
+typedef struct		s_env
+{
+	struct s_env	*next;
+	struct s_env	*prev;
+	char			*name;
+	char			*value;
+}					t_env;
 
 typedef struct		s_shell
 {
@@ -87,8 +129,12 @@ typedef struct		s_shell
 t_cmds      		*store_commands(char *commands);
 int             	putintc(int c);
 void				print_buffer(t_buf *buffer);
-void         		cursor_movement(char *key, t_buf *buffer); // WIP
+void         		cursor_movement(char *key, t_line *line);
+t_cursor    	   *init_cursor(int win_size);
 T_BOOL        		term_action(char *buf);
+t_cursor			*get_first_c(t_line *line);
+
+
 
 /*
 ** line buffer/edition functions:
@@ -97,6 +143,8 @@ T_BOOL        		term_action(char *buf);
 void				ft_add_buf(t_buf **begin_list, char *key);
 char     		   	*stringify_buffer(t_buf  *buffer);
 int					list_len(t_buf *buffer);
+void				free_line_struct(t_line *line); // Freeing the struct
+
 
 /*
 ** 21sh ending here

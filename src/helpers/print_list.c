@@ -1,31 +1,6 @@
 #include "../../includes/ft_sh.h"
 
 /*
-** counts the amount of columns the cursor is away
-** from the end of the buffer
-*/
-
-int         get_cursor_pos(t_buf *buffer)
-{
-    int ret;
-    t_buf *tmp;
-
-    tmp = NULL;
-    ret = 0;
-    if (!buffer)
-        fatal("Error (get_cursor_pos)");
-    tmp = buffer;
-    while (tmp && tmp->next && tmp->cursor == FALSE)
-        tmp = tmp->next;
-    while (tmp->next)
-    {
-        ret++;
-        tmp = tmp->next;
-    }
-    return (ret);
-}
-
-/*
 ** clears the current line of the prompt
 ** before re - outputting the line buffer
 */
@@ -64,11 +39,9 @@ void        print_buffer(t_buf *buffer)
         tputs(tgetstr("le", NULL), 0, putintc);
         i++;
     }
-
     clear_prompt_line(); // TESTING
-
-
-
+    
+    // printing the key buffer
     tmp = buffer;
     while (tmp)
     {
