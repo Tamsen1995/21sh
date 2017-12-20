@@ -34,22 +34,42 @@ void        free_env(t_env *env)
     free_env_var(tmp);
 }
 
+
 /*
-** frees the argument variables of the shell
+** A function which aims to free a command structure from
+** the linked list
 */
 
-void        free_args(t_shell *shell)
+// NOT IN HEADER 
+void            free_cmd(t_cmds *cmd)
 {
-    int i;
+    if (cmd->args)
+        free_twod_arr(cmd->args);
+    if (cmd)
+        free(cmd);
+    cmd = NULL;
+}
 
-    i = 0;
-    if (!shell)
-        fatal("Error in (free_args)");
-    while (shell->args[i])
+
+/*
+** A function which free the list of commands in the shell backwards
+*/
+
+// NOT IN HEADER
+void        free_cmds_list(t_shell *shell)
+{
+    t_cmds *tmp;
+
+    tmp = NULL;
+    tmp = shell->cmds;
+    while (tmp->next) // Going towards the end first
+        tmp = tmp->next;
+    while (tmp->prev)
     {
-        free(shell->args[i]);
-        i++;
+        tmp = tmp->prev;
+        free_cmd(tmp->next);
     }
+    //   free_cmd(tmp); // fenceposting
 }
 
 /*
@@ -60,11 +80,12 @@ void        free_shell(t_shell *shell)
 {
     if (!shell)
         fatal("No shell to be freed in (free_shell)");
-    if (shell->env != NULL)
+    if (shell->env)
         free_env(shell->env);
-    if (shell->bin_dir != NULL)
+    if (shell->bin_dir)
         ft_strfree(shell->bin_dir);
+    if (shell->cmds)
+        free_cmds_list(shell);
     free(shell);
     shell = NULL;
-    // More might be implemented later as we add more variables onto the shell
 }

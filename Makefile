@@ -1,5 +1,5 @@
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -I includes
+FLAGS = -g -Wall -Wextra -Werror -I includes
 LIBFT = libft/libft.a
 NAME = 21sh
 SRC = src/main.c \
@@ -11,6 +11,7 @@ SRC = src/main.c \
 	src/init_shell.c \
 	src/check_bin_cmd.c \
 	src/free_shell.c \
+	src/store_commands.c \
 	src/builtins/builtin_env.c \
 	src/builtins/builtin_exit.c \
 	src/builtins/builtin_echo.c \
@@ -19,6 +20,16 @@ SRC = src/main.c \
 	src/builtins/builtin_unsetenv.c \
 	src/builtins/builtins.c \
 	src/helpers/check_directory.c \
+	src/helpers/putintc.c \
+	src/helpers/print_list.c \
+	src/prompt/prompt_loop.c \
+	src/prompt/line_edition/line_buffer/ft_add_buf.c \
+	src/prompt/line_edition/line_buffer/stringify_buffer.c \
+	src/prompt/line_edition/cursor_movement.c \
+	src/prompt/line_edition/init_cursor.c \
+	src/prompt/line_edition/term_action.c \
+	src/prompt/line_edition/get_first_c.c \
+	src/prompt/line_edition/free_line_struct.c \
 	src/check_bin_path.c \
 
 OBJ = $(addsuffix .o, $(basename $(SRC)))
@@ -30,7 +41,7 @@ $(LIBFT):
 
 $(NAME):$(LIBFT) $(NAME) $(OBJ)
 	@echo "building binary file"
-	$(CC) $(FLAGS) $(SRC) -o $(NAME) -I -lft $(LIBFT)
+	$(CC) $(FLAGS) $(SRC) -o $(NAME) -I -lft $(LIBFT) -ltermcap
 
 %.o: %.c ft_ls.h
 		clang $(FLAG) -c $< -o $@

@@ -24,7 +24,6 @@ t_stack				*handle_single_fl(char *fl_path, char *flags);
 void				free_list(t_stack *list);
 void                print_total_blocks(t_stack *file, char *flags);
 t_bool		        is_hidden_file(t_stack *file);
-void		        print_list(t_stack *file);
 void        		print_flags(t_stack *file, char *flags);
 void		        print_dir(t_stack *files, char *flags);
 void                output_module(t_stack *files, char *flags);
