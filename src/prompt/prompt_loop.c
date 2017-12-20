@@ -50,6 +50,15 @@ t_line         *init_line()
     return (line);
 }
 
+// go to the current_c
+    // count the number of jumps/iterations in the process
+// jump / iterate said number of times in the buffer
+    // boom ! you've got the desired buffer position into which you can insert/delete
+
+// TODO delete
+
+// TODO insert
+
 /*
 ** Display the initial contents of the text buffer on the screen.
 ** Get a keystroke from the user.
