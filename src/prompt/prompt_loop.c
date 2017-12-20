@@ -50,14 +50,44 @@ t_line         *init_line()
     return (line);
 }
 
-// go to the current_c
-    // count the number of jumps/iterations in the process
-// jump / iterate said number of times in the buffer
-    // boom ! you've got the desired buffer position into which you can insert/delete
+
+////////////////////////////////////////// INSERT / DELETE in relation to current cursor position
+
+
+// find the buffer element at which the cursor is currently positioned at
+    // go to the current_c
+        // count the number of jumps/iterations in the process
+    // jump / iterate said number of times in the buffer
+        // boom ! you've got the desired buffer position into which you can insert/delete
+
+
+/*
+** returns the buffer element which is found at the current tracked cursor position
+*/
+
+
+
+
 
 // TODO delete
+    // find buffer/cursor position
+    // delete element before the buffer/cursor position
+        // take the elem to be deleted
+        // point the next pointer of the prev pointer to the next pointer
+        // point the prev pointer of the next pointer to the prev pointer
+        // free/delete elem
+
+/*
+** deletes the element before the current cursor position in the buffer
+*/
+
+void           del_buf_elem(t_line *line);
+
+
 
 // TODO insert
+
+////////////////////////////////////////// INSERT / DELETE in relation to current cursor position
 
 /*
 ** Display the initial contents of the text buffer on the screen.
