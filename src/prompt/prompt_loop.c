@@ -1,7 +1,7 @@
 #include "../../includes/ft_sh.h"
 
 
-////////////////////////////////////////// INSERT / DELETE in relation to current cursor position
+//////////////////////////////////////////////////////////////////////////////////// INSERT / DELETE in relation to current cursor position
 
 
 // find the buffer element at which the cursor is currently positioned at
@@ -48,13 +48,33 @@ t_buf       *get_cur_buffer(t_line *line)
 
 
 
-// TODO delete
-    // find buffer/cursor position
-    // delete element before the buffer/cursor position
-        // take the elem to be deleted
-        // point the next pointer of the prev pointer to the next pointer
-        // point the prev pointer of the next pointer to the prev pointer
-        // free/delete elem
+
+    /*
+       // When not first node, follow the normal deletion process
+ 
+    // find the previous node
+    struct Node *prev = head;
+    while(prev->next != NULL && prev->next != n)
+        prev = prev->next;
+ 
+    // Check if node really exists in Linked List
+    if(prev->next == NULL)
+    {
+        printf("\n Given node is not present in Linked List");
+        return;
+    }
+ 
+    // Remove node from Linked List
+    prev->next = prev->next->next;
+ 
+    // Free memory
+    free(n);
+ 
+    return; 
+}
+    */
+
+
 
 /*
 ** deletes the element before the current cursor position in the buffer
@@ -64,26 +84,42 @@ void           del_buf_elem(t_line *line)
 {
     t_buf *buf_elem; // buffer element at which the buffer is positioned
 
+    
+    t_buf *del;
+
     buf_elem = NULL;
+    del = NULL;
     if (!line)
         fatal ("Error (del_buf_elem)");
     buf_elem = get_cur_buffer(line);
 
-    printf("\n\n %s \n\n", buf_elem->key); // TESTING
+   // if (!buf_elem-) 
+     //   return ;
+  //  del_this = buf_elem->prev;
+    //del_this->prev->next = del_this->next;
+   // del_this->next->prev = del_this->prev;
+   // line->last_c = line->last_c->prev;
+  //  line->current_c = line->current_c->prev;
+  //  ft_strfree(del_this->key);
+    //free(del_this);
 
-    exit(-1);
+
+
+    tputs(tgetstr("le", NULL), 0, putintc);
+
+
+
+
+// TODO fix this function (make it work!)
+
+
+
 }
 
+// TODO insert function
+//void        insert_at_cursor();
 
-
-// TODO insert
-
-////////////////////////////////////////// INSERT / DELETE in relation to current cursor position
-
-
-
-
-
+//////////////////////////////////////////////////////////////////////////////////// INSERT / DELETE in relation to current cursor position
 
 
 
@@ -152,10 +188,12 @@ t_line         *init_line()
 
 char            *prompt_loop(void)
 {
+    int         buf_ind;
 	char		buf[KEY_BUF_SIZE + 1];
     char        *cmd_line;
     t_line      *line;
 
+    buf_ind = 0;
     line = init_line();
     tputs(tgetstr("vs", NULL), 0, putintc);
     ft_putstr(line->prompt);
@@ -166,7 +204,7 @@ char            *prompt_loop(void)
         check_input(line, buf); // WIP // edit the buffer according to action requested
         if (term_action(buf) == FALSE) // WIP
         {
-            ft_add_buf(&line->buffer, buf); // I might have to heavily modify this in order for it to insert the desired keys at the current_c position
+            ft_add_buf(&line->buffer, buf, buf_ind); // I might have to heavily modify this in order for it to insert the desired keys at the current_c position
             // everytime a new key is added to the buf, 
             // the last possible cursor position shall move as well
 
@@ -174,6 +212,7 @@ char            *prompt_loop(void)
             print_buffer(line->buffer);
             line->current_c = line->current_c->next;
             line->last_c = line->last_c->next;
+            buf_ind++;
         }
     }
     cmd_line = stringify_buffer(line->buffer);

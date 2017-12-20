@@ -28,7 +28,7 @@ int         list_len(t_buf *buffer)
 ** allocates a new buffer list element
 */
 
-t_buf      *ft_new_buf(char *key)
+t_buf      *ft_new_buf(char *key, int buf_ind)
 {
     t_buf *new;
 
@@ -37,6 +37,7 @@ t_buf      *ft_new_buf(char *key)
     new->next = NULL;
     new->prev = NULL;
     new->key = NULL;
+    new->ind = buf_ind;
     new->key = ft_strdup(key);
     return (new);
 }
@@ -46,14 +47,14 @@ t_buf      *ft_new_buf(char *key)
 ** and then adds the value to it
 */
 
-void		ft_add_buf(t_buf **begin_list, char *key)
+void		ft_add_buf(t_buf **begin_list, char *key, int buf_ind)
 {
     t_buf *tmp;
 
     tmp = NULL;
 	if (!*begin_list)
 	{
-		*begin_list = ft_new_buf(key);
+		*begin_list = ft_new_buf(key, buf_ind);
 		return ;
 	}
     else
@@ -61,7 +62,7 @@ void		ft_add_buf(t_buf **begin_list, char *key)
         tmp = *begin_list;
         while (tmp->next)
             tmp = tmp->next;
-        tmp->next = ft_new_buf(key);
+        tmp->next = ft_new_buf(key, buf_ind);
         tmp->next->prev = tmp;
     }
 }

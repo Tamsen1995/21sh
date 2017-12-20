@@ -67,6 +67,7 @@ typedef struct		s_buf
 	struct s_buf	*next;
 	struct s_buf	*prev;
 	char 			*key;
+	int				ind; // The index of the buffer
 }					t_buf;
 
 /*
@@ -142,7 +143,7 @@ t_cursor			*get_first_c(t_line *line);
 ** line buffer/edition functions:
 */
 
-void				ft_add_buf(t_buf **begin_list, char *key);
+void				ft_add_buf(t_buf **begin_list, char *key, int buf_ind);
 char     		   	*stringify_buffer(t_buf  *buffer);
 int					list_len(t_buf *buffer);
 void				free_line_struct(t_line *line); // Freeing the struct
