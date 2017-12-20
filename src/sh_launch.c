@@ -44,21 +44,18 @@ char			*make_bin_cmd(t_shell *shell)
 
 void			cmd_not_found(t_shell *shell)
 {
-	shell = NULL; //TESTING
-	/*
-
 	char *command;
 
 	command = NULL;
-	if (!shell || !shell->args[0])
-		fatal("Error in (cmd_not_found");
+	if (!shell || !shell->cmds->args[0])
+		fatal("Error in (cmd_not_found)");
 	ft_putstr("tamshell: command not found: ");
-	ft_putendl(shell->args[0]);
-	free_twod_arr(shell->args);
-	free_shell(shell); 
-	
-	*/
+	ft_putendl(shell->cmds->args[0]);
+	free_twod_arr(shell->cmds->args);
 
+	free_shell(shell);  // in the case of two commands, and one not being found, 
+	// there is a pointer which is being freed which shouldn't
+	
 	exit(-1);
 }
 
@@ -76,6 +73,7 @@ int				sh_launch(char **envv, t_shell *shell)
 
 	command = NULL;
 	pid = fork();
+
 	if (check_bin_cmd(shell) == TRUE)
 		command = make_bin_cmd(shell);
 	else if (check_bin_path(shell) == TRUE)
