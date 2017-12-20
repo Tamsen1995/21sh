@@ -4,7 +4,7 @@
 ** allocates a new cursor list element
 */
 
-t_cursor      *ft_new_cur(void)
+t_cursor      *ft_new_cur(int cursor_index)
 {
     t_cursor *new;
 
@@ -12,6 +12,7 @@ t_cursor      *ft_new_cur(void)
         fatal("Error: could not allocate env var list elem in ft_new_env");
     new->next = NULL;
     new->prev = NULL;
+    new->c_ind = cursor_index;
     new->cursor = FALSE;
     return (new);
 }
@@ -20,14 +21,14 @@ t_cursor      *ft_new_cur(void)
 ** pushes a cursor element to the end of a list
 */
 
-void		ft_add_cursor(t_cursor **begin_list)
+void		ft_add_cursor(t_cursor **begin_list, int c_ind)
 {
     t_cursor *tmp;
 
     tmp = NULL;
 	if (!*begin_list)
 	{
-		*begin_list = ft_new_cur();
+		*begin_list = ft_new_cur(c_ind);
 		return ;
 	}
     else
@@ -35,7 +36,7 @@ void		ft_add_cursor(t_cursor **begin_list)
         tmp = *begin_list;
         while (tmp->next)
             tmp = tmp->next;
-        tmp->next = ft_new_cur();
+        tmp->next = ft_new_cur(c_ind);
         tmp->next->prev = tmp;
     }
 }
@@ -59,7 +60,7 @@ t_cursor       *init_cursor(int win_size)
         fatal("Error (init_cursor)");
     while (i < win_size)
     {
-        ft_add_cursor(&cur_list);
+        ft_add_cursor(&cur_list, i);
         i++;
     }
     return (cur_list);

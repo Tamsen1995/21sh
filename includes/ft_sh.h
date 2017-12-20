@@ -50,6 +50,7 @@ typedef struct			s_cursor
 {
 	struct s_cursor		*next;
 	struct s_cursor		*prev;
+	int					c_ind; // cursor index
 	T_BOOL				cursor;
 }						t_cursor;
 
