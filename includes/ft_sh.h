@@ -132,6 +132,8 @@ t_cursor    	   *init_cursor(int win_size);
 T_BOOL        		term_action(char *buf);
 t_cursor			*get_first_c(t_line *line);
 
+
+
 /*
 ** line buffer/edition functions:
 */
@@ -139,6 +141,9 @@ t_cursor			*get_first_c(t_line *line);
 void				ft_add_buf(t_buf **begin_list, char *key);
 char     		   	*stringify_buffer(t_buf  *buffer);
 int					list_len(t_buf *buffer);
+
+void				free_line_struct(t_line *line); // Freeing the struct
+
 
 /*
 ** 21sh ending here
