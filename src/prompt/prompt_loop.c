@@ -46,8 +46,18 @@ t_line         *init_line()
     line->cursor = init_cursor((int)line->sz->ws_col);
     line->first_c = get_first_c(line);
     line->current_c = line->first_c;
+    line->last_c = line->first_c;
     return (line);
 }
+
+// go to the current_c
+    // count the number of jumps/iterations in the process
+// jump / iterate said number of times in the buffer
+    // boom ! you've got the desired buffer position into which you can insert/delete
+
+// TODO delete
+
+// TODO insert
 
 /*
 ** Display the initial contents of the text buffer on the screen.
@@ -73,9 +83,14 @@ char            *prompt_loop(void)
         check_input(line, buf); // WIP // edit the buffer according to action requested
         if (term_action(buf) == FALSE) // WIP
         {
-            ft_add_buf(&line->buffer, buf);
+            ft_add_buf(&line->buffer, buf); // I might have to heavily modify this in order for it to insert the desired keys at the current_c position
+            // everytime a new key is added to the buf, 
+            // the last possible cursor position shall move as well
+
+
             print_buffer(line->buffer);
             line->current_c = line->current_c->next;
+            line->last_c = line->last_c->next;
         }
     }
     cmd_line = stringify_buffer(line->buffer);

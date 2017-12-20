@@ -1,11 +1,18 @@
 #include "../../../includes/ft_sh.h"
 
-void        move_right() // WIP
+void        move_right(t_line *line) // WIP
 {
-    tputs(tgetstr("nd", NULL), 0, putintc);
+    if (!line || !line->cursor || \
+        !line->last_c || !line->current_c)
+        fatal("Error (move_right)");
+    if (line->current_c->c_ind < line->last_c->c_ind)
+    {
+        line->current_c = line->current_c->next;
+        tputs(tgetstr("nd", NULL), 0, putintc);
+    }
 }
 
-void        move_left(t_line *line) // WIP
+void        move_left(t_line *line)
 {
     if (!line || !line->cursor || \
         !line->first_c || !line->current_c)
@@ -15,7 +22,6 @@ void        move_left(t_line *line) // WIP
         line->current_c = line->current_c->prev;
         tputs(tgetstr("le", NULL), 0, putintc);
     }
-
 }
 
 /*
@@ -31,5 +37,5 @@ void          cursor_movement(char *key, t_line *line) // WIP
     if (ft_strcmp(key, K_LEFT) == 0)
         move_left(line);
     if (ft_strcmp(key, K_RIGHT) == 0)
-        move_right();       
+        move_right(line);       
 }
