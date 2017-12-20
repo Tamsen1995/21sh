@@ -41,10 +41,11 @@ t_line         *init_line()
         fatal("");
     line->buffer = NULL;
     line->cursor = NULL;
-    line->prompt = "tamsshell $> ";
+    line->prompt = "tamshell $> ";
     line->sz = get_win_size();
     line->cursor = init_cursor((int)line->sz->ws_col);
     line->first_c = get_first_c(line);
+    line->current_c = line->first_c;
     return (line);
 }
 
@@ -58,7 +59,6 @@ t_line         *init_line()
 
 char            *prompt_loop(void)
 {
-
 	char		buf[KEY_BUF_SIZE + 1];
     char        *cmd_line;
     t_line      *line;
@@ -70,12 +70,12 @@ char            *prompt_loop(void)
     {
         ft_bzero(buf, KEY_BUF_SIZE + 1);
         read(STDIN_FILENO, buf, KEY_BUF_SIZE);
-        // edit the buffer according to action requested
-        check_input(line, buf); // WIP
+        check_input(line, buf); // WIP // edit the buffer according to action requested
         if (term_action(buf) == FALSE) // WIP
         {
             ft_add_buf(&line->buffer, buf);
             print_buffer(line->buffer);
+            line->current_c = line->current_c->next;
         }
     }
     cmd_line = stringify_buffer(line->buffer);
