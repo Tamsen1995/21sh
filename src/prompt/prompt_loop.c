@@ -55,16 +55,45 @@ t_line         *init_line()
 
 
 // find the buffer element at which the cursor is currently positioned at
-    // go to the current_c
+    // go to the current_c from first_c
         // count the number of jumps/iterations in the process
     // jump / iterate said number of times in the buffer
         // boom ! you've got the desired buffer position into which you can insert/delete
 
 
 /*
-** returns the buffer element which is found at the current tracked cursor position
+** returns a pointer to the 
+** buffer element which is found at
+** the current tracked cursor position
 */
 
+t_buf       *get_cur_buffer(t_line *line)
+{
+    int         i;
+    int         k;
+    t_buf       *ret;
+    t_cursor    *tmp_cur;
+
+    i = 0;
+    k = 0;
+    ret = NULL;
+    tmp_cur = NULL;
+    if (!line || !line->first_c || !line->current_c)
+        fatal("Error (get_cur_buffer)");
+    ret = line->buffer;
+    tmp_cur = line->first_c;
+    while (tmp_cur && tmp_cur->c_ind != line->current_c->c_ind)
+    {
+        k++;
+        tmp_cur = tmp_cur->next;
+    }
+    while (ret &&  i < k)
+    {
+        i++;
+        ret = ret->next;
+    }
+    return (ret); // TODO test result
+}
 
 
 
