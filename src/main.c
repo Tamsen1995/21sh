@@ -76,6 +76,7 @@ void        sh_loop(t_shell *shell, char **envv) // WIP
     {
         // line edition happens in prompt_loop, fires off the buffer of commands
         // once commands have been typed in
+        ft_putstr("tamshell $> ");
         buf = prompt_loop();
 
         // if (isatty(STDIN_FILENO)) // I'm  not sure when to use this.
