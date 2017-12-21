@@ -4,6 +4,7 @@
 
 
 // delets the last element off the linked buffer list
+// TESTING
 void            del_test(t_buf *buffer)
 {
     t_buf *tmp;
