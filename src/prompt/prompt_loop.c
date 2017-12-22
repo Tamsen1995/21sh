@@ -52,7 +52,7 @@ void            check_input(t_line *line, char *buf) // WIP
     cursor_movement(buf, line);
 
     if (ft_strcmp(buf, K_BACKSPACE) == 0)
-       del_buf_elem(line);
+       del_buf_elem(&line);
 
     // TODO other actions
 }

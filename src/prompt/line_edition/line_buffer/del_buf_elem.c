@@ -51,33 +51,51 @@ void           print_list_test(t_buf *buffer)
     }
 }
 
+
+/*
+** frees a buf element
+*/
+void            free_buf_elem(t_buf *buf_elem)
+{
+    ft_strfree(buf_elem->key); // TESTING
+    free(buf_elem);
+    buf_elem = NULL;
+}
+
 /*
 ** deletes the element before the current cursor position in the buffer
 */
 
-void           del_buf_elem(t_line *line)
+void           del_buf_elem(t_line **line)
 {
     t_buf *del;
+    t_buf *tmp;
 
     del = NULL;
-    if (!line || !line->buffer || !line->cursor)
+    tmp = NULL;
+    if (!(*line) || !(*line)->buffer || !(*line)->cursor)
         fatal("Error (del_buf_elem)");
     // getting the buffer element that the cursor
     // is pointing
-    del = get_cur_buffer(line);
+    del = get_cur_buffer((*line));
+    tmp = (*line)->buffer;
     if (!del->prev)
         return ;
     // going to the one before since that is the one to be deleted
     if (del->next)
         del = del->prev;
-    
-    // del is now the element to be deleted
+
+    while (tmp->ind != del->ind)
+        tmp = tmp->next;
     
 
-    
+    //  ft_putendl(tmp->key); // TESTING
+    free_buf_elem(tmp);
+
+    //  del is now the element to be deleted
+
     printf("\n\n%s\n\n", del->key); // TESTING
-    print_list_test(line->buffer); // TESTING
-
+    print_list_test((*line)->buffer); // TESTING
     exit(-1); // TESTING
 
 // TODO fix this function (make it work!)
