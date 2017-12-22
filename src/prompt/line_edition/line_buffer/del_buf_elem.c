@@ -37,20 +37,6 @@ t_buf       *get_cur_buffer(t_line *line)
     return (ret); // TODO test result
 }
 
-// TESTING
-// Testing the buffer eveytime in order to see if desired elements have been executed
-void           print_list_test(t_buf *buffer)
-{
-    t_buf *tmp;
-
-    tmp = buffer;
-    while (tmp)
-    {
-        ft_putstr(tmp->key);
-        tmp = tmp->next;
-    }
-}
-
 
 /*
 ** frees a buf element
@@ -85,17 +71,21 @@ void           del_buf_elem(t_line **line)
     if (del->next)
         del = del->prev;
 
+    // putting the tmp pointer to the position of the item to be deleted
     while (tmp->ind != del->ind)
         tmp = tmp->next;
     
-
+    // if the last element is selected
+    if (!del->next)
+    {
+        free_buf_elem(tmp);
+        return ;
+    }
+ 
+    
     //  ft_putendl(tmp->key); // TESTING
-    free_buf_elem(tmp);
 
-    //  del is now the element to be deleted
-
-    printf("\n\n%s\n\n", del->key); // TESTING
-    print_list_test((*line)->buffer); // TESTING
+    printf("\n\n%s\n\n", tmp->key); // TESTING
     exit(-1); // TESTING
 
 // TODO fix this function (make it work!)

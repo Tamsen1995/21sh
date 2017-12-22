@@ -38,22 +38,40 @@ t_line         *init_line()
     return (line);
 }
 
+
+// TESTING
+// Testing the buffer eveytime in order to see if desired elements have been executed
+void           print_list_test(t_buf *buffer)
+{
+    t_buf *tmp;
+
+    tmp = buffer;
+    while (tmp)
+    {
+        ft_putstr(tmp->key);
+        tmp = tmp->next;
+    }
+}
+
+
 /*
 ** checks the buffer linked list for actions which 
 ** might have to be executed
 */
 
-void            check_input(t_line *line, char *buf) // WIP
+void            check_input(t_line **line, char *buf) // WIP
 {
-    if (!line)
+    if (!(*line))
         fatal("Error (check_input)");
-    if (!line->buffer || !buf)
+    if (!(*line)->buffer || !buf)
         return ;
-    cursor_movement(buf, line);
+    cursor_movement(buf, (*line));
 
     if (ft_strcmp(buf, K_BACKSPACE) == 0)
-       del_buf_elem(&line);
+    {
+        del_buf_elem(line); // WIP
 
+    }
     // TODO other actions
 }
 
@@ -80,7 +98,8 @@ char            *prompt_loop(void)
     {
         ft_bzero(buf, KEY_BUF_SIZE + 1);
         read(STDIN_FILENO, buf, KEY_BUF_SIZE);
-        check_input(line, buf); // WIP // edit the buffer according to action requested
+        check_input(&line, buf); // WIP // edit the buffer according to action requested
+        // the line comes out of check_input modified
         if (term_action(buf) == FALSE) // WIP
         {
             ft_add_buf(&line->buffer, buf, buf_ind); 
@@ -88,12 +107,20 @@ char            *prompt_loop(void)
             // everytime a new key is added to the buf, 
             // the last possible cursor position shall move as well
 
-
             print_buffer(line->buffer);
             line->current_c = line->current_c->next;
             line->last_c = line->last_c->next;
             buf_ind++;
         }
+        else
+        { 
+            ft_putendl(""); // TESTING
+            ft_putstr(line->prompt); // TESTING
+            print_buffer(line->buffer); // TESTING
+        }
+
+
+    
     }
     cmd_line = stringify_buffer(line->buffer);
     free_line_struct(line);

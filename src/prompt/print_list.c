@@ -34,13 +34,15 @@ void        print_buffer(t_buf *buffer)
         return ;
     n = list_len(buffer);
 
-//    printf("\n%d\n", n); // TESTING
+    // printf("\n%d\n", n); // TESTING
     while (i < n)
     { 
         tputs(tgetstr("le", NULL), 0, putintc);
         i++;
     }
-    clear_prompt_line(); // TESTING
+
+
+    // clear_prompt_line(); // TESTING
     // printing the key buffer
     tmp = buffer;
     while (tmp)
