@@ -3,44 +3,6 @@
 
 
 
-// delets the last element off the linked buffer list
-// TESTING
-void            del_test(t_buf *buffer)
-{
-    t_buf *tmp;
-
-    tmp = NULL;
-    tmp = buffer;
-    while (tmp->next)
-        tmp = tmp->next;
-    ft_strfree(tmp->key);
-    free(tmp);
-    tmp = NULL;
-
-
-}
-
-/*
-** checks the buffer linked list for actions which 
-** might have to be executed
-*/
-
-void            check_input(t_line *line, char *buf) // WIP
-{
-    if (!line)
-        fatal("Error (check_input)");
-    if (!line->buffer || !buf)
-        return ;
-    cursor_movement(buf, line);
-
-    if (ft_strcmp(buf, K_BACKSPACE) == 0)
-       del_test(line->buffer);
-       
-       //del_buf_elem(line);
-
-    // TODO other actions
-}
-
 
 struct winsize		*get_win_size()
 {
@@ -76,6 +38,24 @@ t_line         *init_line()
     return (line);
 }
 
+/*
+** checks the buffer linked list for actions which 
+** might have to be executed
+*/
+
+void            check_input(t_line *line, char *buf) // WIP
+{
+    if (!line)
+        fatal("Error (check_input)");
+    if (!line->buffer || !buf)
+        return ;
+    cursor_movement(buf, line);
+
+    if (ft_strcmp(buf, K_BACKSPACE) == 0)
+       del_buf_elem(line);
+
+    // TODO other actions
+}
 
 /*
 ** Display the initial contents of the text buffer on the screen.
@@ -95,7 +75,7 @@ char            *prompt_loop(void)
     buf_ind = 0;
     line = init_line();
     tputs(tgetstr("vs", NULL), 0, putintc);
-   // ft_putstr(line->prompt);
+    ft_putstr(line->prompt);
     while (buf[0] != 10)
     {
         ft_bzero(buf, KEY_BUF_SIZE + 1);
@@ -103,7 +83,8 @@ char            *prompt_loop(void)
         check_input(line, buf); // WIP // edit the buffer according to action requested
         if (term_action(buf) == FALSE) // WIP
         {
-            ft_add_buf(&line->buffer, buf, buf_ind); // I might have to heavily modify this in order for it to insert the desired keys at the current_c position
+            ft_add_buf(&line->buffer, buf, buf_ind); 
+            // I might have to heavily modify this in order for it to insert the desired keys at the current_c position
             // everytime a new key is added to the buf, 
             // the last possible cursor position shall move as well
 

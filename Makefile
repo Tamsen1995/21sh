@@ -21,12 +21,12 @@ SRC = src/main.c \
 	src/builtins/builtins.c \
 	src/helpers/check_directory.c \
 	src/helpers/putintc.c \
-	src/helpers/print_list.c \
+	src/prompt/print_list.c \
 	src/prompt/prompt_loop.c \
 	src/prompt/line_edition/line_buffer/ft_add_buf.c \
 	src/prompt/line_edition/line_buffer/stringify_buffer.c \
+	src/prompt/line_edition/line_buffer/del_buf_elem.c \
 	src/prompt/line_edition/cursor_movement.c \
-	src/prompt/line_edition/del_buf_elem.c \
 	src/prompt/line_edition/init_cursor.c \
 	src/prompt/line_edition/term_action.c \
 	src/prompt/line_edition/get_first_c.c \
