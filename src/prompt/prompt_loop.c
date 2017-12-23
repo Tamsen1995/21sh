@@ -101,12 +101,11 @@ char            *prompt_loop(void)
         if (term_action(buf) == FALSE) // WIP
         {
             ft_add_buf(&line->buffer, buf, buf_ind);
-            //print_buffer(line->buffer);
             line->current_c = line->current_c->next;
             line->last_c = line->last_c->next;
             buf_ind++;
         }
-        print_buffer(line->buffer);
+        print_buffer(line);
     }
     cmd_line = stringify_buffer(line->buffer);
     //free_line_struct(line);
