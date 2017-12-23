@@ -44,6 +44,11 @@ void        print_buffer(t_buf *buffer)
     if (!buffer)
         return ;
     n = list_len(buffer);
+    while (i < 100)
+    {
+        tputs(tgetstr("le", NULL), 0, putintc);
+        i++;
+    }
     tmp = buffer;
     while (tmp)
     {
