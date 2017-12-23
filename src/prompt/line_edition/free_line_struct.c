@@ -55,8 +55,9 @@ void            free_line_buf(t_line *line)
 
 void            free_line_struct(t_line *line)
 {
-    if (!line)
+    if (!line || !line->sz)
         fatal("Error (free_line_struct)");
+    reset_cursor(line);
     free_line_buf(line);
     free_cursor(line);
     if (line->sz)

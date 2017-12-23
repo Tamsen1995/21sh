@@ -28,7 +28,7 @@ int         list_len(t_buf *buffer)
 ** resets the cursor to the beginnging of the prompt
 */
 
-void        reset_cursor(t_line *line)
+void        prompt_cursor(t_line *line)
 {
     int     i;
     int     prompt_len;
@@ -38,18 +38,42 @@ void        reset_cursor(t_line *line)
     if (!line || !line->prompt)
         fatal("Error: (reset_cursor)");
     prompt_len = ft_strlen(line->prompt);
-    while (i < line->sz->ws_col)
-    {
-        tputs(tgetstr("le", NULL), 0, putintc);
-        i++;
-    }
-    i = 0;
+    reset_cursor(line);
     while (i < prompt_len)
     {
         tputs(tgetstr("nd", NULL), 0, putintc);
         i++;
     }
     tputs(tgetstr("ce", NULL), 0, putintc);
+}
+
+/*
+** positions the cursor at its proper position
+** according to the cursor linked list
+*/
+
+void        set_cursor(t_line *line)
+{
+    t_cursor    *tmp;
+
+    tmp = NULL;
+    if (!line || !line->cursor)
+        fatal("Error (set_cursor)");
+    tmp = line->cursor;
+    reset_cursor(line);
+    while (tmp->c_ind != line->current_c->c_ind)
+    {
+        tputs(tgetstr("nd", NULL), 0, putintc);
+        tmp = tmp->next;
+    }
+
+
+
+    // move cursor all the way to the beginning
+
+    // move cursor to the right in conjunction with the cursor linked list
+    // until the current_c tracked position has been reached
+
 }
 
 /*
@@ -69,12 +93,12 @@ void        print_buffer(t_line *line)
     if (!line->buffer)
         return ;
     n = list_len(line->buffer);
-    reset_cursor(line);
+    prompt_cursor(line);
     tmp = line->buffer;
     while (tmp)
     {
         ft_putstr(tmp->key);
         tmp = tmp->next;
     }
-
+    set_cursor(line);
 }

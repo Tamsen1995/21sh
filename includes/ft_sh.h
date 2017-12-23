@@ -132,10 +132,12 @@ typedef struct		s_shell
 t_cmds      		*store_commands(char *commands);
 int             	putintc(int c);
 void				print_buffer(t_line *line);
-void         		cursor_movement(char *key, t_line *line);
+void         		cursor_movement(char *key, t_line **line);
 t_cursor    	   *init_cursor(int win_size);
 T_BOOL        		term_action(char *buf);
 t_cursor			*get_first_c(t_line *line);
+
+void  			    reset_cursor(t_line *line);
 
 
 

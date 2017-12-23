@@ -34,23 +34,6 @@ t_line         *init_line()
     return (line);
 }
 
-
-// TESTING
-// Testing the buffer eveytime in order to see if desired elements have been executed
-void           print_list_test(t_buf *buffer)
-{
-    t_buf *tmp;
-
-    tmp = buffer;
-    while (tmp)
-    {
-        ft_putstr(tmp->key);
-        tmp = tmp->next;
-    }
-    exit(-1);
-}
-
-
 /*
 ** checks the buffer linked list for actions which 
 ** might have to be executed
@@ -62,15 +45,9 @@ void            check_input(t_line **line, char *buf) // WIP
         fatal("Error (check_input)");
     if (!(*line)->buffer || !buf)
         return ;
-    cursor_movement(buf, (*line));
-
+    cursor_movement(buf, line);
     if (ft_strcmp(buf, K_BACKSPACE) == 0)
-    {
-        del_buf_elem(line); // WIP
-
-
-    }
-    // TODO other actions
+        del_buf_elem(line);
 }
 
 /*
@@ -96,9 +73,8 @@ char            *prompt_loop(void)
     {
         ft_bzero(buf, KEY_BUF_SIZE + 1);
         read(STDIN_FILENO, buf, KEY_BUF_SIZE);
-        check_input(&line, buf); // WIP // edit the buffer according to action requested
-        // the line comes out of check_input modified
-        if (term_action(buf) == FALSE) // WIP
+        check_input(&line, buf);
+        if (term_action(buf) == FALSE)
         {
             ft_add_buf(&line->buffer, buf, buf_ind);
             line->current_c = line->current_c->next;
@@ -108,6 +84,6 @@ char            *prompt_loop(void)
         print_buffer(line);
     }
     cmd_line = stringify_buffer(line->buffer);
-    //free_line_struct(line);
+    free_line_struct(line);
     return (cmd_line);
 }
