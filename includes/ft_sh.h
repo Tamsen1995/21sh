@@ -137,7 +137,7 @@ t_cursor    	   *init_cursor(int win_size);
 T_BOOL        		term_action(char *buf);
 t_cursor			*get_first_c(t_line *line);
 
-void  			    reset_cursor(t_line *line);
+void  			    reset_cursor();
 
 
 

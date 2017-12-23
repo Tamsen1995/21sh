@@ -3,20 +3,24 @@
 /*
 ** resets the cursor to the beginning
 ** of the current line it's on.
-** only works in the absence of bw
+** only works in the absence of the termcap 
+** 'bw'
 */
 
-void        reset_cursor(t_line *line)
+void        reset_cursor()
 {
     int     i;
+    struct winsize *ret;
 
     i = 0;
-    if (!line || !line->sz)
-        fatal("Error (reset_cursor)");
-    while (i < line->sz->ws_col)
+
+    if (!(ret = (struct winsize *)malloc(sizeof(struct winsize) * 1)))
+        fatal("Can't allocate size struct (make_shell)");
+    ioctl(0, TIOCGWINSZ, ret);
+    while (i < ret->ws_col)
     {
         tputs(tgetstr("le", NULL), 0, putintc);
         i++;
     }
-
+    free(ret);
 }

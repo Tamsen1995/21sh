@@ -38,7 +38,7 @@ void        prompt_cursor(t_line *line)
     if (!line || !line->prompt)
         fatal("Error: (reset_cursor)");
     prompt_len = ft_strlen(line->prompt);
-    reset_cursor(line);
+    reset_cursor();
     while (i < prompt_len)
     {
         tputs(tgetstr("nd", NULL), 0, putintc);
@@ -60,7 +60,7 @@ void        set_cursor(t_line *line)
     if (!line || !line->cursor)
         fatal("Error (set_cursor)");
     tmp = line->cursor;
-    reset_cursor(line);
+    reset_cursor();
     while (tmp->c_ind != line->current_c->c_ind)
     {
         tputs(tgetstr("nd", NULL), 0, putintc);
