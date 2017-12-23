@@ -49,6 +49,7 @@ void        reset_cursor(t_line *line)
         tputs(tgetstr("nd", NULL), 0, putintc);
         i++;
     }
+    tputs(tgetstr("ce", NULL), 0, putintc);
 }
 
 /*
@@ -68,10 +69,7 @@ void        print_buffer(t_line *line)
     if (!line->buffer)
         return ;
     n = list_len(line->buffer);
-
-
     reset_cursor(line);
-
     tmp = line->buffer;
     while (tmp)
     {
