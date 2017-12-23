@@ -15,7 +15,8 @@
 #include "../includes/libft.h"
 #include "../includes/ft_ls.h"
 
-
+# define K_RETURN		"\xa\x0\x0\x0\x0\x0"
+# define K_BACKSPACE	"\x7f\x0\x0\x0\x0\x0"
 # define K_UP			"\x1b\x5b\x41\x0\x0\x0"
 # define K_DOWN			"\x1b\x5b\x42\x0\x0\x0"
 # define K_RIGHT		"\x1b\x5b\x43\x0\x0\x0"
@@ -66,6 +67,7 @@ typedef struct		s_buf
 	struct s_buf	*next;
 	struct s_buf	*prev;
 	char 			*key;
+	int				ind; // The index of the buffer
 }					t_buf;
 
 /*
@@ -129,7 +131,7 @@ typedef struct		s_shell
 
 t_cmds      		*store_commands(char *commands);
 int             	putintc(int c);
-void				print_buffer(t_buf *buffer);
+void				print_buffer(t_line *line);
 void         		cursor_movement(char *key, t_line *line);
 t_cursor    	   *init_cursor(int win_size);
 T_BOOL        		term_action(char *buf);
@@ -141,11 +143,11 @@ t_cursor			*get_first_c(t_line *line);
 ** line buffer/edition functions:
 */
 
-void				ft_add_buf(t_buf **begin_list, char *key);
+void				ft_add_buf(t_buf **begin_list, char *key, int buf_ind);
 char     		   	*stringify_buffer(t_buf  *buffer);
 int					list_len(t_buf *buffer);
 void				free_line_struct(t_line *line); // Freeing the struct
-
+void				del_buf_elem(t_line **line);
 
 /*
 ** 21sh ending here

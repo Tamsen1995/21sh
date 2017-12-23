@@ -1,21 +1,5 @@
 #include "../../includes/ft_sh.h"
 
-/*
-** checks the buffer linked list for actions which 
-** might have to be executed
-*/
-
-void            check_input(t_line *line, char *buf) // WIP
-{
-    if (!line)
-        fatal("Error (check_input)");
-    if (!line->buffer || !buf)
-        return ;
-    cursor_movement(buf, line);
-    // TODO other actions
-}
-
-
 struct winsize		*get_win_size()
 {
     struct winsize *ret;
@@ -50,14 +34,44 @@ t_line         *init_line()
     return (line);
 }
 
-// go to the current_c
-    // count the number of jumps/iterations in the process
-// jump / iterate said number of times in the buffer
-    // boom ! you've got the desired buffer position into which you can insert/delete
 
-// TODO delete
+// TESTING
+// Testing the buffer eveytime in order to see if desired elements have been executed
+void           print_list_test(t_buf *buffer)
+{
+    t_buf *tmp;
 
-// TODO insert
+    tmp = buffer;
+    while (tmp)
+    {
+        ft_putstr(tmp->key);
+        tmp = tmp->next;
+    }
+    exit(-1);
+}
+
+
+/*
+** checks the buffer linked list for actions which 
+** might have to be executed
+*/
+
+void            check_input(t_line **line, char *buf) // WIP
+{
+    if (!(*line))
+        fatal("Error (check_input)");
+    if (!(*line)->buffer || !buf)
+        return ;
+    cursor_movement(buf, (*line));
+
+    if (ft_strcmp(buf, K_BACKSPACE) == 0)
+    {
+        del_buf_elem(line); // WIP
+
+
+    }
+    // TODO other actions
+}
 
 /*
 ** Display the initial contents of the text buffer on the screen.
@@ -69,10 +83,12 @@ t_line         *init_line()
 
 char            *prompt_loop(void)
 {
+    int         buf_ind;
 	char		buf[KEY_BUF_SIZE + 1];
     char        *cmd_line;
     t_line      *line;
 
+    buf_ind = 0;
     line = init_line();
     tputs(tgetstr("vs", NULL), 0, putintc);
     ft_putstr(line->prompt);
@@ -80,20 +96,18 @@ char            *prompt_loop(void)
     {
         ft_bzero(buf, KEY_BUF_SIZE + 1);
         read(STDIN_FILENO, buf, KEY_BUF_SIZE);
-        check_input(line, buf); // WIP // edit the buffer according to action requested
+        check_input(&line, buf); // WIP // edit the buffer according to action requested
+        // the line comes out of check_input modified
         if (term_action(buf) == FALSE) // WIP
         {
-            ft_add_buf(&line->buffer, buf); // I might have to heavily modify this in order for it to insert the desired keys at the current_c position
-            // everytime a new key is added to the buf, 
-            // the last possible cursor position shall move as well
-
-
-            print_buffer(line->buffer);
+            ft_add_buf(&line->buffer, buf, buf_ind);
             line->current_c = line->current_c->next;
             line->last_c = line->last_c->next;
+            buf_ind++;
         }
+        print_buffer(line);
     }
     cmd_line = stringify_buffer(line->buffer);
-    free_line_struct(line);
+    //free_line_struct(line);
     return (cmd_line);
 }

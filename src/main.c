@@ -78,10 +78,6 @@ void        sh_loop(t_shell *shell, char **envv) // WIP
         // once commands have been typed in
         buf = prompt_loop();
 
-        // if (isatty(STDIN_FILENO)) // I'm  not sure when to use this.
-        // It tests whether the stdin refers to a terminal or not
-         //   ft_putendl("Testing");
-
         line = replace_tabs(buf);
         shell->cmds = store_commands(line);
 
