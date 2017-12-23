@@ -65,7 +65,7 @@ void           del_buf_elem(t_line **line)
     // is pointing
     del = get_cur_buffer((*line));
     tmp = (*line)->buffer;
-    if (!del->prev)
+    if (del->ind == (*line)->buffer->ind || !del->prev)
         return ;
     // going to the one before since that is the one to be deleted
     if (del->next)
@@ -78,7 +78,9 @@ void           del_buf_elem(t_line **line)
     // if the last element is selected
     if (!del->next)
     {
-        free_buf_elem(tmp);
+     //   free_buf_elem(tmp);
+     // somehow free the list
+        tmp->prev->next = NULL;
         return ;
     }
  

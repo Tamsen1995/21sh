@@ -1,18 +1,29 @@
 #include "../../includes/ft_sh.h"
 
+
 /*
-** clears the current line of the prompt
-** before re - outputting the line buffer
+** iterates through an entire list
+** and finds out the length of it
 */
 
-void        clear_prompt_line() // WIP
+int         list_len(t_buf *buffer)
 {
-    //tputs(tgetstr("cl", NULL), 0, putintc);
-    //tputs(tgetstr("cd", NULL), 0, putintc);
-    tputs(tgetstr("ce", NULL), 0, putintc);
+    int     i;
+    t_buf   *tmp;
 
-  
+    i = 0;
+    tmp = NULL;
+    if (!buffer)
+        fatal("error in (list_len)");
+    tmp = buffer;
+    while (tmp->next)
+    {
+        i++;
+        tmp = tmp->next;
+    }
+    return (i);
 }
+
 
 /*
 ** outputs the linked list which represents the buffer
@@ -33,17 +44,6 @@ void        print_buffer(t_buf *buffer)
     if (!buffer)
         return ;
     n = list_len(buffer);
-
-    // printf("\n%d\n", n); // TESTING
-    while (i < n)
-    { 
-        tputs(tgetstr("le", NULL), 0, putintc);
-        i++;
-    }
-
-
-    // clear_prompt_line(); // TESTING
-    // printing the key buffer
     tmp = buffer;
     while (tmp)
     {

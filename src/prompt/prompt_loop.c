@@ -1,9 +1,5 @@
 #include "../../includes/ft_sh.h"
 
-
-
-
-
 struct winsize		*get_win_size()
 {
     struct winsize *ret;
@@ -51,6 +47,7 @@ void           print_list_test(t_buf *buffer)
         ft_putstr(tmp->key);
         tmp = tmp->next;
     }
+    exit(-1);
 }
 
 
@@ -70,6 +67,7 @@ void            check_input(t_line **line, char *buf) // WIP
     if (ft_strcmp(buf, K_BACKSPACE) == 0)
     {
         del_buf_elem(line); // WIP
+
 
     }
     // TODO other actions
@@ -112,17 +110,8 @@ char            *prompt_loop(void)
             line->last_c = line->last_c->next;
             buf_ind++;
         }
-        else
-        { 
-            ft_putendl(""); // TESTING
-            ft_putstr(line->prompt); // TESTING
-            print_buffer(line->buffer); // TESTING
-        }
-
-
-    
     }
     cmd_line = stringify_buffer(line->buffer);
-    free_line_struct(line);
+    //free_line_struct(line);
     return (cmd_line);
 }

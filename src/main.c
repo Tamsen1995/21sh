@@ -78,7 +78,6 @@ void        sh_loop(t_shell *shell, char **envv) // WIP
         // once commands have been typed in
         buf = prompt_loop();
 
-
         line = replace_tabs(buf);
         shell->cmds = store_commands(line);
 
