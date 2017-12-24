@@ -71,25 +71,26 @@ void           del_buf_elem(t_line **line)
     if (!(*line) || !(*line)->buffer || !(*line)->cursor)
         fatal("Error (del_buf_elem)");
     del = get_cur_buffer(line);
-
-    printf("\n%d\n", del->ind); // TESTING
-
-    if (del->ind == (*line)->buffer->ind || !del->prev)
+    if (del->ind == (*line)->buffer->ind || !del->prev) // if the cursor is at the very beginning of the buffer
         return ;
-    if (del->next)
+    if (del->next) // going to the item BEFORE the cursor
         del = del->prev;
-    if (!del->next)
+    if (!del->next) // the last item in the buffer
         del->prev->next = NULL;
-    else if (del->prev)
+    else if (del->prev) // an item in the middle of the chain
     {
         del->prev->next = del->next;
         del->next->prev = del->prev;
     }
-    free_buf_elem(del);
+    else if (!del->prev) // if the first item is to be deleted
+    {
+        (*line)->buffer = (*line)->buffer->next;
+        (*line)->buffer->prev = NULL;
+    }
+    free_buf_elem(del); // freeing and moving the cursors
     (*line)->current_c = (*line)->current_c->prev;
     (*line)->last_c = (*line)->last_c->prev;
     reset_buf_ind(line);
-
 }
 
 // TODO insert function
