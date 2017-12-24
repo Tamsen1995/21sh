@@ -71,20 +71,25 @@ void           del_buf_elem(t_line **line)
     if (!(*line) || !(*line)->buffer || !(*line)->cursor)
         fatal("Error (del_buf_elem)");
     del = get_cur_buffer(line);
-    if (del->ind == (*line)->buffer->ind || !del->prev)
+    if (del->ind == (*line)->buffer->ind && !del->prev)
         return ;
     if (del->next)
         del = del->prev;
     if (!del->next)
         del->prev->next = NULL;
-    else
+    else if (del->prev)
     {
         del->prev->next = del->next;
         del->next->prev = del->prev;
     }
+
+
+
     free_buf_elem(del);
     (*line)->current_c = (*line)->current_c->prev;
+    (*line)->last_c = (*line)->last_c->prev;
     reset_buf_ind(line);
+
 }
 
 // TODO insert function
