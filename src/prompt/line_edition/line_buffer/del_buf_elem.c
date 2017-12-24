@@ -71,7 +71,10 @@ void           del_buf_elem(t_line **line)
     if (!(*line) || !(*line)->buffer || !(*line)->cursor)
         fatal("Error (del_buf_elem)");
     del = get_cur_buffer(line);
-    if (del->ind == (*line)->buffer->ind && !del->prev)
+
+    printf("\n%d\n", del->ind); // TESTING
+
+    if (del->ind == (*line)->buffer->ind || !del->prev)
         return ;
     if (del->next)
         del = del->prev;

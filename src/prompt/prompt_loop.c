@@ -60,12 +60,10 @@ void            check_input(t_line **line, char *buf) // WIP
 
 char            *prompt_loop(void)
 {
-    int         buf_ind;
 	char		buf[KEY_BUF_SIZE + 1];
     char        *cmd_line;
     t_line      *line;
 
-    buf_ind = 0;
     line = init_line();
     tputs(tgetstr("vs", NULL), 0, putintc);
     ft_putstr(line->prompt);
@@ -76,10 +74,10 @@ char            *prompt_loop(void)
         check_input(&line, buf);
         if (term_action(buf) == FALSE)
         {
-            ft_add_buf(&line->buffer, buf, buf_ind);
+            ft_add_buf(&line->buffer, buf);
             line->current_c = line->current_c->next;
             line->last_c = line->last_c->next;
-            buf_ind++;
+            reset_buf_ind(&line);
         }
         print_buffer(line);
     }

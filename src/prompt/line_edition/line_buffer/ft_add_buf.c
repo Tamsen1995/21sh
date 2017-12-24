@@ -4,7 +4,7 @@
 ** allocates a new buffer list element
 */
 
-t_buf      *ft_new_buf(char *key, int buf_ind)
+t_buf      *ft_new_buf(char *key)
 {
     t_buf *new;
 
@@ -13,7 +13,7 @@ t_buf      *ft_new_buf(char *key, int buf_ind)
     new->next = NULL;
     new->prev = NULL;
     new->key = NULL;
-    new->ind = buf_ind;
+    new->ind = 0;
     new->key = ft_strdup(key);
     return (new);
 }
@@ -23,14 +23,14 @@ t_buf      *ft_new_buf(char *key, int buf_ind)
 ** and then adds the value to it
 */
 
-void		ft_add_buf(t_buf **begin_list, char *key, int buf_ind)
+void		ft_add_buf(t_buf **begin_list, char *key)
 {
     t_buf *tmp;
 
     tmp = NULL;
 	if (!*begin_list)
 	{
-		*begin_list = ft_new_buf(key, buf_ind);
+		*begin_list = ft_new_buf(key);
 		return ;
 	}
     else
@@ -38,7 +38,7 @@ void		ft_add_buf(t_buf **begin_list, char *key, int buf_ind)
         tmp = *begin_list;
         while (tmp->next)
             tmp = tmp->next;
-        tmp->next = ft_new_buf(key, buf_ind);
+        tmp->next = ft_new_buf(key);
         tmp->next->prev = tmp;
     }
 }

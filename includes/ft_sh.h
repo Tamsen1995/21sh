@@ -145,11 +145,12 @@ void  			    reset_cursor();
 ** line buffer/edition functions:
 */
 
-void				ft_add_buf(t_buf **begin_list, char *key, int buf_ind);
+void				ft_add_buf(t_buf **begin_list, char *key);
 char     		   	*stringify_buffer(t_buf  *buffer);
 int					list_len(t_buf *buffer);
 void				free_line_struct(t_line *line); // Freeing the struct
 void				del_buf_elem(t_line **line);
+void  		        reset_buf_ind(t_line **line);
 
 /*
 ** 21sh ending here
