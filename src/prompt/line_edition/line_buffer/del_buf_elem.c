@@ -82,9 +82,6 @@ void           del_buf_elem(t_line **line)
         del->prev->next = del->next;
         del->next->prev = del->prev;
     }
-
-
-
     free_buf_elem(del);
     (*line)->current_c = (*line)->current_c->prev;
     (*line)->last_c = (*line)->last_c->prev;
