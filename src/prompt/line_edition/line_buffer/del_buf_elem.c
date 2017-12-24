@@ -37,6 +37,29 @@ void            free_buf_elem(t_buf *buf_elem)
 }
 
 /*
+** everytime a buffer element is removed the buffer indexes need
+** to be reset.
+*/
+
+void          reset_buf_ind(t_line **line)
+{
+    t_buf   *tmp;
+    int     i;
+
+    tmp = NULL;
+    i = 0;
+    if (!(*line))
+        fatal("Error (reset_buf_ind)");
+    tmp = (*line)->buffer;
+    while (tmp)
+    {
+        tmp->ind = i;
+        tmp = tmp->next;
+        i++;
+    }
+}
+
+/*
 ** deletes the element before the current cursor position in the buffer
 */
 
@@ -61,11 +84,7 @@ void           del_buf_elem(t_line **line)
     }
     free_buf_elem(del);
     (*line)->current_c = (*line)->current_c->prev;
-
-
-    // TODO re-iterate through the list and reset buffer indexes
-
-    // TODO fix this function (make it work!)
+    reset_buf_ind(line);
 }
 
 // TODO insert function
