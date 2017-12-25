@@ -67,7 +67,9 @@ void          init_buf_ind(t_line *line)
 
 t_buf           *make_new_buf(t_buf *old_buf, t_buf *del_item)
 {
-
+    if (!old_buf || !del_item)
+        fatal("Error (make_new_buf)");
+    return (NULL);
 }
 
 /*
@@ -82,7 +84,7 @@ t_buf           *del_buf_elem(t_line *line)
 
     new_list = NULL;
     if (line->current_c->c_ind == line->first_c->c_ind) // if the cursor is on the first position
-        return ;
+        return (line->buffer);
     del = get_cur_buffer(line);
     if (del->next) // if it's not the last item
         del = del->prev;
