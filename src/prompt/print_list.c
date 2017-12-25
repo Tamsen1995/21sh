@@ -78,15 +78,8 @@ void        set_cursor(t_line *line)
 void        print_buffer(t_line *line)
 {
     t_buf   *tmp;
-    int     n;
 
-    n = 0;
     tmp = NULL;
-
-
-    if (!line->buffer)
-        return ;
-    n = list_len(line->buffer);
     prompt_cursor(line);
     tmp = line->buffer;
     while (tmp)

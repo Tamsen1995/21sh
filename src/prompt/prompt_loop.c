@@ -48,8 +48,6 @@ void            check_input(t_line *line, char *buf) // WIP
     cursor_movement(buf, line);
     if (ft_strcmp(buf, K_BACKSPACE) == 0)
         line->buffer = del_buf_elem(line);
-
-
 }
 
 /*
