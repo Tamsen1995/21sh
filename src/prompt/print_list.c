@@ -1,6 +1,5 @@
 #include "../../includes/ft_sh.h"
 
-
 /*
 ** positions the cursor at its proper position
 ** according to the cursor linked list

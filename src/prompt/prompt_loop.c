@@ -31,6 +31,8 @@ t_line         *init_line()
     line->first_c = get_first_c(line);
     line->current_c = line->first_c;
     line->last_c = line->first_c;
+    tputs(tgetstr("vs", NULL), 0, putintc);
+    ft_putstr(line->prompt);
     return (line);
 }
 
@@ -49,8 +51,6 @@ char            *prompt_loop(void)
     t_line      *line;
 
     line = init_line();
-    tputs(tgetstr("vs", NULL), 0, putintc);
-    ft_putstr(line->prompt);
     while (buf[0] != 10)
     {
         ft_bzero(buf, KEY_BUF_SIZE + 1);
