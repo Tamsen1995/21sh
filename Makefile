@@ -12,6 +12,7 @@ SRC = src/main.c \
 	src/check_bin_cmd.c \
 	src/free_shell.c \
 	src/store_commands.c \
+	src/check_bin_path.c \
 	src/builtins/builtin_env.c \
 	src/builtins/builtin_exit.c \
 	src/builtins/builtin_echo.c \
@@ -32,7 +33,7 @@ SRC = src/main.c \
 	src/prompt/line_edition/term_action.c \
 	src/prompt/line_edition/get_first_c.c \
 	src/prompt/line_edition/free_line_struct.c \
-	src/check_bin_path.c \
+	src/test_helpers/print_list_test.c \
 
 OBJ = $(addsuffix .o, $(basename $(SRC)))
 

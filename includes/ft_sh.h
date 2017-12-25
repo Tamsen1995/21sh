@@ -126,6 +126,19 @@ typedef struct		s_shell
 
 }					t_shell;
 
+
+
+/*
+** Testing functions
+*/
+
+void           print_list_test(t_buf *buffer);
+
+/*
+** Testing functions
+*/
+
+
 /*
 ** 21sh starting here
 */
@@ -134,13 +147,9 @@ t_cmds      		*store_commands(char *commands);
 int             	putintc(int c);
 void				print_buffer(t_line *line);
 void         		cursor_movement(char *key, t_line *line);
-t_cursor    	   *init_cursor(int win_size);
+t_cursor    	   	*init_cursor(int win_size);
 T_BOOL        		term_action(char *buf);
 t_cursor			*get_first_c(t_line *line);
-
-void  			    reset_cursor();
-
-
 
 /*
 ** line buffer/edition functions:
@@ -151,7 +160,9 @@ char     		   	*stringify_buffer(t_buf  *buffer);
 int					list_len(t_buf *buffer);
 void				free_line_struct(t_line *line); // Freeing the struct
 t_buf          		*del_buf_elem(t_line *line);
-void  		        init_buf_ind(t_line *line);
+void  		        init_buf_ind(t_buf	*buffer);
+void     	       	free_buffer(t_buf *buffer);
+void  			    reset_cursor();
 
 /*
 ** 21sh ending here

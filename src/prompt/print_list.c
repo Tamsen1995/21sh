@@ -66,14 +66,6 @@ void        set_cursor(t_line *line)
         tputs(tgetstr("nd", NULL), 0, putintc);
         tmp = tmp->next;
     }
-
-
-
-    // move cursor all the way to the beginning
-
-    // move cursor to the right in conjunction with the cursor linked list
-    // until the current_c tracked position has been reached
-
 }
 
 /*
@@ -90,6 +82,8 @@ void        print_buffer(t_line *line)
 
     n = 0;
     tmp = NULL;
+
+
     if (!line->buffer)
         return ;
     n = list_len(line->buffer);

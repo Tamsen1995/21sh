@@ -48,6 +48,8 @@ void            check_input(t_line *line, char *buf) // WIP
     cursor_movement(buf, line);
     if (ft_strcmp(buf, K_BACKSPACE) == 0)
         line->buffer = del_buf_elem(line);
+
+
 }
 
 /*
@@ -77,7 +79,7 @@ char            *prompt_loop(void)
             ft_add_buf(&line->buffer, buf);
             line->current_c = line->current_c->next;
             line->last_c = line->last_c->next;
-            init_buf_ind(line);
+            init_buf_ind(line->buffer);
         }
         print_buffer(line);
     }

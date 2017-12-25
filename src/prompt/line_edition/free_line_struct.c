@@ -27,14 +27,14 @@ void            free_cursor(t_line *line)
 ** freeing the line buffer
 */
 
-void            free_line_buf(t_line *line)
+void            free_buffer(t_buf *buffer)
 {
     t_buf *tmp;
 
     tmp = NULL;
-    if (!line || !line->buffer)
-        fatal("Error (free_line_buf)");
-    tmp = line->buffer;
+    if (!buffer)
+        fatal("Error (free_buffer)");
+    tmp = buffer;
     while (tmp->next)
         tmp = tmp->next;
     while (tmp->prev)
@@ -58,7 +58,7 @@ void            free_line_struct(t_line *line)
     if (!line || !line->sz)
         fatal("Error (free_line_struct)");
     reset_cursor();
-    free_line_buf(line);
+    free_buffer(line->buffer);
     free_cursor(line);
     if (line->sz)
         free(line->sz);
