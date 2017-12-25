@@ -67,8 +67,13 @@ void          init_buf_ind(t_line *line)
 
 t_buf           *make_new_buf(t_buf *old_buf, t_buf *del_item)
 {
+    t_buf *tmp;
+    t_buf *new_list;
+
     if (!old_buf || !del_item)
         fatal("Error (make_new_buf)");
+
+
     return (NULL);
 }
 
@@ -80,16 +85,16 @@ t_buf           *make_new_buf(t_buf *old_buf, t_buf *del_item)
 t_buf           *del_buf_elem(t_line *line)
 {
     t_buf *del;
-    t_buf *new_list;
+    t_buf *new_buf;
 
-    new_list = NULL;
+    new_buf = NULL;
     if (line->current_c->c_ind == line->first_c->c_ind) // if the cursor is on the first position
         return (line->buffer);
     del = get_cur_buffer(line);
     if (del->next) // if it's not the last item
         del = del->prev;
-    new_list = make_new_buf(line->buffer, del);
-    return (new_list);
+    new_buf = make_new_buf(line->buffer, del);
+    return (new_buf);
 }
 
 // TODO insert function
