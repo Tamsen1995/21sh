@@ -35,22 +35,6 @@ t_line         *init_line()
 }
 
 /*
-** checks the buffer linked list for actions which 
-** might have to be executed
-*/
-
-void            check_input(t_line *line, char *buf) // WIP
-{
-    if (!line)
-        fatal("Error (check_input)");
-    if (!line->buffer || !buf)
-        return ;
-    cursor_movement(buf, line);
-    if (ft_strcmp(buf, K_BACKSPACE) == 0)
-        line->buffer = del_buf_elem(line);
-}
-
-/*
 ** Display the initial contents of the text buffer on the screen.
 ** Get a keystroke from the user.
 ** If the keystroke is a command (like delete or backspace), dispatch or carry out that command.
