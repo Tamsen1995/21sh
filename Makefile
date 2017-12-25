@@ -31,6 +31,7 @@ SRC = src/main.c \
 	src/prompt/line_edition/get_first_c.c \
 	src/prompt/line_edition/free_line_struct.c \
 	src/prompt/line_edition/line_buffer/ft_add_buf.c \
+	src/prompt/line_edition/line_buffer/get_cur_buffer.c \
 	src/prompt/line_edition/line_buffer/stringify_buffer.c \
 	src/prompt/line_edition/line_buffer/insert_buffer.c \
 	src/prompt/line_edition/line_buffer/ft_new_buf.c \

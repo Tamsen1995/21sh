@@ -12,6 +12,5 @@ void           print_list_test(t_buf *buffer)
         ft_putstr(tmp->key);
         tmp = tmp->next;
     }
-    exit(-1);
 }
 

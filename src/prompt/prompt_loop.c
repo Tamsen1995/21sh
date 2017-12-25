@@ -57,10 +57,7 @@ char            *prompt_loop(void)
         read(STDIN_FILENO, buf, KEY_BUF_SIZE);
         check_input(line, buf);
         if (term_action(buf) == FALSE)
-        {
             insert_buffer(line, buf);
-            // ft_add_buf(&line->buffer, buf);
-        }
         print_buffer(line);
     }
     cmd_line = stringify_buffer(line->buffer);

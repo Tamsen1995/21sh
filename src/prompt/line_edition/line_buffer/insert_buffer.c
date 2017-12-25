@@ -8,18 +8,23 @@
 void        insert_at_cursor(t_line *line, char *key)
 {
     t_buf *tmp_buf;
-    t_cursor *tmp_cur;
-    if (!line || !line->cursor)
+    t_buf *new_buf;
+
+    new_buf = NULL;
+    if (!line || !line->cursor || !key)
         fatal("Error (insert_at_cursor)");
-    tmp_buf = line->buffer;
-    tmp_cur = line->first_c;
-    while (tmp_buf->next && tmp_cur->next && tmp_cur->c_ind != line->current_c->c_ind)
+    new_buf = ft_new_buf(key);
+    tmp_buf = get_cur_buffer(line);
+    if (line->current_c->c_ind == line->last_c->c_ind)
     {
-        tmp_buf = tmp_buf->next;
-        tmp_cur = tmp_cur->next;
+        tmp_buf->next = new_buf;
+        new_buf->prev = tmp_buf;
     }
-    if (!tmp_buf->next)
-        tmp_buf->next = ft_new_buf(key);
+    if (tmp_buf->next) // If it's not the last buffer item
+        tmp_buf = tmp_buf->prev;
+
+    // TODO : insert the ne_buf item AFTER the tmp_buf element
+
 }
 
 /*
