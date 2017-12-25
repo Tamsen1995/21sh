@@ -165,6 +165,9 @@ void     	       	free_buffer(t_buf *buffer);
 void  			    reset_cursor();
 void      		    check_input(t_line *line, char *buf);
 void 		       	prompt_cursor(t_line *line);
+void  				insert_buffer(t_line *line, char *key);
+t_buf  			    *ft_new_buf(char *key);
+
 
 
 /*

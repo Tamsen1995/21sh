@@ -58,10 +58,8 @@ char            *prompt_loop(void)
         check_input(line, buf);
         if (term_action(buf) == FALSE)
         {
-            ft_add_buf(&line->buffer, buf);
-            line->current_c = line->current_c->next;
-            line->last_c = line->last_c->next;
-            init_buf_ind(line->buffer);
+            insert_buffer(line, buf);
+            // ft_add_buf(&line->buffer, buf);
         }
         print_buffer(line);
     }
