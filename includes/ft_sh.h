@@ -10,6 +10,7 @@
 #include <sys/wait.h>
 #include <sys/param.h>
 #include <signal.h>
+#include <stdarg.h>
 #include <fcntl.h>
 #include <stdio.h>
 #include "../includes/libft.h"
@@ -132,7 +133,7 @@ typedef struct		s_shell
 t_cmds      		*store_commands(char *commands);
 int             	putintc(int c);
 void				print_buffer(t_line *line);
-void         		cursor_movement(char *key, t_line **line);
+void         		cursor_movement(char *key, t_line *line);
 t_cursor    	   *init_cursor(int win_size);
 T_BOOL        		term_action(char *buf);
 t_cursor			*get_first_c(t_line *line);
@@ -149,8 +150,8 @@ void				ft_add_buf(t_buf **begin_list, char *key);
 char     		   	*stringify_buffer(t_buf  *buffer);
 int					list_len(t_buf *buffer);
 void				free_line_struct(t_line *line); // Freeing the struct
-void				del_buf_elem(t_line **line);
-void  		        reset_buf_ind(t_line **line);
+t_buf          		*del_buf_elem(t_line *line);
+void  		        init_buf_ind(t_line *line);
 
 /*
 ** 21sh ending here

@@ -39,15 +39,15 @@ t_line         *init_line()
 ** might have to be executed
 */
 
-void            check_input(t_line **line, char *buf) // WIP
+void            check_input(t_line *line, char *buf) // WIP
 {
-    if (!(*line))
+    if (!line)
         fatal("Error (check_input)");
-    if (!(*line)->buffer || !buf)
+    if (!line->buffer || !buf)
         return ;
     cursor_movement(buf, line);
     if (ft_strcmp(buf, K_BACKSPACE) == 0)
-        del_buf_elem(line);
+        line = del_buf_elem(line);
 }
 
 /*
@@ -71,13 +71,13 @@ char            *prompt_loop(void)
     {
         ft_bzero(buf, KEY_BUF_SIZE + 1);
         read(STDIN_FILENO, buf, KEY_BUF_SIZE);
-        check_input(&line, buf);
+        check_input(line, buf);
         if (term_action(buf) == FALSE)
         {
             ft_add_buf(&line->buffer, buf);
             line->current_c = line->current_c->next;
             line->last_c = line->last_c->next;
-            reset_buf_ind(&line);
+            init_buf_ind(line);
         }
         print_buffer(line);
     }
