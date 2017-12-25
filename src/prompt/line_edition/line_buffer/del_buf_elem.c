@@ -110,6 +110,3 @@ t_buf           *del_buf_elem(t_line *line)
     // TODO free the old line buffer
     return (new_buf);
 }
-
-// TODO insert function
-// void        insert_at_cursor();
