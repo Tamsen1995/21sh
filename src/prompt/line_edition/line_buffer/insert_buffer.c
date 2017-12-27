@@ -14,7 +14,7 @@ t_buf       *put_buf_middle();
 ** frees the old buffer
 */
 
-void        put_buf_at_begin(t_line *line, char *key)
+t_buf       *put_buf_at_begin(t_line *line, char *key)
 {
     t_buf *tmp;
     t_buf *new_buf;
@@ -25,15 +25,13 @@ void        put_buf_at_begin(t_line *line, char *key)
         fatal("Error (put_buf_at_begin)");
     tmp = line->buffer;
 	new_buf = ft_new_buf(key);
-    while (tmp->next)
+    while (tmp)
     {
         ft_add_buf(&new_buf, tmp->key);
         tmp = tmp->next;
     }
     free_buffer(line->buffer);
-    line->buffer = new_buf;
-  //  return (new_buf);
-    // TODO : FREE old buffer
+    return (new_buf);
 }
 
 /*
@@ -52,6 +50,14 @@ void        insert_at_cursor(t_line *line, char *key)
     if (line->current_c->c_ind == line->last_c->c_ind\
     && !tmp_buf->next)
         ft_add_buf(&line->buffer, key);
+    else if (!tmp_buf->prev) // insert at head of buffer
+        line->buffer = put_buf_at_begin(line, key);
+
+
+//    ft_putendl(""); // TESTING
+  //  print_list_test(line->buffer);
+    //ft_putendl(""); // TESTING
+
     // TODO : insert new elem into the buffer
 }
 
