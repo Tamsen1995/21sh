@@ -22,7 +22,7 @@ SRC = src/main.c \
 	src/builtins/builtins.c \
 	src/helpers/check_directory.c \
 	src/helpers/putintc.c \
-	src/prompt/print_list.c \
+	src/prompt/print_buffer.c \
 	src/prompt/prompt_loop.c \
 	src/prompt/check_input.c \
 	src/prompt/helpers/list_len.c \
