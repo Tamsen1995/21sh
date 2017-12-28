@@ -50,14 +50,8 @@ void        insert_at_cursor(t_line *line, char *key)
     if (line->current_c->c_ind == line->last_c->c_ind\
     && !tmp_buf->next)
         ft_add_buf(&line->buffer, key);
-    else if (!tmp_buf->prev) // insert at head of buffer
+    else if (!tmp_buf->prev)
         line->buffer = put_buf_at_begin(line, key);
-
-
-//    ft_putendl(""); // TESTING
-  //  print_list_test(line->buffer);
-    //ft_putendl(""); // TESTING
-
     // TODO : insert new elem into the buffer
 }
 

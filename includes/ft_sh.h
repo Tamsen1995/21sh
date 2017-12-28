@@ -163,6 +163,7 @@ t_buf          		*del_buf_elem(t_line *line);
 void  		        init_buf_ind(t_buf	*buffer);
 void     	       	free_buffer(t_buf *buffer);
 void  			    reset_cursor();
+void 			    set_cursor(t_line *line);
 void      		    check_input(t_line *line, char *buf);
 void 		       	prompt_cursor(t_line *line);
 void  				insert_buffer(t_line *line, char *key);

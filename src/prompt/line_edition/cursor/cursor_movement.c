@@ -36,5 +36,5 @@ void          cursor_movement(char *key, t_line *line) // WIP
     if (ft_strcmp(key, K_LEFT) == 0)
         move_left(line);
     if (ft_strcmp(key, K_RIGHT) == 0)
-        move_right(line);       
+        move_right(line);
 }

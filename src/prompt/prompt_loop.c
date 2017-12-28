@@ -55,12 +55,25 @@ char            *prompt_loop(void)
     {
         ft_bzero(buf, KEY_BUF_SIZE + 1);
         read(STDIN_FILENO, buf, KEY_BUF_SIZE);
-        check_input(line, buf);
-        if (term_action(buf) == FALSE)
+        if (term_action(buf) == TRUE)
+            check_input(line, buf);
+        else if (term_action(buf) == FALSE)
             insert_buffer(line, buf);
         print_buffer(line);
+        set_cursor(line);
     }
+
+    // BUG : since the buffer line is still intact here something has to be wrong with the
+    // stringify_buffer function.
+    // Thus far I know that the way I output the buffer is not the source of the bug.
+    // The bug could be either here or between here and the cmd_not_found function
+    
     cmd_line = stringify_buffer(line->buffer);
+
+    ft_putendl(""); // TESTING
+    ft_putendl(cmd_line); // TESTING
+    ft_putendl(""); // TESTING
+
     free_line_struct(line);
     return (cmd_line);
 }

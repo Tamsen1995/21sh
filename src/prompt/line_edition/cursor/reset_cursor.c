@@ -9,18 +9,5 @@
 
 void        reset_cursor()
 {
-    int     i;
-    struct winsize *ret;
-
-    i = 0;
-
-    if (!(ret = (struct winsize *)malloc(sizeof(struct winsize) * 1)))
-        fatal("Can't allocate size struct (make_shell)");
-    ioctl(0, TIOCGWINSZ, ret);
-    while (i < ret->ws_col)
-    {
-        tputs(tgetstr("le", NULL), 0, putintc);
-        i++;
-    }
-    free(ret);
+    tputs(tgetstr("cr", NULL), 0, putintc);
 }

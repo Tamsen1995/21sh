@@ -15,10 +15,10 @@ char        *stringify_buffer(t_buf  *buffer)
     i = 0;
     if (!buffer)
         fatal("error in (stringify_buffer)");
-    i = list_len(buffer);
-    ret = ft_strnew(i); // allocating a new string
     tmp = buffer;
-    while (tmp->next) // iteratively concatenate the string
+    i = list_len(tmp);
+    ret = ft_strnew(i);
+    while (tmp->next)
     {
         ret = ft_strcat(ret, tmp->key);
         tmp = tmp->next;
