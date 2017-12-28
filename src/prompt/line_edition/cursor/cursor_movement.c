@@ -27,7 +27,7 @@ void        move_left(t_line *line)
 ** Takes care of potential cursor movement
 */
 
-void          cursor_movement(char *key, t_line *line) // WIP
+void          cursor_movement(char *key, t_line *line)
 {
     if (!line)
         fatal("Error (cursor_movement)");

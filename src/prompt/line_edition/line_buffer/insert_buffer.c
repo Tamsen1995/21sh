@@ -67,6 +67,8 @@ void    insert_buffer(t_line *line, char *key)
     tmp = NULL;
     if (!line || !key)
         fatal("Error (insert_buffer)");
+    if (ft_strcmp(key, "\n") == 0)
+        return ;
 	if (!line->buffer)
 		line->buffer = ft_new_buf(key);
     else
