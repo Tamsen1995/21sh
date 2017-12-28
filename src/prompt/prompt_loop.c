@@ -72,7 +72,7 @@ char            *prompt_loop(void)
 
     line = init_line();
     ft_putstr(line->prompt);
-    while (buf[0] != 10)
+    while (ft_strcmp(buf, K_RETURN) != 0)
     {
         ft_bzero(buf, KEY_BUF_SIZE + 1);
         read(STDIN_FILENO, buf, KEY_BUF_SIZE);
