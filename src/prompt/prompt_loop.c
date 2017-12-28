@@ -35,6 +35,27 @@ t_line         *init_line()
     return (line);
 }
 
+
+/*
+** puts the cursor to its last possible position
+*/
+
+void            cursor_to_end(t_line *line)
+{
+    int i;
+    t_cursor *tmp;
+
+    i = 0;
+    tmp = line->cursor;
+    reset_cursor();
+    while (tmp->c_ind < line->last_c->c_ind)
+    {
+        tputs(tgetstr("nd", NULL), 0, putintc);
+        tmp = tmp->next;
+    }
+
+}
+
 /*
 ** Display the initial contents of the text buffer on the screen.
 ** Get a keystroke from the user.
@@ -60,8 +81,8 @@ char            *prompt_loop(void)
         else if (term_action(buf) == FALSE)
             insert_buffer(line, buf);
         print_buffer(line);
-        set_cursor(line);
     }
+    cursor_to_end(line);
 
     // BUG : since the buffer line is still intact here something has to be wrong with the
     // stringify_buffer function.
@@ -71,6 +92,7 @@ char            *prompt_loop(void)
     cmd_line = stringify_buffer(line->buffer);
 
     ft_putendl(""); // TESTING
+    ft_putstr("-->"); // TESTING
     ft_putendl(cmd_line); // TESTING
     ft_putendl(""); // TESTING
 

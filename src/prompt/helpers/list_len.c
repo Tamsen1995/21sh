@@ -15,7 +15,7 @@ int         list_len(t_buf *buffer)
     if (!buffer)
         fatal("error in (list_len)");
     tmp = buffer;
-    while (tmp->next)
+    while (tmp)
     {
         i++;
         tmp = tmp->next;

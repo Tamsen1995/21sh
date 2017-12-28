@@ -19,4 +19,5 @@ void        print_buffer(t_line *line)
         ft_putstr(tmp->key);
         tmp = tmp->next;
     }
+    set_cursor(line);
 }
