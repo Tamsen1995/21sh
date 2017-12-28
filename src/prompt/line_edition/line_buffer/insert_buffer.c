@@ -60,20 +60,18 @@ void        insert_at_cursor(t_line *line, char *key)
 ** into the buffer
 */
 
-void    insert_buffer(t_line *line, char *key)
+void    insert_buffer(t_line **line, char *key)
 {
     t_buf *tmp;
 
     tmp = NULL;
     if (!line || !key)
         fatal("Error (insert_buffer)");
-    if (ft_strcmp(key, "\n") == 0)
-        return ;
-	if (!line->buffer)
-		line->buffer = ft_new_buf(key);
+	if (!(*line)->buffer)
+		(*line)->buffer = ft_new_buf(key);
     else
-        insert_at_cursor(line, key);
-    line->current_c = line->current_c->next;
-    line->last_c = line->last_c->next;
-    init_buf_ind(line->buffer);
+        insert_at_cursor((*line), key);
+    (*line)->current_c = (*line)->current_c->next;
+    (*line)->last_c = (*line)->last_c->next;
+    init_buf_ind((*line)->buffer);
 }

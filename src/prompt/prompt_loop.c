@@ -79,7 +79,7 @@ char            *prompt_loop(void)
         if (term_action(buf) == TRUE)
             check_input(line, buf);
         else if (term_action(buf) == FALSE)
-            insert_buffer(line, buf);
+            insert_buffer(&line, buf);
         print_buffer(line);
     }
     reset_cursor();
@@ -89,6 +89,7 @@ char            *prompt_loop(void)
     // Thus far I know that the way I output the buffer is not the source of the bug.
     // The bug could be either here or between here and the cmd_not_found function
     // for some reason the cursor movement to the left can arbitrariliy add signs or delete them from the buffer
+    // Everytime I only do the enter sign the prompt bugs out and puts it in the list maybe Idk..
 
     cmd_line = stringify_buffer(line->buffer);
 
