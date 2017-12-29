@@ -29,6 +29,7 @@ SRC = src/main.c \
 	src/prompt/history/add_history.c \
 	src/prompt/history/check_hist.c \
 	src/prompt/history/check_hist_down.c \
+	src/prompt/history/set_cursor_internal.c \
 	src/prompt/line_edition/init_cursor.c \
 	src/prompt/line_edition/term_action.c \
 	src/prompt/line_edition/get_first_c.c \

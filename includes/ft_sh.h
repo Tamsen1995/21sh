@@ -157,6 +157,8 @@ void        check_hist(t_line *line);
 void    	check_hist_down(t_line *line);
 void        add_history(t_hist **history, char *buf);
 
+void        set_cursor_internal(t_line *line);
+
 /*
 ** line buffer/edition functions:
 */
