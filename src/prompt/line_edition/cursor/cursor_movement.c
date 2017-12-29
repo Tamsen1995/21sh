@@ -1,4 +1,4 @@
-#include "../../../includes/ft_sh.h"
+#include "../../../../includes/ft_sh.h"
 
 void        move_right(t_line *line) // WIP
 {
@@ -27,7 +27,7 @@ void        move_left(t_line *line)
 ** Takes care of potential cursor movement
 */
 
-void          cursor_movement(char *key, t_line *line) // WIP
+void          cursor_movement(char *key, t_line *line)
 {
     if (!line)
         fatal("Error (cursor_movement)");
@@ -36,5 +36,5 @@ void          cursor_movement(char *key, t_line *line) // WIP
     if (ft_strcmp(key, K_LEFT) == 0)
         move_left(line);
     if (ft_strcmp(key, K_RIGHT) == 0)
-        move_right(line);       
+        move_right(line);
 }

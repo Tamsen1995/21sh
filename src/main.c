@@ -74,24 +74,16 @@ void        sh_loop(t_shell *shell, char **envv) // WIP
     line = NULL;
     while (status == 1) 
     {
-        // line edition happens in prompt_loop, fires off the buffer of commands
-        // once commands have been typed in
         buf = prompt_loop();
-
         line = replace_tabs(buf);
         shell->cmds = store_commands(line);
-
-        // Executes the list of commands that was given to the program
-        // This list of commands is seperated by the ";" sign
         while (shell->cmds)
         {
             shell->argc = count_args(shell->cmds->args);
             status = sh_execute(envv, shell);
             shell->cmds = shell->cmds->next;
         }
-        ////////////////////////////////////
         ft_strfree(line);
-      
         // ft_strfree(buf);
     }
 }

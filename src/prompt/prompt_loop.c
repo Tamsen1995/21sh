@@ -31,23 +31,29 @@ t_line         *init_line()
     line->first_c = get_first_c(line);
     line->current_c = line->first_c;
     line->last_c = line->first_c;
+    tputs(tgetstr("vs", NULL), 0, putintc);
     return (line);
 }
 
+
 /*
-** checks the buffer linked list for actions which 
-** might have to be executed
+** puts the cursor to its last possible position
 */
 
-void            check_input(t_line *line, char *buf) // WIP
+void            cursor_to_end(t_line *line)
 {
-    if (!line)
-        fatal("Error (check_input)");
-    if (!line->buffer || !buf)
-        return ;
-    cursor_movement(buf, line);
-    if (ft_strcmp(buf, K_BACKSPACE) == 0)
-        line->buffer = del_buf_elem(line);
+    int i;
+    t_cursor *tmp;
+
+    i = 0;
+    tmp = line->cursor;
+    reset_cursor();
+    while (tmp->c_ind < line->last_c->c_ind)
+    {
+        tputs(tgetstr("nd", NULL), 0, putintc);
+        tmp = tmp->next;
+    }
+
 }
 
 /*
@@ -64,24 +70,20 @@ char            *prompt_loop(void)
     char        *cmd_line;
     t_line      *line;
 
-    line = init_line();
-    tputs(tgetstr("vs", NULL), 0, putintc);
+    line = init_line();    
     ft_putstr(line->prompt);
-    while (buf[0] != 10)
+    while (ft_strcmp(buf, K_RETURN) != 0)
     {
         ft_bzero(buf, KEY_BUF_SIZE + 1);
         read(STDIN_FILENO, buf, KEY_BUF_SIZE);
-        check_input(line, buf);
-        if (term_action(buf) == FALSE)
-        {
-            ft_add_buf(&line->buffer, buf);
-            line->current_c = line->current_c->next;
-            line->last_c = line->last_c->next;
-            init_buf_ind(line->buffer);
-        }
+        if (term_action(buf) == TRUE)
+            check_input(line, buf);
+        else if (term_action(buf) == FALSE)
+            insert_buffer(line, buf);
         print_buffer(line);
     }
     cmd_line = stringify_buffer(line->buffer);
     free_line_struct(line);
+    ft_putendl("");
     return (cmd_line);
 }

@@ -1,29 +1,5 @@
 #include "../../../../includes/ft_sh.h"
 
-/*
-** returns a pointer to the 
-** buffer element which is found at
-** the current tracked cursor position
-*/
-
-t_buf       *get_cur_buffer(t_line *line)
-{
-    t_buf       *ret;
-    t_cursor    *tmp_cur;
-
-    ret = NULL;
-    tmp_cur = NULL;
-    if (!line || !line->first_c || !line->current_c)
-        fatal("Error (get_cur_buffer)");
-    ret = line->buffer;
-    tmp_cur = line->first_c;
-    while (ret->next && tmp_cur && tmp_cur->c_ind != line->current_c->c_ind)
-    {
-        ret = ret->next;
-        tmp_cur = tmp_cur->next;
-    }
-    return (ret);
-}
 
 /*
 ** frees a buf element
@@ -105,11 +81,6 @@ t_buf           *del_buf_elem(t_line *line)
     new_buf = make_new_buf(line->buffer, del);
     line->current_c = line->current_c->prev;
     line->last_c = line->last_c->prev;
-
     free_buffer(line->buffer);
-    // TODO free the old line buffer
     return (new_buf);
 }
-
-// TODO insert function
-// void        insert_at_cursor();

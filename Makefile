@@ -22,17 +22,24 @@ SRC = src/main.c \
 	src/builtins/builtins.c \
 	src/helpers/check_directory.c \
 	src/helpers/putintc.c \
-	src/prompt/print_list.c \
+	src/prompt/print_buffer.c \
 	src/prompt/prompt_loop.c \
-	src/prompt/reset_cursor.c \
-	src/prompt/line_edition/line_buffer/ft_add_buf.c \
-	src/prompt/line_edition/line_buffer/stringify_buffer.c \
-	src/prompt/line_edition/line_buffer/del_buf_elem.c \
-	src/prompt/line_edition/cursor_movement.c \
+	src/prompt/check_input.c \
+	src/prompt/helpers/list_len.c \
 	src/prompt/line_edition/init_cursor.c \
 	src/prompt/line_edition/term_action.c \
 	src/prompt/line_edition/get_first_c.c \
 	src/prompt/line_edition/free_line_struct.c \
+	src/prompt/line_edition/line_buffer/ft_add_buf.c \
+	src/prompt/line_edition/line_buffer/get_cur_buffer.c \
+	src/prompt/line_edition/line_buffer/stringify_buffer.c \
+	src/prompt/line_edition/line_buffer/insert_buffer.c \
+	src/prompt/line_edition/line_buffer/ft_new_buf.c \
+	src/prompt/line_edition/line_buffer/del_buf_elem.c \
+	src/prompt/line_edition/cursor/cursor_movement.c \
+	src/prompt/line_edition/cursor/prompt_cursor.c \
+	src/prompt/line_edition/cursor/reset_cursor.c \
+	src/prompt/line_edition/cursor/set_cursor.c \
 	src/test_helpers/print_list_test.c \
 
 OBJ = $(addsuffix .o, $(basename $(SRC)))

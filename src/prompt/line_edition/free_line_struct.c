@@ -5,14 +5,14 @@
 ** frees the cursor index linked list
 */
 
-void            free_cursor(t_line *line)
+void            free_cursor(t_cursor *cur)
 {
     t_cursor *tmp;
 
     tmp = NULL;
-    if (!line || !line->cursor)
+    if (!cur)
         fatal("Error (free_cursor)");
-    tmp = line->cursor;
+    tmp = cur;
     while (tmp->next)
         tmp = tmp->next;
     while (tmp->prev)
@@ -33,7 +33,7 @@ void            free_buffer(t_buf *buffer)
 
     tmp = NULL;
     if (!buffer)
-        fatal("Error (free_buffer)");
+        return ;
     tmp = buffer;
     while (tmp->next)
         tmp = tmp->next;
@@ -59,9 +59,7 @@ void            free_line_struct(t_line *line)
         fatal("Error (free_line_struct)");
     reset_cursor();
     free_buffer(line->buffer);
-    free_cursor(line);
+    free_cursor(line->cursor);
     if (line->sz)
         free(line->sz);
-    
-    // TODO finish function
 }
