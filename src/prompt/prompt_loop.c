@@ -70,7 +70,7 @@ char            *prompt_loop(void)
     char        *cmd_line;
     t_line      *line;
 
-    line = init_line();
+    line = init_line();    
     ft_putstr(line->prompt);
     while (ft_strcmp(buf, K_RETURN) != 0)
     {
@@ -82,22 +82,7 @@ char            *prompt_loop(void)
             insert_buffer(&line, buf);
         print_buffer(line);
     }
-    reset_cursor();
-
-    // BUG : since the buffer line is still intact here something has to be wrong with the
-    // stringify_buffer function.
-    // Thus far I know that the way I output the buffer is not the source of the bug.
-    // The bug could be either here or between here and the cmd_not_found function
-    // for some reason the cursor movement to the left can arbitrariliy add signs or delete them from the buffer
-    // Everytime I only do the enter sign the prompt bugs out and puts it in the list maybe Idk..
-
     cmd_line = stringify_buffer(line->buffer);
-
-    ft_putendl(""); // TESTING
-    ft_putstr("-->"); // TESTING
-    ft_putstr(cmd_line); // TESTING
-    ft_putendl("<----"); // TESTING
-
     free_line_struct(line);
     return (cmd_line);
 }

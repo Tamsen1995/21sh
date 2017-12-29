@@ -33,7 +33,7 @@ void            free_buffer(t_buf *buffer)
 
     tmp = NULL;
     if (!buffer)
-        fatal("Error (free_buffer)");
+        return ;
     tmp = buffer;
     while (tmp->next)
         tmp = tmp->next;

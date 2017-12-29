@@ -14,11 +14,11 @@ char        *stringify_buffer(t_buf  *buffer)
     tmp = NULL;
     i = 0;
     if (!buffer)
-        fatal("error in (stringify_buffer)");
+        return (NULL);
     tmp = buffer;
     i = list_len(tmp);
     ret = ft_strnew(i);
-    while (tmp->next)
+    while (tmp)
     {
         ret = ft_strcat(ret, tmp->key);
         tmp = tmp->next;
