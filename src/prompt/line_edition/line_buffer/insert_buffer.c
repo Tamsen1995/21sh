@@ -6,7 +6,22 @@
 
 void        put_buf_middle(t_line *line, char *key)
 {
-    // TODO : finish
+    t_buf *cur_buf;
+    t_buf *new_buf;
+
+    cur_buf = NULL;
+    new_buf = NULL;
+    if (!line || !line->buffer || !line->cursor || !key)
+        fatal("Error (put_buf_middle)");
+    cur_buf = get_cur_buffer(line);
+    new_buf = ft_new_buf(key);
+    if (cur_buf->prev)
+        cur_buf = cur_buf->prev;
+    new_buf->next = cur_buf->next;
+    new_buf->prev = cur_buf;
+    cur_buf->next->prev = new_buf;
+    cur_buf->next = new_buf;
+
 
 }
 
@@ -55,8 +70,7 @@ void        insert_at_cursor(t_line *line, char *key)
     else if (!tmp_buf->prev)
         line->buffer = put_buf_at_begin(line, key);
     else
-        put_buf_middle(line, key);     // TODO : finish
-    // TODO : insert new elem into the buffer
+        put_buf_middle(line, key);
 }
 
 /*
