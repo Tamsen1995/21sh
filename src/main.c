@@ -28,7 +28,7 @@ int         count_args(char **args)
         return (0);
     while (args[argc])
         argc++;
-    return (argc); // TODO test this function
+    return (argc);
 }
 
 /*

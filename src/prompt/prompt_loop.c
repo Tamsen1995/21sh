@@ -73,8 +73,7 @@ char            *prompt_loop(t_hist *history)
 
     line = init_line();    
     ft_putstr(line->prompt);
-    line->history = history; // pointing the history pointer of the line
-    // onto the history list on the exterior
+    line->history = history;
     while (ft_strcmp(buf, K_RETURN) != 0)
     {
         ft_bzero(buf, KEY_BUF_SIZE + 1);

@@ -14,7 +14,7 @@ t_hist *ft_new_his(char *cmd)
     new->next = NULL;
     new->prev = NULL;
     new->cmd = NULL;
-    new->current = FALSE;
+    new->current = TRUE;
     new->cmd = ft_strdup(cmd);
     return (new);
 }
@@ -44,6 +44,7 @@ void        add_history(t_hist **history, char *cmd)
     new_his = ft_new_his(cmd);
     while (tmp_his->next)
         tmp_his = tmp_his->next;
+    tmp_his->current = FALSE;
     tmp_his->next = new_his;
     new_his->prev = tmp_his;
 }

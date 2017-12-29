@@ -9,7 +9,7 @@ void            check_input(t_line *line, char *buf)
 {
     if (!line)
         fatal("Error (check_input)");
-    if (!line->buffer || !buf)
+    if (!buf)
         return ;
     cursor_movement(buf, line);
     if (ft_strcmp(buf, K_UP) == 0)
