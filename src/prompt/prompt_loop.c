@@ -79,7 +79,7 @@ char            *prompt_loop(void)
         if (term_action(buf) == TRUE)
             check_input(line, buf);
         else if (term_action(buf) == FALSE)
-            insert_buffer(&line, buf);
+            insert_buffer(line, buf);
         print_buffer(line);
     }
     cmd_line = stringify_buffer(line->buffer);

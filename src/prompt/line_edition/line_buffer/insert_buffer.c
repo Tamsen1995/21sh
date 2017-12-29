@@ -1,12 +1,14 @@
 #include "../../../../includes/ft_sh.h"
 
 /*
-** returns a copy of the buffer
-** with the intended element inside
-** the list
+** inserts an element at the cursor position in the buffer
 */
 
-t_buf       *put_buf_middle();
+void        put_buf_middle(t_line *line, char *key)
+{
+    // TODO : finish
+
+}
 
 /*
 ** returns a copy of the buffer
@@ -52,6 +54,8 @@ void        insert_at_cursor(t_line *line, char *key)
         ft_add_buf(&line->buffer, key);
     else if (!tmp_buf->prev)
         line->buffer = put_buf_at_begin(line, key);
+    else
+        put_buf_middle(line, key);     // TODO : finish
     // TODO : insert new elem into the buffer
 }
 
@@ -60,18 +64,18 @@ void        insert_at_cursor(t_line *line, char *key)
 ** into the buffer
 */
 
-void    insert_buffer(t_line **line, char *key)
+void    insert_buffer(t_line *line, char *key)
 {
     t_buf *tmp;
 
     tmp = NULL;
     if (!line || !key)
         fatal("Error (insert_buffer)");
-	if (!(*line)->buffer)
-		(*line)->buffer = ft_new_buf(key);
+	if (!line->buffer)
+		line->buffer = ft_new_buf(key);
     else
-        insert_at_cursor((*line), key);
-    (*line)->current_c = (*line)->current_c->next;
-    (*line)->last_c = (*line)->last_c->next;
-    init_buf_ind((*line)->buffer);
+        insert_at_cursor(line, key);
+    line->current_c = line->current_c->next;
+    line->last_c = line->last_c->next;
+    init_buf_ind(line->buffer);
 }

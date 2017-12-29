@@ -166,7 +166,7 @@ void  			    reset_cursor();
 void 			    set_cursor(t_line *line);
 void      		    check_input(t_line *line, char *buf);
 void 		       	prompt_cursor(t_line *line);
-void  				insert_buffer(t_line **line, char *key);
+void  				insert_buffer(t_line *line, char *key);
 t_buf  			    *ft_new_buf(char *key);
 t_buf				*get_cur_buffer(t_line *line);
 
