@@ -31,16 +31,18 @@
 # define FALSE 0
 
 
-
-/*	
-struct winsize
-{
-  unsigned short ws_row;	// rows, in characters 
-  unsigned short ws_col;	// columns, in characters 
-  unsigned short ws_xpixel;	// horizontal size, pixels 
-  unsigned short ws_ypixel;	// vertical size, pixels 
-};
+/*
+** history of the commands
+** given in the past for the arrow up keys
 */
+
+typedef struct		s_hist
+{
+	struct s_hist	*next;
+	struct s_hist	*prev;
+	char			*cmd;
+	char			*value;
+}					t_hist;
 
 
 /*
@@ -52,7 +54,7 @@ typedef struct			s_cursor
 {
 	struct s_cursor		*next;
 	struct s_cursor		*prev;
-	int					c_ind; // cursor index
+	int					c_ind;
 	T_BOOL				cursor;
 }						t_cursor;
 
@@ -68,7 +70,7 @@ typedef struct		s_buf
 	struct s_buf	*next;
 	struct s_buf	*prev;
 	char 			*key;
-	int				ind; // The index of the buffer
+	int				ind;
 }					t_buf;
 
 /*
@@ -127,19 +129,6 @@ typedef struct		s_shell
 }					t_shell;
 
 /*
-** history of the commands
-** given in the past for the arrow up keys
-*/
-
-typedef struct		s_hist
-{
-	struct s_hist	*next;
-	struct s_hist	*prev;
-	char			*cmd;
-	char			*value;
-}					t_hist;
-
-/*
 ** Testing functions
 */
 
@@ -156,6 +145,14 @@ void         		cursor_movement(char *key, t_line *line);
 t_cursor    	   	*init_cursor(int win_size);
 T_BOOL        		term_action(char *buf);
 t_cursor			*get_first_c(t_line *line);
+
+
+
+/*
+** command line history functions:
+*/
+
+
 
 /*
 ** line buffer/edition functions:

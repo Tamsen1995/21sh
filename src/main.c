@@ -68,9 +68,11 @@ void        sh_loop(t_shell *shell, char **envv) // WIP
 {
     int status;
     char *buf;
+    t_hist *history;
 
     status = 1;
     buf = NULL;
+    history = NULL;
     while (status == 1) 
     {
         buf = prompt_loop();
