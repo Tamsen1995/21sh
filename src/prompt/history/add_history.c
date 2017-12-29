@@ -9,6 +9,8 @@ t_hist *ft_new_his(char *cmd)
 {
     t_hist *new;
 
+    if (!cmd)
+        fatal("Error (ft_new_his)");
     if (!(new = (t_hist *)malloc(sizeof(t_hist))))
         fatal("Error: could not allocate env var list elem in ft_new_env");
     new->next = NULL;
