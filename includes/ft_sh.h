@@ -126,18 +126,24 @@ typedef struct		s_shell
 
 }					t_shell;
 
+/*
+** history of the commands
+** given in the past for the arrow up keys
+*/
 
+typedef struct		s_hist
+{
+	struct s_hist	*next;
+	struct s_hist	*prev;
+	char			*cmd;
+	char			*value;
+}					t_hist;
 
 /*
 ** Testing functions
 */
 
 void           print_list_test(t_buf *buffer);
-
-/*
-** Testing functions
-*/
-
 
 /*
 ** 21sh starting here
@@ -169,9 +175,6 @@ void 		       	prompt_cursor(t_line *line);
 void  				insert_buffer(t_line *line, char *key);
 t_buf  			    *ft_new_buf(char *key);
 t_buf				*get_cur_buffer(t_line *line);
-
-
-
 
 /*
 ** 21sh ending here

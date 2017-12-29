@@ -53,6 +53,7 @@ char        *replace_tabs(char *buf)
             line [i] = ' ';
         i++;
     }
+    ft_strfree(buf);
     return (line);
 }
 
@@ -66,28 +67,24 @@ char        *replace_tabs(char *buf)
 void        sh_loop(t_shell *shell, char **envv) // WIP
 {
     int status;
-    char *line;
     char *buf;
 
     status = 1;
     buf = NULL;
-    line = NULL;
     while (status == 1) 
     {
         buf = prompt_loop();
-        line = replace_tabs(buf);
-        shell->cmds = store_commands(line);
+        buf = replace_tabs(buf);
+        shell->cmds = store_commands(buf);
         while (shell->cmds)
         {
             shell->argc = count_args(shell->cmds->args);
             status = sh_execute(envv, shell);
             shell->cmds = shell->cmds->next;
         }
-        ft_strfree(line);
-        // ft_strfree(buf);
+        ft_strfree(buf);
     }
 }
-
 
 /*
 ** Initiating the shell
@@ -101,22 +98,12 @@ int         main(int ac, char **av, char **envv)
     char        *term_name;
     char        buf[MAX_BUF_SIZE];
 
-
     shell = NULL;
-
-    /* 
-    ** I need the terminal description in order to
-    ** interrogate the terminal about its capabilities 
-    */
-
     term_name = ft_secure_getenv("TERM");
     if (tgetent(buf, term_name) == -1)
-        fatal("Error with tgetent (main)");
-    ///////////////////////////////////////
-
-
+        fatal("Could not get terminal description (main)");
     shell = init_shell(ac, av, envv);
-    sh_loop(shell, envv);  // the programs main loop
+    sh_loop(shell, envv);
     free_shell(shell);
     return (0);
 }
