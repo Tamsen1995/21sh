@@ -99,8 +99,10 @@ void        check_hist(t_line *line)
     t_hist *tmp_his;
 
     tmp_his = NULL;
-    if (!line || !line->history)
+    if (!line)
         fatal("Error (check_hist)");
+    if (!line->history)
+        return ;
     tmp_his = line->history;
     while (tmp_his && tmp_his->current == FALSE)
         tmp_his = tmp_his->next;
