@@ -24,6 +24,7 @@ t_line         *init_line()
     if (!(line = malloc(sizeof(t_line) * 1)))
         fatal("");
     line->buffer = NULL;
+    line->history = NULL;
     line->cursor = NULL;
     line->prompt = "tamshell $> ";
     line->sz = get_win_size();
@@ -64,7 +65,7 @@ void            cursor_to_end(t_line *line)
 ** Display the updated contents of the text buffer on the screen.
 */
 
-char            *prompt_loop(void)
+char            *prompt_loop(t_hist *history)
 {
 	char		buf[KEY_BUF_SIZE + 1];
     char        *cmd_line;
@@ -72,10 +73,12 @@ char            *prompt_loop(void)
 
     line = init_line();    
     ft_putstr(line->prompt);
+    line->history = history; // pointing the history pointer of the line
+    // onto the history list on the exterior
     while (ft_strcmp(buf, K_RETURN) != 0)
     {
         ft_bzero(buf, KEY_BUF_SIZE + 1);
-        read(STDIN_FILENO, buf, KEY_BUF_SIZE);
+        read(STDIN_FILENO, buf, KEY_BUF_SIZE); 
         if (term_action(buf) == TRUE)
             check_input(line, buf);
         else if (term_action(buf) == FALSE)
@@ -84,6 +87,5 @@ char            *prompt_loop(void)
     }
     cmd_line = stringify_buffer(line->buffer);
     free_line_struct(line);
-    ft_putendl("");
     return (cmd_line);
 }

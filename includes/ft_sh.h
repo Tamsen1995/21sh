@@ -41,7 +41,7 @@ typedef struct		s_hist
 	struct s_hist	*next;
 	struct s_hist	*prev;
 	char			*cmd;
-	char			*value;
+	T_BOOL			current;
 }					t_hist;
 
 
@@ -80,6 +80,7 @@ typedef struct		s_buf
 
 typedef struct			s_line
 {	
+	struct s_hist		*history;
 	struct s_buf		*buffer;
 	struct s_cursor		*cursor;
 	struct s_cursor		*first_c; // the cursor cannot go past this ever because this is where the prompt starts
@@ -152,7 +153,8 @@ t_cursor			*get_first_c(t_line *line);
 ** command line history functions:
 */
 
-
+void        check_hist(t_line *line);
+void        add_history(t_hist **history, char *buf);
 
 /*
 ** line buffer/edition functions:
@@ -198,6 +200,6 @@ int					sh_cd(char **args, t_shell *shell);
 int					sh_exit(void);
 int					sh_echo(char **args);
 t_shell				*init_shell(int ac, char **av, char **envv);
-char				*prompt_loop(void);
+char				*prompt_loop(t_hist *history);
 
 #endif

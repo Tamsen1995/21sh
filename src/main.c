@@ -75,8 +75,9 @@ void        sh_loop(t_shell *shell, char **envv) // WIP
     history = NULL;
     while (status == 1) 
     {
-        buf = prompt_loop();
+        buf = prompt_loop(history);
         buf = replace_tabs(buf);
+        add_history(&history, buf);
         shell->cmds = store_commands(buf);
         while (shell->cmds)
         {

@@ -62,4 +62,5 @@ void            free_line_struct(t_line *line)
     free_cursor(line->cursor);
     if (line->sz)
         free(line->sz);
+    ft_putendl("");
 }
