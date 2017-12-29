@@ -84,5 +84,6 @@ char            *prompt_loop(void)
     }
     cmd_line = stringify_buffer(line->buffer);
     free_line_struct(line);
+    ft_putendl("");
     return (cmd_line);
 }
