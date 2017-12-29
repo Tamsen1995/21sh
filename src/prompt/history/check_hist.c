@@ -27,6 +27,32 @@ t_buf        *replace_buffer(char *string)
     return (new_buf);
 }
 
+
+/*
+** sets the cursor to the end of command line after
+** the buffer has been changed 
+** (like in the case of history checking for instance)
+*/
+
+void        cursor_toend(t_line *line)
+{
+    t_buf *tmp_buf;
+
+    tmp_buf = NULL;
+    if (!line || !line->buffer ||!line->cursor)
+        fatal("Error (cursor_toend)");
+    prompt_cursor(line);
+    tmp_buf = line->buffer;
+    while (tmp_buf)
+    {
+        line->current_c = line->current_c->next;
+        tmp_buf = tmp_buf->next;
+    }
+
+
+}
+
+
 /*
 ** everytime an arrow key is pressed
 ** the history list is checked backwards
@@ -41,19 +67,14 @@ void        check_hist(t_line *line)
     if (!line || !line->history)
         fatal("Error (check_hist)");
     tmp_his = line->history;
-    // get to the history element in which the .current is
-        // set to true
     while (tmp_his && tmp_his->current == FALSE)
         tmp_his = tmp_his->next;
-    // set that element to false
-    // make the history element before the chosen element true
     if (tmp_his->prev)
     {
         tmp_his->current = FALSE;
         tmp_his->prev->current = TRUE;
     }
-    // free the old buffer
     free_buffer(line->buffer);
-    // set the buffer list to the chosen element
     line->buffer = replace_buffer(tmp_his->cmd);
+ //   cursor_toend(line);
 }
