@@ -11,6 +11,9 @@ void        check_hist(t_line *line)
     t_hist *tmp_his;
 
     tmp_his = NULL;
+
+  //  set_cursor(line);
+
     if (!line || !line->history)
         fatal("Error (check_hist)");
     tmp_his = line->history;

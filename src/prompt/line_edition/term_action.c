@@ -14,6 +14,8 @@ T_BOOL          term_action(char *buf)
     if (ft_strcmp(buf, K_LEFT) == 0)
         return (TRUE);
     if (ft_strcmp(buf, K_RIGHT) == 0)
+        return (TRUE);    
+    if (ft_strcmp(buf, K_UP) == 0)
         return (TRUE);
     if (ft_strcmp(buf, K_BACKSPACE) == 0)
         return (TRUE);
