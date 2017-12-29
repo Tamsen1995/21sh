@@ -154,6 +154,7 @@ t_cursor			*get_first_c(t_line *line);
 */
 
 void        check_hist(t_line *line);
+void    	check_hist_down(t_line *line);
 void        add_history(t_hist **history, char *buf);
 
 /*
