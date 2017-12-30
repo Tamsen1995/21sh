@@ -22,6 +22,7 @@ void        check_hist(t_line *line)
     {
         tmp_his->current = FALSE;
         tmp_his->prev->current = TRUE;
+        tmp_his = tmp_his->prev;
     }
     free_buffer(line->buffer);
     line->buffer = replace_buffer(tmp_his->cmd);

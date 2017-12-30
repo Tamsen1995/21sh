@@ -18,10 +18,6 @@ void    check_hist_down(t_line *line)
     tmp_his->current = FALSE;
     tmp_his = tmp_his->next;
     tmp_his->current = TRUE;
-
-    ft_putendl(tmp_his->cmd); // TESTING
-
-
     free_buffer(line->buffer);
     line->buffer = replace_buffer(tmp_his->cmd);
     set_cursor_internal(line);
