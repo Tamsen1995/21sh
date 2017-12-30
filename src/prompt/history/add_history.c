@@ -18,6 +18,7 @@ t_hist *ft_new_his(char *cmd)
     new->cmd = NULL;
     new->current = TRUE;
     new->cmd = ft_strdup(cmd);
+    new->index = 0;
     return (new);
 }
 

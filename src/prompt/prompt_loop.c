@@ -16,15 +16,15 @@ struct winsize		*get_win_size()
 ** initializes the struct necessary for line edition
 */
 
-t_line         *init_line()
+t_line         *init_line(t_hist *history)
 {
     t_line *line;
 
     line = NULL;
     if (!(line = malloc(sizeof(t_line) * 1)))
         fatal("");
+
     line->buffer = NULL;
-    line->history = NULL;
     line->cursor = NULL;
     line->prompt = "tamshell $> ";
     line->sz = get_win_size();
@@ -32,7 +32,10 @@ t_line         *init_line()
     line->first_c = get_first_c(line);
     line->current_c = line->first_c;
     line->last_c = line->first_c;
+    line->his_index = 0;
+    line->history = history;
     tputs(tgetstr("vs", NULL), 0, putintc);
+    init_hist_index(line->history);
     return (line);
 }
 
@@ -71,9 +74,8 @@ char            *prompt_loop(t_hist *history)
     char        *cmd_line;
     t_line      *line;
 
-    line = init_line();    
+    line = init_line(history);    
     ft_putstr(line->prompt);
-    line->history = history;
     while (ft_strcmp(buf, K_RETURN) != 0)
     {
         ft_bzero(buf, KEY_BUF_SIZE + 1);

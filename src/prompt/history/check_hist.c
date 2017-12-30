@@ -18,6 +18,7 @@ void        check_hist(t_line *line)
     tmp_his = line->history;
 
 
+
     free_buffer(line->buffer);
     line->buffer = replace_buffer(tmp_his->cmd);
     set_cursor_internal(line);
