@@ -22,8 +22,10 @@ void        check_hist(t_line *line)
     {
         tmp_his->current = FALSE;
         tmp_his->prev->current = TRUE;
-        tmp_his = tmp_his->prev;
+        tmp_his = tmp_his->prev; // BUG: if the last element happens to be
+        // the element which is supposed to replace the buffer, then it gets skipped.
     }
+
     free_buffer(line->buffer);
     line->buffer = replace_buffer(tmp_his->cmd);
     set_cursor_internal(line);
