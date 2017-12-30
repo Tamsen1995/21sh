@@ -160,7 +160,7 @@ void        add_history(t_hist **history, char *buf);
 t_buf      	*replace_buffer(char *string);
 void        set_cursor_internal(t_line *line);
 void		init_hist_index(t_hist *history);
-
+int         get_last_index(t_hist *history);
 /*
 ** line buffer/edition functions:
 */

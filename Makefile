@@ -30,7 +30,7 @@ SRC = src/main.c \
 	src/prompt/history/check_hist.c \
 	src/prompt/history/check_hist_down.c \
 	src/prompt/history/set_cursor_internal.c \
-	src/prompt/history/init_hist_index.c \
+	src/prompt/history/hist_index.c \
 	src/prompt/history/replace_buffer.c \
 	src/prompt/line_edition/init_cursor.c \
 	src/prompt/line_edition/term_action.c \
