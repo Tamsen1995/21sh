@@ -18,10 +18,11 @@ void        check_hist(t_line *line)
     tmp_his = line->history;
     while (tmp_his && tmp_his->current == FALSE)
         tmp_his = tmp_his->next;
-    if (!tmp_his->prev)
-        return ;
-    tmp_his->current = FALSE;
-    tmp_his->prev->current = TRUE;
+    if (tmp_his->prev)
+    {
+        tmp_his->current = FALSE;
+        tmp_his->prev->current = TRUE;
+    }
     free_buffer(line->buffer);
     line->buffer = replace_buffer(tmp_his->cmd);
     set_cursor_internal(line);
