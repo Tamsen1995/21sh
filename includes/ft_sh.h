@@ -148,7 +148,6 @@ T_BOOL        		term_action(char *buf);
 t_cursor			*get_first_c(t_line *line);
 
 
-
 /*
 ** command line history functions:
 */
@@ -156,7 +155,7 @@ t_cursor			*get_first_c(t_line *line);
 void        check_hist(t_line *line);
 void    	check_hist_down(t_line *line);
 void        add_history(t_hist **history, char *buf);
-
+t_buf      	*replace_buffer(char *string);
 void        set_cursor_internal(t_line *line);
 
 /*
