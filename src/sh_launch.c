@@ -79,8 +79,13 @@ int				sh_launch(char **envv, t_shell *shell)
 		command = ft_strdup(shell->cmds->args[0]);
 	if (pid == 0)
 	{
+
+
+
+
 		if (execve(command, shell->cmds->args, envv) == -1)
 			cmd_not_found(shell);
+
 	}
 	else if (pid < 0)
 		fatal("sh_launch ERR:002");

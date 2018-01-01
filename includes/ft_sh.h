@@ -151,6 +151,13 @@ T_BOOL        		term_action(char *buf);
 t_cursor			*get_first_c(t_line *line);
 
 
+
+/*
+** redirection functions
+*/
+
+void exec_redirections(t_shell *shell);
+
 /*
 ** command line history functions:
 */
