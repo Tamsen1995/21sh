@@ -24,5 +24,6 @@ t_buf        *replace_buffer(char *string)
         ft_add_buf(&new_buf, key);
         i++;
     }
+    init_buf_ind(new_buf);
     return (new_buf);
 }

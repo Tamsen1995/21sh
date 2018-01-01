@@ -45,6 +45,7 @@ void            free_buffer(t_buf *buffer)
     }
     ft_strfree(tmp->key);
     free(tmp);
+    buffer = NULL;
 }
 
 /*

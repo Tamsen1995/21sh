@@ -65,7 +65,7 @@ void            cursor_to_end(t_line *line)
 ** Get a keystroke from the user.
 ** If the keystroke is a command (like delete or backspace), dispatch or carry out that command.
 ** If the keystroke is a character, insert it into the text buffer (or replace the current character if not in insert mode).
-** Display the updated contents of the text buffer on the screen.
+** Display the updated contents of the text buffer on screen.
 */
 
 char            *prompt_loop(t_hist *history)
