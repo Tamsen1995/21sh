@@ -19,7 +19,7 @@ void        change_env_var(char **args, t_shell *shell)
     if (!args[1])
         fatal("No name in (change_env_var)");
     if (!args[2])
-        fatal("Value missing in (change_env_var)"); // TESTING purposes
+        fatal("Value missing in (change_env_var)");
     name = ft_strdup(args[1]);
     nw_value = ft_strdup(args[2]);
     while (env_tmp && ft_strcmp(env_tmp->name, name) != 0)

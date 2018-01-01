@@ -59,6 +59,8 @@ t_cmds      *store_commands(char *commands)
     cmds_arr = NULL;
     ret = NULL;
     i = 0;
+    if (!commands)
+        return (NULL);
     cmds_arr = ft_strsplit(commands, ';');
     if (!cmds_arr)
     {

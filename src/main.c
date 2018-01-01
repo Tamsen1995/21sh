@@ -28,7 +28,7 @@ int         count_args(char **args)
         return (0);
     while (args[argc])
         argc++;
-    return (argc); // TODO test this function
+    return (argc);
 }
 
 /*
@@ -53,6 +53,7 @@ char        *replace_tabs(char *buf)
             line [i] = ' ';
         i++;
     }
+    ft_strfree(buf);
     return (line);
 }
 
@@ -66,40 +67,28 @@ char        *replace_tabs(char *buf)
 void        sh_loop(t_shell *shell, char **envv) // WIP
 {
     int status;
-    char *line;
     char *buf;
+    t_hist *history;
 
     status = 1;
     buf = NULL;
-    line = NULL;
+    history = NULL;
     while (status == 1) 
     {
-        // line edition happens in prompt_loop, fires off the buffer of commands
-        // once commands have been typed in
-        buf = prompt_loop();
-
-        // if (isatty(STDIN_FILENO)) // I'm  not sure when to use this.
-        // It tests whether the stdin refers to a terminal or not
-         //   ft_putendl("Testing");
-
-        line = replace_tabs(buf);
-        shell->cmds = store_commands(line);
-
-        // Executes the list of commands that was given to the program
-        // This list of commands is seperated by the ";" sign
+        buf = prompt_loop(history);
+        buf = replace_tabs(buf);
+        add_history(&history, buf);
+        shell->cmds = store_commands(buf);
         while (shell->cmds)
         {
             shell->argc = count_args(shell->cmds->args);
             status = sh_execute(envv, shell);
             shell->cmds = shell->cmds->next;
         }
-        ////////////////////////////////////
-        ft_strfree(line);
-      
-        // ft_strfree(buf);
+        ft_strfree(buf);
     }
+    shell->history = history;
 }
-
 
 /*
 ** Initiating the shell
@@ -113,22 +102,12 @@ int         main(int ac, char **av, char **envv)
     char        *term_name;
     char        buf[MAX_BUF_SIZE];
 
-
     shell = NULL;
-
-    /* 
-    ** I need the terminal description in order to
-    ** interrogate the terminal about its capabilities 
-    */
-
     term_name = ft_secure_getenv("TERM");
     if (tgetent(buf, term_name) == -1)
-        fatal("Error with tgetent (main)");
-    ///////////////////////////////////////
-
-
+        fatal("Could not get terminal description (main)");
     shell = init_shell(ac, av, envv);
-    sh_loop(shell, envv);  // the programs main loop
+    sh_loop(shell, envv);
     free_shell(shell);
     return (0);
 }
