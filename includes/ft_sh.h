@@ -120,6 +120,7 @@ typedef struct		s_env
 
 typedef struct		s_shell
 {
+	struct s_hist		*history;
 	int					argc; // Amount of arguments passed into my shell (for each individual command)
 	struct s_cmds		*cmds; // a list of commands
 	struct s_env		*env; // The environment variables
