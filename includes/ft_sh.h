@@ -40,6 +40,7 @@ typedef struct		s_hist
 {
 	struct s_hist	*next;
 	struct s_hist	*prev;
+	int				index;
 	char			*cmd;
 	T_BOOL			current;
 }					t_hist;
@@ -80,6 +81,7 @@ typedef struct		s_buf
 
 typedef struct			s_line
 {	
+	int					his_index;
 	struct s_hist		*history;
 	struct s_buf		*buffer;
 	struct s_cursor		*cursor;
@@ -118,6 +120,7 @@ typedef struct		s_env
 
 typedef struct		s_shell
 {
+	struct s_hist		*history;
 	int					argc; // Amount of arguments passed into my shell (for each individual command)
 	struct s_cmds		*cmds; // a list of commands
 	struct s_env		*env; // The environment variables
@@ -157,7 +160,8 @@ void    	check_hist_down(t_line *line);
 void        add_history(t_hist **history, char *buf);
 t_buf      	*replace_buffer(char *string);
 void        set_cursor_internal(t_line *line);
-
+void		init_hist_index(t_hist *history);
+int         get_last_index(t_hist *history);
 /*
 ** line buffer/edition functions:
 */

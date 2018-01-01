@@ -50,8 +50,8 @@ void        set_cursor_internal(t_line *line)
     t_buf *tmp_buf;
 
     tmp_buf = NULL;
-    if (!line || !line->buffer ||!line->cursor)
-        fatal("Error (cursor_toend)");
+    if (!line ||!line->cursor)
+        fatal("Error (set_cursor_internal)");
     prompt_cursor_internal(line);
     tmp_buf = line->buffer;
     while (tmp_buf)

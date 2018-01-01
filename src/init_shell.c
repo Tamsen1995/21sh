@@ -53,6 +53,7 @@ t_shell     *init_shell(int ac, char **av, char **envv)
     ac = 0;
     if (!(shell = (t_shell *)malloc(sizeof(t_shell) * 1)))
         fatal("Couldn't allocate shell in (init_shell)");
+    shell->history = NULL;
     shell->env = init_env(envv);
     shell->argc = 0;
     shell->cmds = NULL;

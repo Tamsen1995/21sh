@@ -73,6 +73,31 @@ void        free_cmds_list(t_shell *shell)
 }
 
 /*
+** function to free the history of
+** the line
+*/
+
+void        free_line_history(t_hist *history)
+{
+    t_hist *tmp_his;
+
+    tmp_his = NULL;
+    if (!history)
+        fatal("Error in (free_line_history)");
+    tmp_his = history;
+    while (tmp_his->next)
+        tmp_his = tmp_his->next;
+    while (tmp_his->prev)
+    {
+        tmp_his = tmp_his->prev;
+        ft_strfree(tmp_his->next->cmd);
+        free(tmp_his->next);
+    }
+    ft_strfree(tmp_his->cmd);
+    free(tmp_his);
+}
+
+/*
 ** Takes in the shell and frees it
 */
 
@@ -86,6 +111,8 @@ void        free_shell(t_shell *shell)
         ft_strfree(shell->bin_dir);
     if (shell->cmds)
         free_cmds_list(shell);
+    if (shell->history)
+        free_line_history(shell->history);
     free(shell);
     shell = NULL;
 }

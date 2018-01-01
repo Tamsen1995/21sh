@@ -87,6 +87,7 @@ void        sh_loop(t_shell *shell, char **envv) // WIP
         }
         ft_strfree(buf);
     }
+    shell->history = history;
 }
 
 /*

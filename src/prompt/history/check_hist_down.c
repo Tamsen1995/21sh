@@ -2,23 +2,28 @@
 
 void    check_hist_down(t_line *line)
 {
-    t_hist *tmp_his;
+    t_hist  *tmp_his;
+    char    *replacement;
 
     tmp_his = NULL;
+    replacement = NULL;
     if (!line)
         fatal("Error (check_hist_down)");
     if (!line->history)
         return ;
-    tmp_his = line->history;
-    while (tmp_his && tmp_his->current == FALSE)
-        tmp_his = tmp_his->next;
-    if (!tmp_his->next)
+    if (line->his_index == 0)
         return ;
-
-    tmp_his->current = FALSE;
-    tmp_his = tmp_his->next;
-    tmp_his->current = TRUE;
+    else if (get_last_index(line->history) == line->his_index)
+        replacement = "";
+    else
+    {
+        line->his_index++;
+        tmp_his = line->history;
+        while (tmp_his && tmp_his->index != line->his_index)
+            tmp_his = tmp_his->next;
+        replacement = tmp_his->cmd;
+    }
     free_buffer(line->buffer);
-    line->buffer = replace_buffer(tmp_his->cmd);
+    line->buffer = replace_buffer(replacement);
     set_cursor_internal(line);
 }
