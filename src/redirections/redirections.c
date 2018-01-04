@@ -1,6 +1,17 @@
 #include "../../includes/ft_sh.h"
 
 /*
+** resets all modified file descriptors
+** usually to be executed right after
+** the execution of each command
+*/
+
+void reset_redirects()
+{
+    // TODO : implement
+}
+
+/*
 ** the highest level of abstraction for
 ** the redirection module
 */
@@ -8,7 +19,7 @@
 
 void redirections()
 {
-    
+    // TODO : implement
 
 
 }
