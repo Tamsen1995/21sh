@@ -17,12 +17,30 @@ void reset_redirects()
 */
 
 
-void redirections()
+void redirections(t_shell *shell)
 {
     // TODO : implement
 
+    // find out the file descriptors of all files in in the command struct
 
 }
+
+
+
+// bash processes redirections from left to right 
+
+
+// pointing the stdout towards a file with >file and then the stderr towards the stdout 2>&1
+// will result in both being pointed towards the file.
+// however pointing the stderr towards the stdout and then the stdout towards the file will not result in the same thing
+    // in other words, the pointers pointing to an adress of an fd are not modified along with the fd address itself. 
+    // Only whenever the pointer is set. So if an fd pointer is set to a certain modified fd, and another pointer decides to point to it, 
+    // then it will also point to the modified address. But if a pointer is set to another fd pointer, and that pointer is modified, 
+    // the pointer pointing to it will not be modified, but will remain at its initial address 
+    // (huge run on sentence)
+
+
+// writing command n>file will redirect the fd n to file
 
 // once the redirection has been executed I oughta reset everything back to normal so that
 // the shell may continue to print its input in a normal manner
