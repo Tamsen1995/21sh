@@ -83,7 +83,7 @@ void        sh_loop(t_shell *shell, char **envv) // WIP
         {
             shell->argc = count_args(shell->cmds->args);
 
-            exec_redirections(shell); // TODO : research and implement
+           // exec_redirections(shell); // TODO : research and implement
 
             status = sh_execute(envv, shell);
             shell->cmds = shell->cmds->next;

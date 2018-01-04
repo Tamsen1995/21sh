@@ -1,18 +1,47 @@
 #include "../../includes/ft_sh.h"
 
 /*
-** so far only a place to tinker with the
-** process of redirection
+** the highest level of abstraction for
+** the redirection module
 */
 
-void exec_redirections(t_shell *shell)
-{
-    // TODO : research
-    // TODO : check the incoming commands (shell->cmds) for potential redirection
 
-    if (!shell)
-        fatal("Error (exec_redirection)");
-	int fd1 = open("textfile.txt", O_CREAT | O_WRONLY | O_TRUNC);
-    dup2(fd1, STDOUT_FILENO);
-	close(fd1);
+void redirections()
+{
+    
+
+
 }
+
+// < infile
+
+// > outfile
+
+
+// Perhaps for every command one needs to discern the
+// fd through the redirections. Once this is done the command
+// can be executed as usual
+    // So for every command the outfile, infile, and errfile
+    // will be determined through variables
+    // if no changes have been made to either of these, they remain
+    // NULL and all outputs/inputs will be treated normally
+
+// > creating overwriting
+    // only redirectos stdout
+    // stderr is not considered
+
+// >> appending to a file
+
+// < inputting a file into something, usually and in most cases 
+    // the stdin of a command
+
+// 2>&1 implies that the stderr is being sent to the same place
+    // as stderr
+
+// 2> redirects the stderr to whereever it makes sense
+
+// | this is a pipe and it redirects the stdout of one file to the stdin
+    // of another
+
+// The redirections module mainly takes care of the manipulation of file descriptors
+

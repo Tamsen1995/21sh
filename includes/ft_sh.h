@@ -173,6 +173,7 @@ int         get_last_index(t_hist *history);
 ** line buffer/edition functions:
 */
 
+t_line     		    *init_line(t_hist *history);
 void				ft_add_buf(t_buf **begin_list, char *key);
 char     		   	*stringify_buffer(t_buf  *buffer);
 int					list_len(t_buf *buffer);
