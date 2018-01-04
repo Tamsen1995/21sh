@@ -59,6 +59,13 @@ void			cmd_not_found(t_shell *shell)
 	exit(-1);
 }
 
+void safe_exec(t_shell *shell , char *command, char **envv)
+{
+	if (execve(command, shell->cmds->args, envv) == -1)
+		cmd_not_found(shell);
+}
+
+
 /*
 ** if the pid is a zero, we assume it to be
 ** the child process
@@ -77,12 +84,10 @@ int				sh_launch(char **envv, t_shell *shell)
 		command = make_bin_cmd(shell);
 	else if (check_bin_path(shell) == TRUE)
 		command = ft_strdup(shell->cmds->args[0]);
+	else
+		command = ft_strdup(shell->cmds->args[0]);
 	if (pid == 0)
-	{
-		if (execve(command, shell->cmds->args, envv) == -1)
-			cmd_not_found(shell);
-
-	}
+		safe_exec(shell, command, envv);
 	else if (pid < 0)
 		fatal("sh_launch ERR:002");
 	else

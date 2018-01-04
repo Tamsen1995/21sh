@@ -13,10 +13,18 @@ void redirections()
 
 }
 
+// once the redirection has been executed I oughta reset everything back to normal so that
+// the shell may continue to print its input in a normal manner
+
+// The command structure will be expanded
+// Additional fields for input files, and output files
+// are to be added.
+// (REDIRECTIONS)
+
+
 // < infile
 
 // > outfile
-
 
 // Perhaps for every command one needs to discern the
 // fd through the redirections. Once this is done the command

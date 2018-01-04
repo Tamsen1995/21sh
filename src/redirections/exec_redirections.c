@@ -13,6 +13,7 @@ void exec_redirections(t_shell *shell)
     if (!shell)
         fatal("Error (exec_redirection)");
 	int fd1 = open("textfile.txt", O_CREAT | O_WRONLY | O_TRUNC);
-    dup2(fd1, STDOUT_FILENO);
+    dup2(fd1, STDOUT_FILENO); 
+    // whatever's supposed to go into the second FD is going into the first one
 	close(fd1);
 }
