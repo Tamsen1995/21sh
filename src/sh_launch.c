@@ -62,10 +62,59 @@ void			cmd_not_found(t_shell *shell)
 
 void safe_exec(t_shell *shell , char *command, char **envv)
 {
-
-	//exec_redirections(shell); // TODO : research and implement
 	if (execve(command, shell->cmds->args, envv) == -1)
 		cmd_not_found(shell);
+}
+
+char *make_command(t_shell *shell)
+{
+	char *command;
+
+	command = NULL;
+	if (!shell)
+		fatal("Error (make_command)");
+	if (check_bin_cmd(shell) == TRUE)
+		command = make_bin_cmd(shell);
+	else if (check_bin_path(shell) == TRUE)
+		command = ft_strdup(shell->cmds->args[0]);
+	else
+		command = ft_strdup(shell->cmds->args[0]);
+	return (command);
+}
+
+/*
+** sets up the fds for redirection
+** before command execution
+*/
+
+void 			modify_fds()
+{
+	mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+
+	int fd1 = open("textfile.txt", O_CREAT | O_RDWR | O_TRUNC, mode);
+    dup2(fd1, STDOUT_FILENO); 
+	close(fd1);
+}
+
+/*
+** will discern the redirections 
+** and then take everything not relevant for the execve
+** function out of the commands array
+*/
+
+void 			discern_redirs(t_shell *shell)
+{
+	int i;
+
+	i = 0;
+	
+	while (shell->cmds->args[i])
+	{
+		ft_putendl(shell->cmds->args[i]);
+		i++; // TESTING
+	}
+	ft_putendl("EXITING PROGRAM IN (discern_redirs)");
+	exit(-1);
 }
 
 
@@ -83,16 +132,14 @@ int				sh_launch(char **envv, t_shell *shell)
 
 	command = NULL;
 	pid = fork();
-	if (check_bin_cmd(shell) == TRUE)
-		command = make_bin_cmd(shell);
-	else if (check_bin_path(shell) == TRUE)
-		command = ft_strdup(shell->cmds->args[0]);
-	else
-		command = ft_strdup(shell->cmds->args[0]);
+	command = make_command(shell);
 	if (pid == 0)
+	{
+		modify_fds();
 		safe_exec(shell, command, envv);
+	}
 	else if (pid < 0)
-		fatal("sh_launch ERR:002");
+		fatal("Child procress could not be created (sh_launch)");
 	else
 	{
 		wpid = waitpid(pid, &status, WUNTRACED);

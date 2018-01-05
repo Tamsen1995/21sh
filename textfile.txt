@@ -1,0 +1,10 @@
+21sh
+21sh.dSYM
+Makefile
+auteur
+blerg
+ft_sh.dSYM
+includes
+libft
+src
+textfile.txt

@@ -160,8 +160,7 @@ t_cursor			*get_first_c(t_line *line);
 */
 
 void		redirections(t_shell *shell);
-void		exec_redirections(t_shell *shell);
-void 		exec_redirections2(t_shell *shell); // TESTING
+
 /*
 ** command line history functions:
 */
