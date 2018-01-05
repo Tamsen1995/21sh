@@ -52,10 +52,7 @@ void			cmd_not_found(t_shell *shell)
 	ft_putstr("tamshell: command not found: ");
 	ft_putendl(shell->cmds->args[0]);
 	free_twod_arr(shell->cmds->args);
-
-	free_shell(shell);  // in the case of two commands, and one not being found, 
-	// there is a pointer which is being freed which shouldn't
-	
+	free_shell(shell);
 	exit(-1);
 }
 
@@ -83,42 +80,6 @@ char *make_command(t_shell *shell)
 }
 
 /*
-** sets up the fds for redirection
-** before command execution
-*/
-
-void 			modify_fds()
-{
-	mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
-
-	int fd1 = open("textfile.txt", O_CREAT | O_RDWR | O_TRUNC, mode);
-    dup2(fd1, STDOUT_FILENO); 
-	close(fd1);
-}
-
-/*
-** will discern the redirections 
-** and then take everything not relevant for the execve
-** function out of the commands array
-*/
-
-void 			discern_redirs(t_shell *shell)
-{
-	int i;
-
-	i = 0;
-	
-	while (shell->cmds->args[i])
-	{
-		ft_putendl(shell->cmds->args[i]);
-		i++; // TESTING
-	}
-	ft_putendl("EXITING PROGRAM IN (discern_redirs)");
-	exit(-1);
-}
-
-
-/*
 ** if the pid is a zero, we assume it to be
 ** the child process
 */
@@ -135,7 +96,7 @@ int				sh_launch(char **envv, t_shell *shell)
 	command = make_command(shell);
 	if (pid == 0)
 	{
-		modify_fds();
+		modify_fds(); // WIP
 		safe_exec(shell, command, envv);
 	}
 	else if (pid < 0)

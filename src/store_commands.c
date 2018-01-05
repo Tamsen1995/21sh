@@ -13,10 +13,8 @@ t_cmds      *ft_new_cmd(char *command)
     new->next = NULL;
     new->prev = NULL;
     new->args = NULL;
+    new->fds = NULL;
     new->args = ft_strsplit(command, ' ');
-    new->in_fd = 0;
-    new->out_fd = 1;
-    new->err_fd = 2;
     return (new);
 }
 

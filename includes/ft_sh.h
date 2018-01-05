@@ -93,6 +93,21 @@ typedef struct			s_line
 }						t_line;
 
 /*
+** a linked list of file descriptors for each command.
+** each command can have several files to be outputted to
+*/
+
+typedef struct		s_cmd_fds
+{
+	struct s_cmd_fds 	*next;
+	struct s_cmd_fds 	*prev;
+	int					out_fd;
+	int					in_fd;
+	int					err_fd;
+
+}					t_cmd_fd;
+
+/*
 ** a  linked list of commands here
 ** each command is a 2d array
 ** storing the command itself as well as its
@@ -101,12 +116,12 @@ typedef struct			s_line
 
 typedef struct		s_cmds
 {
-	struct s_cmds	*next;
-	struct s_cmds	*prev;
-	char 			**args;
-	int				out_fd;
-	int				in_fd;
-	int				err_fd;
+	struct s_cmd_fds 	*fds;
+	struct s_cmds		*next;
+	struct s_cmds		*prev;
+	char 				**args;
+
+
 }					t_cmds;
 
 /*
@@ -159,7 +174,7 @@ t_cursor			*get_first_c(t_line *line);
 ** redirection functions
 */
 
-void		redirections(t_shell *shell);
+void 			modify_fds();
 
 /*
 ** command line history functions:

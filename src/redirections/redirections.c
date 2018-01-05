@@ -12,60 +12,44 @@ void        reset_redirects()
 }
 
 /*
-** parses the command line which will include redirections (>, <, &)
-** and then assigns new fds to the list element, 
-** or leaves them at their standard value
+** will discern the redirections 
+** and then take everything not relevant for the execve
+** function out of the commands array
 */
 
-void        discern_new_fds(t_shell *shell)
+void 			discern_redirs(t_shell *shell)
 {
-    if (!shell)
-        fatal("Error (discern_new_fds)");
+	int i;
 
-    // parse_cmd_line();     
-    // get fds of all the files  in the command list
-    // have an array returned
-
-    // assign_cmd_fds(); // 
-    // discern whether these fds are so supposed to be taken from or outputted to, by checking the redirection symbol before
-    // assign the fds to the appropiate int arrays in the cmds struct according to the redirection symbols before them. 
-
-    // if one of the std fds is to be set to another one, 
-    // then one has to check if the fd doesn't already belong to something else
-    // if so make the fd to be modified to that fd as well
-
-    // since several fds can be inputted from or outputted to, instead of merely an int per command, I'll need an array of ints
+	i = 0;
+	
+	while (shell->cmds->args[i])
+	{
+		ft_putendl(shell->cmds->args[i]);
+		i++; // TESTING
+	}
+	ft_putendl("EXITING PROGRAM IN (discern_redirs)");
+	exit(-1);
 }
 
 
 /*
-** the highest level of abstraction for
-** the redirection module
+** sets up the fds for redirection
+** before command execution
 */
 
-
-void        redirections(t_shell *shell)
+void 			modify_fds()
 {
-    // TODO : implement
-    if (!shell)
-        fatal("Error (redirections)");
-    
-    
-    // discern the new fds for the individual commands
-    //  discern_new_fds(shell);
+	mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
 
-    // if you want to use stdin later in your program again, 
-    // then you'll have to save the stdin in a variable.
-    // dup(0); will return this ?
-    
-    // find out the file descriptors of all files in in the command struct
-
+	int fd1 = open("textfile.txt", O_CREAT | O_RDWR | O_TRUNC, mode);
+    dup2(fd1, STDOUT_FILENO); 
+	close(fd1);
 }
 
 
 
 // bash processes redirections from left to right 
-
 
 // pointing the stdout towards a file with >file and then the stderr towards the stdout 2>&1
 // will result in both being pointed towards the file.
