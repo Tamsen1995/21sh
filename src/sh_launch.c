@@ -59,8 +59,11 @@ void			cmd_not_found(t_shell *shell)
 	exit(-1);
 }
 
+
 void safe_exec(t_shell *shell , char *command, char **envv)
 {
+
+	//exec_redirections(shell); // TODO : research and implement
 	if (execve(command, shell->cmds->args, envv) == -1)
 		cmd_not_found(shell);
 }
@@ -70,7 +73,7 @@ void safe_exec(t_shell *shell , char *command, char **envv)
 ** if the pid is a zero, we assume it to be
 ** the child process
 */
-
+ 
 int				sh_launch(char **envv, t_shell *shell)
 {
 	pid_t		pid;

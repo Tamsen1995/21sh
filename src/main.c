@@ -82,7 +82,7 @@ void        sh_loop(t_shell *shell, char **envv) // WIP
         while (shell->cmds)
         {
             shell->argc = count_args(shell->cmds->args);
-            // redirections(shell); // TODO : research and implement
+           //  redirections(shell); // TODO : research and implement
             status = sh_execute(envv, shell);
             // TODO : reset all redirections here reset_redirects
             shell->cmds = shell->cmds->next;

@@ -104,6 +104,9 @@ typedef struct		s_cmds
 	struct s_cmds	*next;
 	struct s_cmds	*prev;
 	char 			**args;
+	int				out_fd;
+	int				in_fd;
+	int				err_fd;
 }					t_cmds;
 
 /*
@@ -156,8 +159,9 @@ t_cursor			*get_first_c(t_line *line);
 ** redirection functions
 */
 
-void exec_redirections(t_shell *shell);
-
+void		redirections(t_shell *shell);
+void		exec_redirections(t_shell *shell);
+void 		exec_redirections2(t_shell *shell); // TESTING
 /*
 ** command line history functions:
 */

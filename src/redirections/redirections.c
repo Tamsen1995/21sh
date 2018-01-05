@@ -6,10 +6,49 @@
 ** the execution of each command
 */
 
-void reset_redirects()
+void        reset_redirects()
 {
     // TODO : implement
 }
+
+
+/*
+** parses the command line which will include redirections (>, <, &)
+** and then assigns new fds to the list element, 
+** or leaves them at their standard value
+*/
+
+void        discern_new_fds(t_shell *shell)
+{
+    if (!shell)
+        fatal("Error (discern_new_fds)");
+
+
+    // parse_cmd_line();     
+    // get fds of all the files  in the command list
+    // have an array returned
+
+    // assign_cmd_fds(); // 
+    // discern whether these fds are so supposed to be taken from or outputted to, by checking the redirection symbol before
+    // assign the fds to the appropiate int arrays in the cmds struct according to the redirection symbols before them. 
+
+
+
+
+    // if one of the std fds is to be set to another one, 
+    // then one has to check if the fd doesn't already belong to something else
+    // if so make the fd to be modified to that fd as well
+
+
+
+
+    // since several fds can be inputted from or outputted to, instead of merely an int per command, I'll need an array of ints
+
+
+
+
+}
+
 
 /*
 ** the highest level of abstraction for
@@ -17,10 +56,17 @@ void reset_redirects()
 */
 
 
-void redirections(t_shell *shell)
+void        redirections(t_shell *shell)
 {
     // TODO : implement
+    if (!shell)
+        fatal("Error (redirections)");
+    
+    
+    // discern the new fds for the individual commands
+  //  discern_new_fds(shell);
 
+    exec_redirections(shell);
     // find out the file descriptors of all files in in the command struct
 
 }
