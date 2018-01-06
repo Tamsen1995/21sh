@@ -175,6 +175,7 @@ t_cursor			*get_first_c(t_line *line);
 */
 
 void 			modify_fds();
+void 			discern_redirs(t_shell *shell);
 
 /*
 ** command line history functions:

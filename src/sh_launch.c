@@ -56,6 +56,10 @@ void			cmd_not_found(t_shell *shell)
 	exit(-1);
 }
 
+/*
+** a safe wrapper around
+** execve
+*/
 
 void safe_exec(t_shell *shell , char *command, char **envv)
 {
@@ -79,21 +83,14 @@ char *make_command(t_shell *shell)
 	return (command);
 }
 
-/*
-** if the pid is a zero, we assume it to be
-** the child process
-*/
- 
-int				sh_launch(char **envv, t_shell *shell)
+
+void			fork_and_exec(t_shell *shell, char *command, char **envv)
 {
 	pid_t		pid;
 	pid_t		wpid;
 	int			status;
-	char		*command;
 
-	command = NULL;
 	pid = fork();
-	command = make_command(shell);
 	if (pid == 0)
 	{
 		modify_fds(); // WIP
@@ -107,6 +104,21 @@ int				sh_launch(char **envv, t_shell *shell)
 		while (!WIFEXITED(status) && !WIFSIGNALED(status))
 			wpid = waitpid(pid, &status, WUNTRACED);
 	}
+}
+
+/*
+** if the pid is a zero, we assume it to be
+** the child process
+*/
+ 
+int				sh_launch(char **envv, t_shell *shell)
+{
+	char		*command;
+
+	command = NULL;
+	command = make_command(shell);
+	discern_redirs(shell); // WIP
+	fork_and_exec(shell, command, envv);
 	ft_strfree(command);
 	return (1);
 }
