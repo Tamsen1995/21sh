@@ -103,9 +103,10 @@ typedef struct			s_line
 
 typedef struct		s_cmds
 {
-	struct s_in_fd		*in_fd;
-	struct s_out_fd		*out_fd;
-	struct s_err_fd		*err_fd;
+	struct s_fds		*in_fds;
+	struct s_fds		*out_fds;
+	struct s_fds		*err_fds;
+
 	
 	struct s_cmds		*next;
 	struct s_cmds		*prev;

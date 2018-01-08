@@ -4,10 +4,10 @@
 #include <unistd.h>
 
 
-typedef struct		s_in_fd
+typedef struct		s_fds
 {
-	struct s_in_fd		*next;
+	struct s_fds		*next;
     int                 fd;
-}					t_in_fd;
+}					t_fds;
 
 #endif

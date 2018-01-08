@@ -13,7 +13,9 @@ t_cmds      *ft_new_cmd(char *command)
     new->next = NULL;
     new->prev = NULL;
     new->args = NULL;
-    new->fds = NULL;
+	new->in_fds = NULL;
+	new->out_fds = NULL;
+	new->err_fds = NULL;
     new->args = ft_strsplit(command, ' ');
     return (new);
 }
