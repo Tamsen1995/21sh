@@ -1,31 +1,32 @@
 #include "../../includes/ft_sh.h"
 
 
+
+T_BOOL			is_input_redir(char *redir, char *file)
+{
+
+	if (ft_strcmp(redir , "<") == 0 && access(file, W_OK) == 0)
+		return (TRUE);
+	return (FALSE);
+}
+
 /*
 ** will discern the redirections 
-** and then take everything not relevant for the execve
-** function out of the commands array
 */
 
 void 			discern_redirs(t_shell *shell)
 {
-	int i;
-    char **cmd_args;
+	int		i;
+    char	**cmd_args;
 
 	i = 0;
     cmd_args = shell->cmds->args;
-//////// WIP
-	while (cmd_args[i])
+	while (cmd_args[i + 1] && cmd_args[i])
 	{
+		if (is_input_redir(cmd_args[i], cmd_args[i + 1]))
 
-        //  if there is a redirection of output, AND the file it is pointing to exists and can be written towards
-		if (ft_strcmp(cmd_args[i] , ">") == 0 && access(cmd_args[i + 1], W_OK) == 0)
-            ft_putendl("File exists and can be written to"); // TESTING
-		i++; // TESTING
+		i++;
 	}
-
-///////////
-
 	ft_putendl("EXITING PROGRAM IN (discern_redirs)");
 	exit(-1);
 }
