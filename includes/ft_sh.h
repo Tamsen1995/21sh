@@ -106,8 +106,6 @@ typedef struct		s_cmds
 	struct s_fds		*in_fds;
 	struct s_fds		*out_fds;
 	struct s_fds		*err_fds;
-
-	
 	struct s_cmds		*next;
 	struct s_cmds		*prev;
 	char 				**args;

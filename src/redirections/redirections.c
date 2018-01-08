@@ -83,7 +83,7 @@ void 			discern_redirs(t_shell *shell)
 
 	}
 
-	
+	// TODO : in_fds list here to test
 
 	ft_putendl("EXITING PROGRAM IN (discern_redirs)");
 	exit(-1);
