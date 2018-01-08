@@ -40,18 +40,25 @@ void 			discern_redirs(t_shell *shell)
 {
 	int		i;
     char	**cmd_args;
-	int		fd_arr[3];
 
 	i = 0;
+	if (!shell || !shell->cmds || !shell->cmds->args)
+		fatal("Error: (discern_redirs)");
     cmd_args = shell->cmds->args;
 	while (cmd_args[i + 1] && cmd_args[i])
 	{
-		reset_fd_arr(fd_arr);
-		if (is_input_redir(cmd_args[i], cmd_args[i + 1]))
-			fd_arr[0] = get_fd(cmd_args[i + 1]);
-		i++;
-	}
 	
+
+
+		if (is_input_redir(cmd_args[i], cmd_args[i + 1]))
+			// add input fd into the input fd linked list
+		
+		i++;
+
+	}
+
+	
+
 
 	ft_putendl("EXITING PROGRAM IN (discern_redirs)");
 	exit(-1);

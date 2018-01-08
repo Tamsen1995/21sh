@@ -15,6 +15,8 @@
 #include <stdio.h>
 #include "../includes/libft.h"
 #include "../includes/ft_ls.h"
+#include "../includes/redirections.h"
+
 
 # define K_RETURN		"\xa\x0\x0\x0\x0\x0"
 # define K_BACKSPACE	"\x7f\x0\x0\x0\x0\x0"
@@ -93,21 +95,6 @@ typedef struct			s_line
 }						t_line;
 
 /*
-** a linked list of file descriptors for each command.
-** each command can have several files to be outputted to
-*/
-
-typedef struct		s_cmd_fds
-{
-	struct s_cmd_fds 	*next;
-	struct s_cmd_fds 	*prev;
-	int					out_fd;
-	int					in_fd;
-	int					err_fd;
-
-}					t_cmd_fd;
-
-/*
 ** a  linked list of commands here
 ** each command is a 2d array
 ** storing the command itself as well as its
@@ -116,7 +103,10 @@ typedef struct		s_cmd_fds
 
 typedef struct		s_cmds
 {
-	struct s_cmd_fds 	*fds;
+	struct s_in_fd		*in_fd;
+	struct s_out_fd		*out_fd;
+	struct s_err_fd		*err_fd;
+	
 	struct s_cmds		*next;
 	struct s_cmds		*prev;
 	char 				**args;

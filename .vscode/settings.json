@@ -4,6 +4,7 @@
         "ft_ls.h": "c",
         "termcap.h": "c",
         "libft.h": "c",
-        "param.h": "c"
+        "param.h": "c",
+        "redirections.h": "c"
     }
 }
