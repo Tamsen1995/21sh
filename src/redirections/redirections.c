@@ -14,8 +14,6 @@ enum e_redir	redir_type(char *redir, char *file)
 	return (NO_REDIRECTION);
 }
 
-
-
 /*
 ** will discern the redirections 
 */
@@ -40,9 +38,6 @@ void 			discern_redirs(t_shell *shell)
 		i++;
 
 	}
-
-	ft_putendl("EXITING PROGRAM IN (discern_redirs)");
-	exit(-1);
 }
 
 

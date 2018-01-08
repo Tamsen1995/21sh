@@ -13,6 +13,7 @@ SRC = src/main.c \
 	src/free_shell.c \
 	src/store_commands.c \
 	src/check_bin_path.c \
+	src/error_checks.c \
 	src/builtins/builtin_env.c \
 	src/builtins/builtin_exit.c \
 	src/builtins/builtin_echo.c \

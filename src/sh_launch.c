@@ -83,7 +83,6 @@ char *make_command(t_shell *shell)
 	return (command);
 }
 
-
 void			fork_and_exec(t_shell *shell, char *command, char **envv)
 {
 	pid_t		pid;
@@ -93,7 +92,6 @@ void			fork_and_exec(t_shell *shell, char *command, char **envv)
 	pid = fork();
 	if (pid == 0)
 	{
-		modify_fds(); // WIP
 		safe_exec(shell, command, envv);
 	}
 	else if (pid < 0)
@@ -117,7 +115,7 @@ int				sh_launch(char **envv, t_shell *shell)
 
 	command = NULL;
 	command = make_command(shell);
-	discern_redirs(shell); // WIP
+	discern_redirs(shell);
 	fork_and_exec(shell, command, envv);
 	ft_strfree(command);
 	return (1);
