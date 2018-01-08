@@ -33,6 +33,7 @@
 # define FALSE 0
 
 
+
 /*
 ** history of the commands
 ** given in the past for the arrow up keys
@@ -163,20 +164,20 @@ t_cursor			*get_first_c(t_line *line);
 ** redirection functions
 */
 
-void 			modify_fds();
-void 			discern_redirs(t_shell *shell);
+void 				discern_redirs(t_shell *shell);
+void 				modify_fds();
 
 /*
 ** command line history functions:
 */
 
-void        check_hist(t_line *line);
-void    	check_hist_down(t_line *line);
-void        add_history(t_hist **history, char *buf);
-t_buf      	*replace_buffer(char *string);
-void        set_cursor_internal(t_line *line);
-void		init_hist_index(t_hist *history);
-int         get_last_index(t_hist *history);
+void        		check_hist(t_line *line);
+void    			check_hist_down(t_line *line);
+void        		add_history(t_hist **history, char *buf);
+t_buf      			*replace_buffer(char *string);
+void        		set_cursor_internal(t_line *line);
+void				init_hist_index(t_hist *history);
+int         		get_last_index(t_hist *history);
 /*
 ** line buffer/edition functions:
 */
