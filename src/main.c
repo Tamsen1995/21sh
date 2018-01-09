@@ -71,6 +71,16 @@ void        sh_loop(t_shell *shell, char **envv) // WIP
     shell->history = history;
 }
 
+/*
+** safe wrapper around term description
+*/
+
+void        get_term_descr(char *buf, char *term_name)
+{
+    if (tgetent(buf, term_name) == -1)
+        fatal("Could not get terminal description (main)");
+}
+
 
 /*
 ** Initiating the shell
@@ -87,8 +97,7 @@ int         main(int ac, char **av, char **envv)
     shell = NULL;
     launch_error_check(envv);
     term_name = ft_secure_getenv("TERM");
-    if (tgetent(buf, term_name) == -1)
-        fatal("Could not get terminal description (main)");
+    get_term_descr(buf, term_name);
     shell = init_shell(ac, av, envv);
     sh_loop(shell, envv);
     free_shell(shell);

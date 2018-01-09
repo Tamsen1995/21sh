@@ -6,5 +6,5 @@
 
 enum e_tokentype	tok_type()
 {
-
+    
 }

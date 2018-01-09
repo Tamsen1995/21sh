@@ -91,9 +91,7 @@ void			fork_and_exec(t_shell *shell, char *command, char **envv)
 
 	pid = fork();
 	if (pid == 0)
-	{
 		safe_exec(shell, command, envv);
-	}
 	else if (pid < 0)
 		fatal("Child procress could not be created (sh_launch)");
 	else
@@ -115,7 +113,6 @@ int				sh_launch(char **envv, t_shell *shell)
 
 	command = NULL;
 	command = make_command(shell);
-	discern_redirs(shell);
 	fork_and_exec(shell, command, envv);
 	ft_strfree(command);
 	return (1);

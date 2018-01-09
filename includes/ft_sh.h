@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include "../includes/libft.h"
 #include "../includes/ft_ls.h"
-#include "../includes/redirections.h"
+#include "../includes/parser.h"
 
 
 # define K_RETURN		"\xa\x0\x0\x0\x0\x0"
@@ -31,22 +31,6 @@
 # define KEY_BUF_SIZE	6
 # define TRUE 1
 # define FALSE 0
-
-
-/*
-** enum
-*/
-
-enum					e_tokentype
-{
-	SEMI_COL,
-	ND_OR,
-	PIPE,
-	INPUT_RE,
-	OUTPUT_RE,
-	ERR_RE,
-	TXT_CMD
-};
 
 
 /*
@@ -174,15 +158,6 @@ void         		cursor_movement(char *key, t_line *line);
 t_cursor    	   	*init_cursor(int win_size);
 T_BOOL        		term_action(char *buf);
 t_cursor			*get_first_c(t_line *line);
-
-
-
-/*
-** redirection functions
-*/
-
-void 				discern_redirs(t_shell *shell);
-void 				modify_fds();
 
 /*
 ** command line history functions:
