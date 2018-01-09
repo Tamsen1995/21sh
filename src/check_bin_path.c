@@ -22,6 +22,8 @@ T_BOOL        check_dir_paths(char *dir_path, char *file_path)
     if (!dir_path || !file_path)
         fatal("Error in (check_dir_paths)");
     dir = safe_opendir(dir_path);
+    if (!dir)
+        return (FALSE);
     while ((ent = readdir(dir)))
     {
         cmpd_path = make_file_path(dir_path, ent->d_name);

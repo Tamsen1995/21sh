@@ -40,6 +40,8 @@ T_BOOL      iter_builtin_bin_paths(char *bin_dir, t_shell *shell)
     ent = NULL;
     file_path = NULL;
     dir = safe_opendir(bin_dir);
+    if (!dir)
+        return (FALSE);
     while ((ent = readdir(dir)))
     {
         file_path = make_file_path(bin_dir, ent->d_name);
