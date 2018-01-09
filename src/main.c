@@ -1,24 +1,5 @@
 #include "../includes/ft_sh.h"
 
-/*
-** A testing function to test if the previous pointer was properly implemented
-*/
-
-void        testing_prev(t_env *env)
-{
-    t_env *tmp;
-
-    tmp = env;
-    while (tmp->next)
-        tmp = tmp->next;
-    while (tmp->prev)
-    {
-        ft_putendl(tmp->name);
-        tmp = tmp->prev;
-    }
-}
-
-
 int         count_args(char **args)
 {
     int argc;
@@ -90,6 +71,7 @@ void        sh_loop(t_shell *shell, char **envv) // WIP
     shell->history = history;
 }
 
+
 /*
 ** Initiating the shell
 ** then re-directing to the
@@ -103,6 +85,7 @@ int         main(int ac, char **av, char **envv)
     char        buf[MAX_BUF_SIZE];
 
     shell = NULL;
+    launch_error_check(envv);
     term_name = ft_secure_getenv("TERM");
     if (tgetent(buf, term_name) == -1)
         fatal("Could not get terminal description (main)");

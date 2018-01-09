@@ -15,6 +15,8 @@
 #include <stdio.h>
 #include "../includes/libft.h"
 #include "../includes/ft_ls.h"
+#include "../includes/redirections.h"
+
 
 # define K_RETURN		"\xa\x0\x0\x0\x0\x0"
 # define K_BACKSPACE	"\x7f\x0\x0\x0\x0\x0"
@@ -29,6 +31,7 @@
 # define KEY_BUF_SIZE	6
 # define TRUE 1
 # define FALSE 0
+
 
 
 /*
@@ -101,9 +104,14 @@ typedef struct			s_line
 
 typedef struct		s_cmds
 {
-	struct s_cmds	*next;
-	struct s_cmds	*prev;
-	char 			**args;
+	struct s_fds		*in_fds;
+	struct s_fds		*out_fds;
+	struct s_fds		*err_fds;
+	struct s_cmds		*next;
+	struct s_cmds		*prev;
+	char 				**args;
+
+
 }					t_cmds;
 
 /*
@@ -132,6 +140,8 @@ typedef struct		s_shell
 
 }					t_shell;
 
+void        launch_error_check(char **envv);
+
 /*
 ** Testing functions
 */
@@ -151,21 +161,30 @@ T_BOOL        		term_action(char *buf);
 t_cursor			*get_first_c(t_line *line);
 
 
+
+/*
+** redirection functions
+*/
+
+void 				discern_redirs(t_shell *shell);
+void 				modify_fds();
+
 /*
 ** command line history functions:
 */
 
-void        check_hist(t_line *line);
-void    	check_hist_down(t_line *line);
-void        add_history(t_hist **history, char *buf);
-t_buf      	*replace_buffer(char *string);
-void        set_cursor_internal(t_line *line);
-void		init_hist_index(t_hist *history);
-int         get_last_index(t_hist *history);
+void        		check_hist(t_line *line);
+void    			check_hist_down(t_line *line);
+void        		add_history(t_hist **history, char *buf);
+t_buf      			*replace_buffer(char *string);
+void        		set_cursor_internal(t_line *line);
+void				init_hist_index(t_hist *history);
+int         		get_last_index(t_hist *history);
 /*
 ** line buffer/edition functions:
 */
 
+t_line     		    *init_line(t_hist *history);
 void				ft_add_buf(t_buf **begin_list, char *key);
 char     		   	*stringify_buffer(t_buf  *buffer);
 int					list_len(t_buf *buffer);

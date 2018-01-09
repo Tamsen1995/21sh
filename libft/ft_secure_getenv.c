@@ -11,6 +11,6 @@ char            *ft_secure_getenv(const char *name)
 
     ret = NULL;
     if ((ret = getenv(name)) == NULL)
-        fatal("Could not get env_var in (ft_secure_getenv)");
+        fatal("fatal environment error (ft_secure_getenv)");
     return (ret);
 }

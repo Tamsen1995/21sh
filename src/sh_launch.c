@@ -52,44 +52,71 @@ void			cmd_not_found(t_shell *shell)
 	ft_putstr("tamshell: command not found: ");
 	ft_putendl(shell->cmds->args[0]);
 	free_twod_arr(shell->cmds->args);
-
-	free_shell(shell);  // in the case of two commands, and one not being found, 
-	// there is a pointer which is being freed which shouldn't
-	
+	free_shell(shell);
 	exit(-1);
 }
 
 /*
-** if the pid is a zero, we assume it to be
-** the child process
+** a safe wrapper around
+** execve
 */
 
-int				sh_launch(char **envv, t_shell *shell)
+void safe_exec(t_shell *shell , char *command, char **envv)
 {
-	pid_t		pid;
-	pid_t		wpid;
-	int			status;
-	char		*command;
+	if (execve(command, shell->cmds->args, envv) == -1)
+		cmd_not_found(shell);
+}
+
+char *make_command(t_shell *shell)
+{
+	char *command;
 
 	command = NULL;
-	pid = fork();
+	if (!shell)
+		fatal("Error (make_command)");
 	if (check_bin_cmd(shell) == TRUE)
 		command = make_bin_cmd(shell);
 	else if (check_bin_path(shell) == TRUE)
 		command = ft_strdup(shell->cmds->args[0]);
+	else
+		command = ft_strdup(shell->cmds->args[0]);
+	return (command);
+}
+
+void			fork_and_exec(t_shell *shell, char *command, char **envv)
+{
+	pid_t		pid;
+	pid_t		wpid;
+	int			status;
+
+	pid = fork();
 	if (pid == 0)
 	{
-		if (execve(command, shell->cmds->args, envv) == -1)
-			cmd_not_found(shell);
+		safe_exec(shell, command, envv);
 	}
 	else if (pid < 0)
-		fatal("sh_launch ERR:002");
+		fatal("Child procress could not be created (sh_launch)");
 	else
 	{
 		wpid = waitpid(pid, &status, WUNTRACED);
 		while (!WIFEXITED(status) && !WIFSIGNALED(status))
 			wpid = waitpid(pid, &status, WUNTRACED);
 	}
+}
+
+/*
+** if the pid is a zero, we assume it to be
+** the child process
+*/
+ 
+int				sh_launch(char **envv, t_shell *shell)
+{
+	char		*command;
+
+	command = NULL;
+	command = make_command(shell);
+	discern_redirs(shell);
+	fork_and_exec(shell, command, envv);
 	ft_strfree(command);
 	return (1);
 }

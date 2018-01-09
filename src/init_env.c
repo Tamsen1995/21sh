@@ -1,6 +1,5 @@
 #include "../includes/ft_sh.h"
 
-// allocates a new environment variables list element
 t_env       *ft_new_env(char *name, char *value)
 {
     t_env *new;
@@ -14,8 +13,11 @@ t_env       *ft_new_env(char *name, char *value)
     return (new);
 }
 
-// iterates to the end of the env list
-// and then adds the value to it
+/*
+** iterates to the end of the env list
+** and then adds the value to it
+*/
+
 void		ft_putenv(t_env **begin_list, char *name, char *value)
 {
     t_env *tmp;
@@ -36,20 +38,37 @@ void		ft_putenv(t_env **begin_list, char *name, char *value)
     }
 }
 
-// Takes in the environmnet vars
-// and allocates a list with all the env vars in it
-t_env       *init_env(char **envv)
+t_env           *get_first_env_elem(char **envv)
 {
-    
     t_env *env_list;    
-    char **env_var; // each individual env var split into name and value
-    int i;
+    char **env_var;
 
-    i = 1;
-    env_var = NULL;
+    env_list = NULL;
+    if (!envv)
+        fatal("No environment present (get_first_env_elem)");
     env_var = ft_strsplit(envv[0], '=');
     env_list = ft_new_env(env_var[0], env_var[1]);
     free_twod_arr(env_var);
+    return (env_list);
+}
+
+/*
+** Takes in the environmnet vars
+** and allocates a list with all the env vars in it
+*/
+
+t_env       *init_env(char **envv)
+{
+    
+    t_env   *env_list;    
+    char    **env_var;
+    int     i;
+
+    i = 1;
+    env_var = NULL;
+    if (!envv)
+        fatal("No environment present (init_env)");
+    env_list = get_first_env_elem(envv);
     while (envv[i])
     {
         env_var = ft_strsplit(envv[i], '=');
