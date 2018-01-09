@@ -33,6 +33,21 @@
 # define FALSE 0
 
 
+/*
+** enum
+*/
+
+enum					e_tokentype
+{
+	SEMI_COL,
+	ND_OR,
+	PIPE,
+	INPUT_RE,
+	OUTPUT_RE,
+	ERR_RE,
+	TXT_CMD
+};
+
 
 /*
 ** history of the commands
