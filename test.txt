@@ -1,3 +1,6 @@
+git add -A
+git commit -m "[UPD] implemented the lexer structures"
+git push origin lexertbui
 CC = gcc
 FLAGS = -g -Wall -Wextra -Werror -I includes
 LIBFT = libft/libft.a
@@ -15,7 +18,6 @@ SRC = src/main.c \
 	src/check_bin_path.c \
 	src/error_checks.c \
 	src/parser/parser.c \
-	src/parser/lexer.c \
 	src/builtins/builtin_env.c \
 	src/builtins/builtin_exit.c \
 	src/builtins/builtin_echo.c \

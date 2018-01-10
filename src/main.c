@@ -63,6 +63,11 @@ void        sh_loop(t_shell *shell, char **envv) // WIP
         while (shell->cmds)
         {
             shell->argc = count_args(shell->cmds->args);
+
+
+            parser(shell);
+            // TODO : implement parser / lexer / AST builder
+
             status = sh_execute(envv, shell);
             shell->cmds = shell->cmds->next;
         }
