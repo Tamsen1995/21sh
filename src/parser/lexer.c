@@ -54,6 +54,7 @@ void		ft_add_token(t_tokens **begin_list, char *token)
         while (tmp->next)
             tmp = tmp->next;
         tmp->next = ft_new_tok(token);
+        tmp->next->prev = tmp;
     }
 }
 

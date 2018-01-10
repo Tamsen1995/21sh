@@ -155,6 +155,7 @@ typedef struct		s_fds
 typedef struct			s_tokens
 {
 	struct s_tokens		*next;
+	struct s_tokens		*prev;
 	enum e_tokentype	tok_type;
 	char				*token;
 }						t_tokens;
