@@ -162,16 +162,16 @@ typedef struct			s_tokens
 
 typedef struct			s_ast_node
 {
-	char			*elem;
-	int				type;
-	int				stdin;
-	int				stdout;
-	int				stderr;
-	int				fd_from;
-	int				fd_to;
-	char			**cmd;
-	struct s_node	*left;
-	struct s_node	*right;
+	char				*elem;
+	int					type;
+	int					stdin;
+	int					stdout;
+	int					stderr;
+	int					fd_from;
+	int					fd_to;
+	char				**cmd;
+	struct s_ast_node	*left;
+	struct s_ast_node	*right;
 }						t_ast_node;
 
 

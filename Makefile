@@ -15,6 +15,8 @@ SRC = src/main.c \
 	src/check_bin_path.c \
 	src/error_checks.c \
 	src/parser/parser.c \
+	src/parser/parser_tree.c \
+	src/parser/parser_operator.c \
 	src/parser/lexer.c \
 	src/builtins/builtin_env.c \
 	src/builtins/builtin_exit.c \
