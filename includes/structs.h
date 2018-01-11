@@ -26,14 +26,14 @@ enum					e_redir
 
 enum					e_tokentype
 {
-	ND_OR,
-	PIPE,
-	INPUT_RE,
-	OUTPUT_RE,
-	ERR_RE,
-	TXT_CMD,
-    CHAR_NULL,
-    CHAR_GENERAL
+	ND_OR, // 3
+	PIPE, // 2
+	INPUT_RE, // 3
+	OUTPUT_RE, // 3
+	ERR_RE, // 3
+	TXT_CMD, // 4
+    CHAR_NULL, 
+    CHAR_GENERAL // 4
 };
 
 

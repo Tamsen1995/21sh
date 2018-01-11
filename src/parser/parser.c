@@ -26,30 +26,52 @@ static t_ast_node	*ft_create_node(void)
 
 int					ft_find_operator(t_tokens *tokens) // WIP
 {
+	t_tokens *tmp;
+
+	tmp = NULL;
 	if (!tokens)
 		fatal("Error in : ft_find_operator");
 
-	return (1);
+	while (tmp)
+	{
+		//  returns a non zero value upon finding 
+		// an operator
+
+		tmp = tmp->next;
+	}
+
+	return (0);
 }
 
 
 t_ast_node			*make_ast(t_tokens *tokens) // WIP
 {
-	t_ast_node	*tree;
+	t_ast_node	*node;
 	t_tokens *tokens_tmp;
 
-	tree = NULL;
+	node = NULL;
 	tokens_tmp = NULL;
-	tree  = ft_create_node();
+	node  = ft_create_node();
 	if (!tokens)
 		fatal("Error in : (make_tree)");
-
+	tokens_tmp = tokens;
 	if (ft_find_operator(tokens_tmp) != 0)
 	{
-		ft_putendl("call recursion");
+		tokens_tmp->prev->next = NULL;
+		node->left = make_ast(tokens_tmp->prev);
+		node->elem = ft_strdup(tokens_tmp->token);
+		node->right = make_ast(tokens_tmp->next);
+
+
+		// TODO : figure out how to free the tokens
+
 		// split the operation
 		// with a operand on the left
-		// the operand as the current node element
+		ft_putendl("call recursion");
+
+
+
+		// the operator as the current node element
 		// and the rest of the split up string as the right node
 			// call this into the recursion
 	}
@@ -58,7 +80,7 @@ t_ast_node			*make_ast(t_tokens *tokens) // WIP
 		ft_putendl("declare node and simply exit condition");
 		// simply equate this to the current node
 	}
-	return (tree);
+	return (node);
 }
 
 
