@@ -35,6 +35,7 @@ t_tokens      *ft_new_tok(char *token)
     new->token = NULL;
     new->tok_type = tok_type(token);
     new->token = ft_strdup(token);
+    new->tok_ind = 0;
     return (new);
 }
 
@@ -58,6 +59,30 @@ void		ft_add_token(t_tokens **begin_list, char *token)
     }
 }
 
+
+/*
+** (re-) declares the index count for the token list
+*/
+
+void         init_token_index(t_tokens *tokens)
+{
+    int      i;
+    t_tokens *tmp;
+
+    i = 0;
+    tmp = NULL;
+    if (!tokens)
+        fatal("Error in : (init_token_index)");
+    tmp = tokens;
+    while (tmp)
+    {
+        tmp->tok_ind = i;
+        i++;
+        tmp = tmp->next;
+    }
+
+}
+
 t_tokens     *lexer(char **cmd_line)
 {
     int         i;
@@ -72,5 +97,6 @@ t_tokens     *lexer(char **cmd_line)
         ft_add_token(&tokens, cmd_line[i]);
         i++;
     }
+    init_token_index(tokens);
     return (tokens);
 }

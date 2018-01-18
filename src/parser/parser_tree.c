@@ -35,29 +35,27 @@ t_ast_node			*make_ast(t_tokens *tokens) // WIP
 			// after the next pointer of the previous tokens list has been isolated
 	if (ft_find_operator(tokens_tmp) != 0)
 	{
-		tokens_tmp->prev->next = NULL;
 		// setting the next pointer of the previous one to NULL
 		// in order to isolate the list
 
 		node->elem = ft_strdup(tokens_tmp->token);
 		// the operator as the current node element
 
+
+		// TODO : make a copy of the first half of the list, all the way up to the
+		// recently found operator
 		node->left = make_ast(tokens);
 		// split the operation
 		// with a the lesser priority string on the left
 
 		// TODO : implement the handling of the heredoc handling
 
+
+		// TODO : make a copy of the last half of the list from the recently found operator
 		node->right = make_ast(tokens_tmp->next);
 		// and the rest of the split up string as the right node
 			// call this into the recursion
-
-
-
 		// ft_putendl("call recursion");
-
-
-
 	}
 	else
 	{

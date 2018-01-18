@@ -15,5 +15,8 @@ void				parser(t_shell *shell)
     tokens = lexer(cmd_line);
 	tree = make_ast(tokens);
 
+
+    // TODO : figure out how to print the entire tree
+
     exit (-1); // TESTING
 }
