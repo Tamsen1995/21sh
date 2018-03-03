@@ -28,8 +28,7 @@ enum					e_replacement
 	R_DUP_OUTPUT = -34
 };
 
-void		        add_fd(t_fds **begin_list, char *file_name);
-t_fds		        *ft_new_fd(char *file_name);
-int				    get_fd(char *file);
+int is_redirection(char *s);
+
 
 #endif
