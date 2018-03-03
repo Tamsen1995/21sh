@@ -1,6 +1,34 @@
 #include "../includes/ft_sh.h"
 
 /*
+** reassigns redirections inside of the cmds array
+** so that they may match with the enums 
+** defined inside the header
+*/
+
+char **assign_redirections(char **cmd)
+{
+	int i;
+	char **ret_cmd;
+
+	i = 0;
+	ret_cmd = NULL;
+	if (!cmd)
+		fatal("Error in (assign_redirections)");
+	ret_cmd = ft_alloc_twod_arr(ft_count_arr_size(cmd));
+	while (cmd[i])
+	{
+		if (ft_strcmp(cmd[i], "<") == 0)
+			ret_cmd[i] = ft_int_to_str(R_INPUT);
+		else
+			ret_cmd[i] = ft_strdup(cmd[i]);
+		i++;
+	}
+	free_twod_arr(cmd);
+	return (ret_cmd);
+}
+
+/*
 ** will redirect towards the redirections flow
 ** , the builtin flow
 ** or the normal flow
@@ -13,6 +41,7 @@ int sh_execute(char **envv, t_shell *shell)
 
     shell->cmds->args = assign_redirections(shell->cmds->args); // WIP
     exec_redirection(shell->cmds->args);                        // WIP
+
 
     exit(-1); // TESTING
 

@@ -65,6 +65,8 @@ SRC = ft_atoi.c \
 	ft_alloc_twod_arr.c \
 	ft_count_arr_size.c \
 	ft_int_to_str.c \
+	ft_print_twod_arr.c \
+	ft_arrdelone.c \
 	fatal.c \
 	make_file_path.c \
 

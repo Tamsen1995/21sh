@@ -49,6 +49,7 @@ SRC = src/main.c \
 	src/prompt/line_edition/cursor/reset_cursor.c \
 	src/prompt/line_edition/cursor/set_cursor.c \
 	src/redirection/redirection.c \
+	src/redirection/input_redirect.c \
 	src/test_helpers/print_list_test.c \
 
 OBJ = $(addsuffix .o, $(basename $(SRC)))

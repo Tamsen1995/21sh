@@ -168,6 +168,7 @@ t_cursor			*get_first_c(t_line *line);
 
 char				**assign_redirections(char **cmd);
 t_bool				exec_redirection(char **cmd);
+void				input_redirect(char **cmd);
 
 /*
 ** command line history functions:
