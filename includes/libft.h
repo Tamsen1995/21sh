@@ -103,6 +103,9 @@ typedef struct		 s_stack
 	struct s_stack 	*prev;
 }					t_stack;
 
+char				*ft_int_to_str(int nbr);
+int					ft_count_arr_size(char **array);
+char 				**ft_alloc_twod_arr(int size);
 char          		*ft_secure_getenv(const char *name);
 char				*make_file_path(char *dir_path, char *filename);
 DIR  				*safe_opendir(char *dir_path);

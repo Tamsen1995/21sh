@@ -62,6 +62,9 @@ SRC = ft_atoi.c \
 	ft_strfree.c \
 	ft_safe_opendir.c \
 	ft_secure_getenv.c \
+	ft_alloc_twod_arr.c \
+	ft_count_arr_size.c \
+	ft_int_to_str.c \
 	fatal.c \
 	make_file_path.c \
 

@@ -166,8 +166,8 @@ t_cursor			*get_first_c(t_line *line);
 ** redirection functions
 */
 
-void 				discern_redirs(t_shell *shell);
-void 				modify_fds();
+char				**assign_redirections(char **cmd);
+t_bool				exec_redirection(char **cmd);
 
 /*
 ** command line history functions:
