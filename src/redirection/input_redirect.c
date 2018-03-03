@@ -1,8 +1,8 @@
 #include "../../includes/ft_sh.h"
 
-// static void fork_that(char **cmd, int fd_left, int fd_right)
-// {
-// }
+static void fork_that(char **cmd, int fd_left, int fd_right)
+{
+}
 
 /*
 ** finds the fd to be replaced 
@@ -10,7 +10,7 @@
 ** stores these in two seperate variables (fd_left and fd_right)
 ** deletes the redirection symbol as well as the redirection file from the cmds array
 */
-void do_redirect(char **cmd, enum e_replacement c, int o_flag) //void (*do_stuff_with_cmd_and_fd_now)(char **, int, int))
+void do_redirect(char **cmd, enum e_replacement c, int o_flag, void (*do_stuff_with_cmd_and_fd_now)(char **, int, int))
 {
 	int i;
 	char *tmp;
@@ -28,15 +28,13 @@ void do_redirect(char **cmd, enum e_replacement c, int o_flag) //void (*do_stuff
 	if (tmp) // if the redirection sign is still in tmp
 	{
 		cmd = ft_arrdelone(cmd, cmd[i + 1]); // deletes the the file whose fd is now inside of fd_right
-		cmd = ft_arrdelone(cmd, tmp); 	// rid the cmds array of the redirection sign as well as 
+		cmd = ft_arrdelone(cmd, tmp);		 // rid the cmds array of the redirection sign as well as
 	}
-
-
 }
 
 // calls the do_redirect(cmd, R_INPUT, O_RDONLY, fork_that); function
 // with the R_INPUT enum, some flags for the rights of the
 void input_redirect(char **cmd)
 {
-	do_redirect(cmd, R_INPUT, O_RDONLY); //, fork_that);
+	do_redirect(cmd, R_INPUT, O_RDONLY, fork_that);
 }
