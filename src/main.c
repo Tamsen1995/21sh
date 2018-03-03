@@ -1,6 +1,6 @@
 #include "../includes/ft_sh.h"
 
-int         count_args(char **args)
+int count_args(char **args)
 {
     int argc;
 
@@ -18,7 +18,7 @@ int         count_args(char **args)
 ** are replaced with spaces
 */
 
-char        *replace_tabs(char *buf)
+char *replace_tabs(char *buf)
 {
     char *line;
     int i;
@@ -31,7 +31,7 @@ char        *replace_tabs(char *buf)
     while (line[i])
     {
         if (line[i] == '\t')
-            line [i] = ' ';
+            line[i] = ' ';
         i++;
     }
     ft_strfree(buf);
@@ -45,7 +45,7 @@ char        *replace_tabs(char *buf)
 ** Parses it, meaning we seperate the command into a program and a set of arguments
 */
 
-void        sh_loop(t_shell *shell, char **envv) // WIP
+void sh_loop(t_shell *shell, char **envv) // WIP
 {
     int status;
     char *buf;
@@ -54,7 +54,7 @@ void        sh_loop(t_shell *shell, char **envv) // WIP
     status = 1;
     buf = NULL;
     history = NULL;
-    while (status == 1) 
+    while (status == 1)
     {
         buf = prompt_loop(history);
         buf = replace_tabs(buf);
@@ -71,18 +71,17 @@ void        sh_loop(t_shell *shell, char **envv) // WIP
     shell->history = history;
 }
 
-
 /*
 ** Initiating the shell
 ** then re-directing to the
 ** programs main loop
 */
 
-int         main(int ac, char **av, char **envv)
+int main(int ac, char **av, char **envv)
 {
-    t_shell     *shell;
-    char        *term_name;
-    char        buf[MAX_BUF_SIZE];
+    t_shell *shell;
+    char *term_name;
+    char buf[MAX_BUF_SIZE];
 
     shell = NULL;
     launch_error_check(envv);
