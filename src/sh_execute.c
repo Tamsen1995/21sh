@@ -10,7 +10,7 @@
 // with the R_INPUT enum, some flags for the rights of the
 void input_redirect(char **cmd)
 {
-
+    ft_putstr("\n\n--->inside of input_redirect\n\n"); // TESTING
     // Test case for this function
     // will be to print out the cmd array.
 
@@ -36,6 +36,7 @@ static int got_redirection(char **cmd)
     int ret;
     int i;
 
+    ft_putstr("\n\n--->inside of got_redirection\n\n"); // TESTING
     i = 0;
     ret = 0; // ret is to be the number of the redirect
     // index which is to be returned from this function later on
@@ -44,12 +45,18 @@ static int got_redirection(char **cmd)
 
         if ((ret = is_redirection(cmd[i])))
         {
-            // check for syntactical errors such as:
 
+            ft_putnbr(ret); // TESTING this should 
+            // print an index number whenever a redirection has been inputted
+            // but it's not even going into this if condition
+            // TODO : FIX
+
+            // TODO : check for syntactical errors such as:
             // a missing name for the redirect
-
             // as well as an extraneous redirect after the redirect
-            ft_putendl(cmd[i]);
+
+            ft_putstr("\n\n--++->inside of got_redirection's if condition meaning a redirection was found.\n\n"); // TESTING
+
             return (ret);
         }
         i++;
@@ -97,10 +104,7 @@ int sh_execute(char **envv, t_shell *shell)
     if (!shell->cmds->args || !shell->cmds->args[0])
         return (1);
 
-    //  TODO : implement a redirection flow (input first)
-
     exec_redirection(shell->cmds->args); // WIP
-    // this function will redirect the flow towards a redirections execution.
 
     exit(-1); // TESTING
 

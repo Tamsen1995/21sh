@@ -5,6 +5,8 @@
 int is_redirection(char *s)
 {
 	char *ret;
+    ft_putstr("\n\n--->inside of is_redirection\n\n"); // TESTING
+
 
 	if (s && ((ret = ft_strchr(s, R_OUTPUT)) ||
 			  (ret = ft_strchr(s, R_OUTPUT_APPEND)) ||
