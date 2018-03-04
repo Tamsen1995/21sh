@@ -7,6 +7,7 @@ SRC = src/main.c \
 	src/sh_execute.c \
 	src/sh_launch.c \
 	src/sh_path_var.c \
+	src/env.c \
 	src/init_env.c \
 	src/init_shell.c \
 	src/check_bin_cmd.c \

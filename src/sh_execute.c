@@ -36,18 +36,19 @@ char **assign_redirections(char **cmd)
 
 int sh_execute(char **envv, t_shell *shell)
 {
-    if (!shell->cmds->args || !shell->cmds->args[0])
-        return (1);
+	if (!shell->cmds->args || !shell->cmds->args[0])
+		return (1);
 
-    shell->cmds->args = assign_redirections(shell->cmds->args); // WIP
-    exec_redirection(shell->cmds->args);                        // WIP
+	shell->cmds->args = assign_redirections(shell->cmds->args); // WIP
+	if (shell->cmds->args && *shell->cmds->args && !exec_redirection(envv, shell))
+		return (sh_launch(envv, shell));
 
+	exit(-1); // TESTING
 
-    exit(-1); // TESTING
+	return (1); // TESTING
+	// if (check_builtins(cmd[0]) == TRUE ||
+	//     check_builtin_path(shell) == TRUE)
+	//     return (exec_builtin(shell));
 
-    if (check_builtins(shell->cmds->args[0]) == TRUE ||
-        check_builtin_path(shell) == TRUE)
-        return (exec_builtin(shell));
-
-    return (sh_launch(envv, shell));
+	// return (sh_launch(envv, shell));
 }

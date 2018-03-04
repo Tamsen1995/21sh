@@ -31,7 +31,6 @@ void output_redirect(char **cmd)
 	ft_putstr("\n\n--->inside of output_redirect!!!!\n\n"); // TESTING
 }
 
-
 void output_append_redirect(char **cmd)
 {
 	print_twod_arr(cmd);											// TESTING
@@ -79,8 +78,11 @@ static int got_redirection(char **cmd)
 // TODO : implement a function which will
 // return an enum that corresponds to one of these redirections
 
-t_bool exec_redirection(char **cmd)
+t_bool exec_redirection(char **envv, t_shell *shell)
 {
+
+	envv = NULL; // TESTING
+
 	int redirection_index;
 	void (*const f[])(char **) = {
 		output_redirect,
@@ -92,21 +94,11 @@ t_bool exec_redirection(char **cmd)
 		// dup_output
 	};
 
-	if ((redirection_index = got_redirection(cmd)))
+	if ((redirection_index = got_redirection(shell->cmds->args)))
 	{
 		if (redirection_index != -1)
-		{
-			// The redirection index is the enum of
-			// the redirection to be executed,
-			// this index is subtracted by the R_OUTPUT
-			// in order
-			// to indicate the index of the
-			// function to be taken to in the function array.
-			f[redirection_index - R_OUTPUT](cmd);
-		}
+			f[redirection_index - R_OUTPUT](shell->cmds->args);
 		return (TRUE);
 	}
 	return (FALSE);
 }
-
-

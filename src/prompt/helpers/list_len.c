@@ -23,3 +23,18 @@ int         list_len(t_buf *buffer)
     return (i);
 }
 
+int         list_len_env(t_env *env)
+{
+    int     i;
+    t_env   *tmp;
+
+    i = 0;
+    tmp = env;
+    while (tmp)
+    {
+        i++;
+        tmp = tmp->next;
+    }
+    return (i);
+}
+

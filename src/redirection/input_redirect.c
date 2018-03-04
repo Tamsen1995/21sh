@@ -4,16 +4,17 @@ void dup_exec(char **cmd, int *pipe_fd, int fd_left)
 {
 	int save_fd;
 
+	cmd  = NULL;// TESTING
+
 	save_fd = dup(fd_left);
 	close(pipe_fd[fd_left == STDOUT_FILENO ? 0 : 1]); // closing write end because this process will only read from the pipe
 	dup2(pipe_fd[fd_left == STDOUT_FILENO ? 1 : 0], fd_left);
 	close(pipe_fd[fd_left == STDOUT_FILENO ? 1 : 0]);
 
-
 	// execute command recursively
 
 	// make the fd_left into the save_fd (its initial value) again
-	
+
 	// close the save fd
 
 	// make the process wait or exit
@@ -40,6 +41,10 @@ static void fork_that(char **cmd, int fd_left, int fd_right)
 	pid_t wpid;
 	int status;
 	int pipe_fd[2];
+
+	fd_left = 0;  // TESTING
+	fd_right = 0; // TESTING
+	cmd = NULL; // TESTING
 
 	if (pipe(pipe_fd) < 0)
 		fatal("Could not open pipe in (fork_that)");

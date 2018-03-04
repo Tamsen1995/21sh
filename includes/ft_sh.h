@@ -132,6 +132,7 @@ typedef struct		s_shell
 	int					argc; // Amount of arguments passed into my shell (for each individual command)
 	struct s_cmds		*cmds; // a list of commands
 	struct s_env		*env; // The environment variables
+	char				**env_arr;
 	char				*path_var; // The value of PATH
 	char				*bin_dir; // the binary folder in which the sought after CURRENT command is
 	struct winsize		*sz;
@@ -159,7 +160,8 @@ void         		cursor_movement(char *key, t_line *line);
 t_cursor    	   	*init_cursor(int win_size);
 T_BOOL        		term_action(char *buf);
 t_cursor			*get_first_c(t_line *line);
-
+char				**update_env_arr(t_env *env_list);
+char				*make_env_string(t_env *env_elem);
 
 
 /*
@@ -167,7 +169,7 @@ t_cursor			*get_first_c(t_line *line);
 */
 
 char				**assign_redirections(char **cmd);
-t_bool				exec_redirection(char **cmd);
+t_bool exec_redirection(char **envv, t_shell *shell);
 void				input_redirect(char **cmd);
 
 /*
@@ -189,6 +191,7 @@ t_line     		    *init_line(t_hist *history);
 void				ft_add_buf(t_buf **begin_list, char *key);
 char     		   	*stringify_buffer(t_buf  *buffer);
 int					list_len(t_buf *buffer);
+int       			list_len_env(t_env *env);
 void				free_line_struct(t_line *line); // Freeing the struct
 t_buf          		*del_buf_elem(t_line *line);
 void  		        init_buf_ind(t_buf	*buffer);
