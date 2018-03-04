@@ -25,16 +25,14 @@ int is_redirection(char *s)
 
 // TODO : dup_it function
 
-void output_redirect(char **cmd)
+void output_redirect(t_shell *shell)
 {
-	print_twod_arr(cmd);									// TESTING
-	ft_putstr("\n\n--->inside of output_redirect!!!!\n\n"); // TESTING
+	shell = NULL;
 }
 
-void output_append_redirect(char **cmd)
+void output_append_redirect(t_shell *shell)
 {
-	print_twod_arr(cmd);											// TESTING
-	ft_putstr("\n\n--->inside of output_append_redirect,!!!!\n\n"); // TESTING
+	shell = NULL;
 }
 
 // TODO : got_redirection function
@@ -78,13 +76,10 @@ static int got_redirection(char **cmd)
 // TODO : implement a function which will
 // return an enum that corresponds to one of these redirections
 
-t_bool exec_redirection(char **envv, t_shell *shell)
+t_bool exec_redirection(t_shell *shell)
 {
-
-	envv = NULL; // TESTING
-
 	int redirection_index;
-	void (*const f[])(char **) = {
+	void (*const f[])(t_shell *) = {
 		output_redirect,
 		output_append_redirect,
 		input_redirect,
@@ -97,7 +92,7 @@ t_bool exec_redirection(char **envv, t_shell *shell)
 	if ((redirection_index = got_redirection(shell->cmds->args)))
 	{
 		if (redirection_index != -1)
-			f[redirection_index - R_OUTPUT](shell->cmds->args);
+			f[redirection_index - R_OUTPUT](shell);
 		return (TRUE);
 	}
 	return (FALSE);

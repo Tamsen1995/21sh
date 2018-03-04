@@ -83,7 +83,7 @@ char *make_command(t_shell *shell)
 	return (command);
 }
 
-void			fork_and_exec(t_shell *shell, char *command, char **envv)
+void			fork_and_exec(t_shell *shell, char *command)
 {
 	pid_t		pid;
 	pid_t		wpid;
@@ -92,7 +92,7 @@ void			fork_and_exec(t_shell *shell, char *command, char **envv)
 	pid = fork();
 	if (pid == 0)
 	{
-		safe_exec(shell, command, envv);
+		safe_exec(shell, command, shell->env_arr);
 	}
 	else if (pid < 0)
 		fatal("Child procress could not be created (sh_launch)");
@@ -109,13 +109,13 @@ void			fork_and_exec(t_shell *shell, char *command, char **envv)
 ** the child process
 */
  
-int				sh_launch(char **envv, t_shell *shell)
+int				sh_launch(t_shell *shell)
 {
 	char		*command;
 
 	command = NULL;
 	command = make_command(shell);
-	fork_and_exec(shell, command, envv);
+	fork_and_exec(shell, command);
 	ft_strfree(command);
 	return (1);
 }

@@ -169,8 +169,8 @@ char				*make_env_string(t_env *env_elem);
 */
 
 char				**assign_redirections(char **cmd);
-t_bool exec_redirection(char **envv, t_shell *shell);
-void				input_redirect(char **cmd);
+t_bool				exec_redirection(t_shell *shell);
+void				input_redirect(t_shell *shell);
 
 /*
 ** command line history functions:
@@ -223,8 +223,8 @@ int      			sh_env(t_shell *shell);
 int   				sh_setenv(char **args, t_shell *shell);
 t_env   		    *init_env(char **envv);
 int					get_next_line(int const fd, char **line);
-int					sh_execute(char **envv, t_shell *shell);
-int					sh_launch(char **envv, t_shell *shell);
+int					sh_execute(t_shell *shell);
+int					sh_launch(t_shell *shell);
 int					sh_cd(char **args, t_shell *shell);
 int					sh_exit(void);
 int					sh_echo(char **args);

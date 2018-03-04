@@ -34,14 +34,13 @@ char **assign_redirections(char **cmd)
 ** or the normal flow
 */
 
-int sh_execute(char **envv, t_shell *shell)
+int sh_execute(t_shell *shell)
 {
 	if (!shell->cmds->args || !shell->cmds->args[0])
 		return (1);
-
 	shell->cmds->args = assign_redirections(shell->cmds->args); // WIP
-	if (shell->cmds->args && *shell->cmds->args && !exec_redirection(envv, shell))
-		return (sh_launch(envv, shell));
+	if (shell->cmds->args && *shell->cmds->args && !exec_redirection(shell))
+		return (sh_launch(shell));
 
 	exit(-1); // TESTING
 

@@ -113,7 +113,7 @@ void do_redirect(char **cmd, enum e_replacement c, int o_flag, void (*do_stuff_w
 
 // calls the do_redirect(cmd, R_INPUT, O_RDONLY, fork_that); function
 // with the R_INPUT enum, some flags for the rights of the
-void input_redirect(char **cmd)
+void input_redirect(t_shell *shell)
 {
-	do_redirect(cmd, R_INPUT, O_RDONLY, fork_that);
+	do_redirect(shell->cmds->args, R_INPUT, O_RDONLY, fork_that);
 }

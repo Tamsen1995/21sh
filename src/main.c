@@ -45,7 +45,7 @@ char *replace_tabs(char *buf)
 ** Parses it, meaning we seperate the command into a program and a set of arguments
 */
 
-void sh_loop(t_shell *shell, char **envv) // WIP
+void sh_loop(t_shell *shell) // WIP
 {
     int status;
     char *buf;
@@ -63,7 +63,7 @@ void sh_loop(t_shell *shell, char **envv) // WIP
         while (shell->cmds)
         {
             shell->argc = count_args(shell->cmds->args);
-            status = sh_execute(envv, shell);
+            status = sh_execute(shell);
             shell->cmds = shell->cmds->next;
         }
         ft_strfree(buf);
@@ -89,7 +89,7 @@ int main(int ac, char **av, char **envv)
     if (tgetent(buf, term_name) == -1)
         fatal("Could not get terminal description (main)");
     shell = init_shell(ac, av, envv);
-    sh_loop(shell, envv);
+    sh_loop(shell);
     free_shell(shell);
     return (0);
 }
