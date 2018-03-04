@@ -72,10 +72,6 @@ static int got_redirection(char **cmd)
 	return (FALSE);
 }
 
-// TODO : implement enum which will indicate the various redirections
-// TODO : implement a function which will
-// return an enum that corresponds to one of these redirections
-
 t_bool exec_redirection(t_shell *shell)
 {
 	int redirection_index;
