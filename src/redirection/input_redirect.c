@@ -20,22 +20,18 @@ void dup_exec(t_shell *shell, int *pipe_fd, int fd_left)
 
 void write_to_pipe(int *pipe_fd, int fd_right)
 {
-	int			save_fd_out;
-	char		buf[BUFF_SIZE];
-	ssize_t		ret;
+	int save_fd_out;
+	char buf[BUFF_SIZE];
+	ssize_t ret;
 
 	save_fd_out = dup(STDOUT_FILENO);
 	close(pipe_fd[0]);
 	while ((ret = read(fd_right, buf, BUFF_SIZE)) > 0)
-	{
-	//	ft_putendl(buf); // TESTING
 		write(pipe_fd[1], buf, (size_t)ret);
-	}
 	close(pipe_fd[1]);
 	dup2(save_fd_out, STDOUT_FILENO);
 	close(save_fd_out);
 	close(fd_right);
-
 
 	wait(NULL);
 }

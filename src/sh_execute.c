@@ -45,5 +45,5 @@ int sh_execute(t_shell *shell)
 		!exec_redirection(shell) &&
 		!exec_builtin(shell))
 		return (sh_launch(shell));
-	return (1); // TESTING
+	return (1);
 }

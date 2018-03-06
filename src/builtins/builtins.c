@@ -161,8 +161,5 @@ t_bool exec_builtin(t_shell *shell)
         return (sh_env(shell));
     else if (ft_strcmp(shell->cmds->args[0], "exit") == 0)
         return (sh_exit());
-
-    ft_putendl("TESTING");
-
     return (FALSE);
 }
