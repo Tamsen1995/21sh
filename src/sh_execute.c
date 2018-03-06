@@ -20,6 +20,8 @@ char **assign_redirections(char **cmd)
 	{
 		if (ft_strcmp(cmd[i], "<") == 0)
 			ret_cmd[i] = ft_int_to_str(R_INPUT);
+		else if (ft_strcmp(cmd[i], ">") == 0)
+			ret_cmd[i] = ft_int_to_str(R_OUTPUT);
 		else
 			ret_cmd[i] = ft_strdup(cmd[i]);
 		i++;
