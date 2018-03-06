@@ -103,6 +103,7 @@ typedef struct		 s_stack
 	struct s_stack 	*prev;
 }					t_stack;
 
+char				**ft_copy_twod_arr(char **array);
 char 				**ft_arrdelone(char **arr, char *del_str);
 void				print_twod_arr(char **cmd);
 char				*ft_int_to_str(int nbr);

@@ -21,24 +21,7 @@ int is_redirection(char *s)
 	return (FALSE);
 }
 
-// TODO : do_redirect function
-
-// TODO : dup_it function
-
-void output_redirect(t_shell *shell)
-{
-	shell = NULL;
-}
-
-void output_append_redirect(t_shell *shell)
-{
-	shell = NULL;
-}
-
 // TODO : got_redirection function
-// finds a redirection within the cmd array
-// and returns an index nbr assigned to the function of
-// said redirection
 // got_redirection returns the redirection index which determines the
 // redirection that is supposed to take place.
 // it does so by checking for a pipeline
@@ -63,7 +46,9 @@ static int got_redirection(char **cmd)
 		if ((ret = is_redirection(cmd[i])))
 		{
 
-			// TODO : error check and make sure the syntax for the redir is proper
+			// TODO : error check and make sure the syntax
+			// for the redir is properly checked,
+			// if it isn't throw an error to the console
 
 			return (ret);
 		}
@@ -79,13 +64,11 @@ t_bool exec_redirection(t_shell *shell)
 		output_redirect,
 		output_append_redirect,
 		input_redirect,
-		// pipeline,
+		pipeline,
 		// here_doc,
 		// dup_input,
 		// dup_output
 	};
-
-
 	if ((redirection_index = got_redirection(shell->cmds->args)))
 	{
 		if (redirection_index != -1)

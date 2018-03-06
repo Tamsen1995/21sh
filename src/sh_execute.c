@@ -22,6 +22,16 @@ char **assign_redirections(char **cmd)
 			ret_cmd[i] = ft_int_to_str(R_INPUT);
 		else if (ft_strcmp(cmd[i], ">") == 0)
 			ret_cmd[i] = ft_int_to_str(R_OUTPUT);
+		else if (ft_strcmp(cmd[i], ">>") == 0)
+			ret_cmd[i] = ft_int_to_str(R_OUTPUT_APPEND);
+		else if (ft_strcmp(cmd[i], "|") == 0)
+			ret_cmd[i] = ft_int_to_str(R_PIPELINE);
+		else if (ft_strcmp(cmd[i], "<&") == 0)
+			ret_cmd[i] = ft_int_to_str(R_DUP_INPUT);
+		else if (ft_strcmp(cmd[i], ">&") == 0)
+			ret_cmd[i] = ft_int_to_str(R_DUP_OUTPUT);
+		else if (ft_strcmp(cmd[i], "<<") == 0)
+			ret_cmd[i] = ft_int_to_str(R_HERE_DOC);
 		else
 			ret_cmd[i] = ft_strdup(cmd[i]);
 		i++;
