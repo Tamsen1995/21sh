@@ -85,6 +85,7 @@ t_bool exec_redirection(t_shell *shell)
 		// dup_output
 	};
 
+
 	if ((redirection_index = got_redirection(shell->cmds->args)))
 	{
 		if (redirection_index != -1)

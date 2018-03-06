@@ -30,7 +30,6 @@ void do_redirect(t_shell *shell, enum e_replacement c, int o_flag, void (*do_stu
 	int fd_right;
 
 	i = 0;
-	fd_left = 42; // TESTING
 	while (shell->cmds->args[i] && !(tmp = ft_strchr(shell->cmds->args[i], c)))
 		i++;
 	if ((ft_strcmp(shell->cmds->args[i], tmp) == 0) || (fd_left = get_fd(shell->cmds->args[i])) == -1)
@@ -39,9 +38,9 @@ void do_redirect(t_shell *shell, enum e_replacement c, int o_flag, void (*do_stu
 		fatal("Could not get fd in (do_redirect)");
 	if (tmp) // if the redirection sign is still in tmp
 	{
+		tmp = ft_strdup(tmp);
 		shell->cmds->args = ft_arrdelone(shell->cmds->args, shell->cmds->args[i + 1]); // deletes the the file whose fd is now inside of fd_right
-		shell->cmds->args = ft_arrdelone(shell->cmds->args, tmp);		 // rid the shell->cmds->argss array of the redirection sign
+		shell->cmds->args = ft_arrdelone(shell->cmds->args, tmp); // rid the shell->cmds->argss array of the redirection sign
 	}
-
 	do_stuff_with_cmd_and_fd_now(shell, fd_left, fd_right);
 }

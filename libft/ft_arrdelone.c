@@ -24,5 +24,6 @@ char **ft_arrdelone(char **arr, char *del_str)
 		}
 		i++;
 	}
+	free_twod_arr(arr);
 	return (ret);
 }

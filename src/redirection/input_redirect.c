@@ -18,6 +18,28 @@ void dup_exec(t_shell *shell, int *pipe_fd, int fd_left)
 	fd_left == STDOUT_FILENO ? (void)wait(NULL) : exit(EXIT_SUCCESS);
 }
 
+void write_to_pipe(int *pipe_fd, int fd_right)
+{
+	int			save_fd_out;
+	char		buf[BUFF_SIZE];
+	ssize_t		ret;
+
+	save_fd_out = dup(STDOUT_FILENO);
+	close(pipe_fd[0]);
+	while ((ret = read(fd_right, buf, BUFF_SIZE)) > 0)
+	{
+	//	ft_putendl(buf); // TESTING
+		write(pipe_fd[1], buf, (size_t)ret);
+	}
+	close(pipe_fd[1]);
+	dup2(save_fd_out, STDOUT_FILENO);
+	close(save_fd_out);
+	close(fd_right);
+
+
+	wait(NULL);
+}
+
 /*
 ** forks the process so that the parent may write from the fd_right into the pipe
 ** the child process will READ from the pipe and then 
@@ -31,7 +53,6 @@ static void fork_that(t_shell *shell, int fd_left, int fd_right)
 	int status;
 	int pipe_fd[2];
 
-	fd_right = 42; // TESTING
 	if (pipe(pipe_fd) < 0)
 		fatal("Could not open pipe in (fork_that)");
 	pid = fork();
@@ -39,9 +60,9 @@ static void fork_that(t_shell *shell, int fd_left, int fd_right)
 		dup_exec(shell, pipe_fd, fd_left);
 	else if (pid < 0)
 		fatal("Child procress could not be created (sh_launch)");
-	else
+	else // this is the parent process which will have to write
 	{
-		write_to_pipe(shell, pipe_fd, fd_left);
+		write_to_pipe(pipe_fd, fd_right);
 		wpid = waitpid(pid, &status, WUNTRACED);
 		while (!WIFEXITED(status) && !WIFSIGNALED(status))
 			wpid = waitpid(pid, &status, WUNTRACED);
