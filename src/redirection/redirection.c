@@ -21,15 +21,6 @@ int is_redirection(char *s)
 	return (FALSE);
 }
 
-// TODO : do_redirect function
-
-// TODO : dup_it function
-
-void output_append_redirect(t_shell *shell)
-{
-	shell = NULL;
-}
-
 // TODO : got_redirection function
 // finds a redirection within the cmd array
 // and returns an index nbr assigned to the function of

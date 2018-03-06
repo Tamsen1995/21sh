@@ -15,6 +15,10 @@ void dup_fd(t_shell *shell, int fd_left, int fd_right)
 	close(fd_right);
 	close(fd_save);
 }
+void			output_append_redirect(t_shell *shell)
+{
+	do_redirect(shell, R_OUTPUT_APPEND, O_WRONLY | O_CREAT | O_APPEND, dup_fd);
+}
 
 void output_redirect(t_shell *shell)
 {
