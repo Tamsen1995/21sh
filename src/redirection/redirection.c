@@ -67,7 +67,7 @@ t_bool exec_redirection(t_shell *shell)
 		output_redirect,
 		output_append_redirect,
 		input_redirect,
-		// pipeline,
+		pipeline,
 		// here_doc,
 		// dup_input,
 		// dup_output

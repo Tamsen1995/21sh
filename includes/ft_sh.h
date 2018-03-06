@@ -175,6 +175,8 @@ t_bool				exec_redirection(t_shell *shell);
 void				input_redirect(t_shell *shell);
 void				do_redirect(t_shell *shell, enum e_replacement c, \
 int o_flag, void (*do_stuff_with_cmd_and_fd_now)(t_shell *, int, int));
+void				pipeline(t_shell *shell);
+
 /*
 ** command line history functions:
 */
