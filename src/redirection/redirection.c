@@ -22,9 +22,6 @@ int is_redirection(char *s)
 }
 
 // TODO : got_redirection function
-// finds a redirection within the cmd array
-// and returns an index nbr assigned to the function of
-// said redirection
 // got_redirection returns the redirection index which determines the
 // redirection that is supposed to take place.
 // it does so by checking for a pipeline
@@ -72,7 +69,6 @@ t_bool exec_redirection(t_shell *shell)
 		// dup_input,
 		// dup_output
 	};
-
 	if ((redirection_index = got_redirection(shell->cmds->args)))
 	{
 		if (redirection_index != -1)

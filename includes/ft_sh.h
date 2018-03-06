@@ -167,7 +167,7 @@ char				*make_env_string(t_env *env_elem);
 /*
 ** redirection functions
 */
-
+void				dup_exec(t_shell *shell, int *pipe_fd, int fd_left);
 void				output_append_redirect(t_shell *shell);
 void				output_redirect(t_shell *shell);
 char				**assign_redirections(char **cmd);
