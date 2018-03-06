@@ -7,6 +7,7 @@ SRC = src/main.c \
 	src/sh_execute.c \
 	src/sh_launch.c \
 	src/sh_path_var.c \
+	src/env.c \
 	src/init_env.c \
 	src/init_shell.c \
 	src/check_bin_cmd.c \
@@ -48,8 +49,9 @@ SRC = src/main.c \
 	src/prompt/line_edition/cursor/prompt_cursor.c \
 	src/prompt/line_edition/cursor/reset_cursor.c \
 	src/prompt/line_edition/cursor/set_cursor.c \
-	src/redirections/redirections.c \
-	src/redirections/add_cmd_fd.c \
+	src/redirection/redirection.c \
+	src/redirection/input_redirect.c \
+	src/redirection/tools.c \
 	src/test_helpers/print_list_test.c \
 
 OBJ = $(addsuffix .o, $(basename $(SRC)))

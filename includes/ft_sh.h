@@ -132,6 +132,7 @@ typedef struct		s_shell
 	int					argc; // Amount of arguments passed into my shell (for each individual command)
 	struct s_cmds		*cmds; // a list of commands
 	struct s_env		*env; // The environment variables
+	char				**env_arr;
 	char				*path_var; // The value of PATH
 	char				*bin_dir; // the binary folder in which the sought after CURRENT command is
 	struct winsize		*sz;
@@ -159,16 +160,19 @@ void         		cursor_movement(char *key, t_line *line);
 t_cursor    	   	*init_cursor(int win_size);
 T_BOOL        		term_action(char *buf);
 t_cursor			*get_first_c(t_line *line);
-
+char				**update_env_arr(t_env *env_list);
+char				*make_env_string(t_env *env_elem);
 
 
 /*
 ** redirection functions
 */
 
-void 				discern_redirs(t_shell *shell);
-void 				modify_fds();
-
+char				**assign_redirections(char **cmd);
+t_bool				exec_redirection(t_shell *shell);
+void				input_redirect(t_shell *shell);
+void				do_redirect(t_shell *shell, enum e_replacement c, \
+int o_flag, void (*do_stuff_with_cmd_and_fd_now)(t_shell *, int, int));
 /*
 ** command line history functions:
 */
@@ -188,6 +192,7 @@ t_line     		    *init_line(t_hist *history);
 void				ft_add_buf(t_buf **begin_list, char *key);
 char     		   	*stringify_buffer(t_buf  *buffer);
 int					list_len(t_buf *buffer);
+int       			list_len_env(t_env *env);
 void				free_line_struct(t_line *line); // Freeing the struct
 t_buf          		*del_buf_elem(t_line *line);
 void  		        init_buf_ind(t_buf	*buffer);
@@ -212,18 +217,18 @@ T_BOOL				check_bin_path(t_shell *shell);
 T_BOOL    		    check_directory(char *dir_path, char *file);
 void				get_path_var(t_shell *shell);
 void    		    free_shell(t_shell *shell);
-int					sh_unsetenv(char **args, t_shell *shell);
+t_bool				sh_unsetenv(char **args, t_shell *shell);
 void				ft_putenv(t_env **begin_list, char *name, char *value);
 T_BOOL  		    check_bin_cmd(t_shell *shell);
 int      			sh_env(t_shell *shell);
-int   				sh_setenv(char **args, t_shell *shell);
+t_bool   			sh_setenv(char **args, t_shell *shell);
 t_env   		    *init_env(char **envv);
 int					get_next_line(int const fd, char **line);
-int					sh_execute(char **envv, t_shell *shell);
-int					sh_launch(char **envv, t_shell *shell);
-int					sh_cd(char **args, t_shell *shell);
-int					sh_exit(void);
-int					sh_echo(char **args);
+int					sh_execute(t_shell *shell);
+int					sh_launch(t_shell *shell);
+t_bool				sh_cd(char **args, t_shell *shell);
+t_bool				sh_exit(void);
+t_bool				sh_echo(char **args);
 t_shell				*init_shell(int ac, char **av, char **envv);
 char				*prompt_loop(t_hist *history);
 

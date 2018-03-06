@@ -4,7 +4,7 @@
 ** man echo
 */
 
-int sh_echo(char **args)
+t_bool sh_echo(char **args)
 {
     int i;
 
@@ -16,5 +16,5 @@ int sh_echo(char **args)
         i++;
     }
     ft_putendl("");
-    return (1);
+    return (TRUE);
 }

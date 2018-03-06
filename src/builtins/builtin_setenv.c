@@ -38,7 +38,7 @@ void        change_env_var(char **args, t_shell *shell)
 ** if the given variable already exists then it changes it in the envv list
 */
 
-int     sh_setenv(char **args, t_shell *shell)
+t_bool     sh_setenv(char **args, t_shell *shell)
 {
     t_env *tmp_env;
 
@@ -51,7 +51,7 @@ int     sh_setenv(char **args, t_shell *shell)
     else if (shell->argc > 3)
     {
         ft_putendl("minishell: Too many arguments");
-        return (1);
+        return (TRUE);
     } 
     while (tmp_env->next && ft_strcmp(tmp_env->name, args[1]) != 0)
         tmp_env = tmp_env->next;
@@ -59,5 +59,5 @@ int     sh_setenv(char **args, t_shell *shell)
         change_env_var(args, shell);
     else
         ft_putenv(&shell->env, args[1], args[2]);
-    return (1);
+    return (TRUE);
 }

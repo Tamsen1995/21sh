@@ -1,17 +1,16 @@
 #include "../../includes/ft_sh.h"
 
-
 /*
 ** gets in the potential path of a binary
 ** and checks to see if it is the path of a builtin
 */
 
-T_BOOL      is_builtin_path(t_shell *shell)
+T_BOOL is_builtin_path(t_shell *shell)
 {
     int i;
     char **bin_path_split; // the binary path split up
     T_BOOL ret;
-    
+
     i = 0;
     ret = FALSE;
     bin_path_split = NULL;
@@ -30,11 +29,11 @@ T_BOOL      is_builtin_path(t_shell *shell)
 ** if both cases are true it returns TRUE
 */
 
-T_BOOL      iter_builtin_bin_paths(char *bin_dir, t_shell *shell)
+T_BOOL iter_builtin_bin_paths(char *bin_dir, t_shell *shell)
 {
-    DIR             *dir;
-    struct  dirent  *ent;
-    char            *file_path;
+    DIR *dir;
+    struct dirent *ent;
+    char *file_path;
 
     dir = NULL;
     ent = NULL;
@@ -58,7 +57,6 @@ T_BOOL      iter_builtin_bin_paths(char *bin_dir, t_shell *shell)
     return (FALSE);
 }
 
-
 /*
 ** Goes through through all the binaries in the PATH variable
 ** compares all the paths for the individual binaries
@@ -66,10 +64,10 @@ T_BOOL      iter_builtin_bin_paths(char *bin_dir, t_shell *shell)
 ** if there is a match it return true
 */
 
-T_BOOL      check_builtin_path(t_shell *shell)
+T_BOOL check_builtin_path(t_shell *shell)
 {
-    char    **bin_dirs;
-    int     i;
+    char **bin_dirs;
+    int i;
 
     i = 0;
     bin_dirs = NULL;
@@ -119,11 +117,11 @@ T_BOOL check_builtins(char *cmd)
 ** of the builtin binary provided
 */
 
-char        *builtin_cmd_from_path(t_shell *shell)
+char *builtin_cmd_from_path(t_shell *shell)
 {
-    char        **bin_path_split;
-    char        *ret;
-    int         i;
+    char **bin_path_split;
+    char *ret;
+    int i;
 
     i = 0;
     ret = NULL;
@@ -144,7 +142,7 @@ char        *builtin_cmd_from_path(t_shell *shell)
 ** returns whatever the builtin returns
 */
 
-int         exec_builtin(t_shell *shell)
+t_bool exec_builtin(t_shell *shell)
 {
     if (check_builtin_path(shell) == TRUE)
     {
@@ -153,16 +151,15 @@ int         exec_builtin(t_shell *shell)
     }
     if (ft_strcmp(shell->cmds->args[0], "echo") == 0)
         return (sh_echo(shell->cmds->args));
-    if (ft_strcmp(shell->cmds->args[0], "cd") == 0)
+    else if (ft_strcmp(shell->cmds->args[0], "cd") == 0)
         return (sh_cd(shell->cmds->args, shell));
-    if (ft_strcmp(shell->cmds->args[0], "setenv") == 0)
+    else if (ft_strcmp(shell->cmds->args[0], "setenv") == 0)
         return (sh_setenv(shell->cmds->args, shell));
-    if (ft_strcmp(shell->cmds->args[0], "unsetenv") == 0)
+    else if (ft_strcmp(shell->cmds->args[0], "unsetenv") == 0)
         return (sh_unsetenv(shell->cmds->args, shell));
-    if (ft_strcmp(shell->cmds->args[0], "env") == 0)
+    else if (ft_strcmp(shell->cmds->args[0], "env") == 0)
         return (sh_env(shell));
-    if (ft_strcmp(shell->cmds->args[0], "exit") == 0)
+    else if (ft_strcmp(shell->cmds->args[0], "exit") == 0)
         return (sh_exit());
-    fatal("Error in exec_builtin: builtin recognized, but flow not properly redirected");
-    return (0);
+    return (FALSE);
 }

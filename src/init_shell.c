@@ -5,11 +5,10 @@
 ** onto the terminal
 */
 
-void            apply_mode(t_shell *shell)
+void apply_mode(t_shell *shell)
 {
     if (tcsetattr(0, TCSAFLUSH, shell->term) == -1)
         fatal("Error in (apply_mode)");
-
 }
 
 /*
@@ -17,7 +16,7 @@ void            apply_mode(t_shell *shell)
 ** be set into raw mode 
 */
 
-t_shell         *make_shell(t_shell *shell)
+t_shell *make_shell(t_shell *shell)
 {
 
     if (!(shell->sz = (struct winsize *)malloc(sizeof(struct winsize) * 1)))
@@ -31,20 +30,14 @@ t_shell         *make_shell(t_shell *shell)
     if (tcgetattr(0, shell->term) == -1)
         fatal("Could not get attributes for terminal (make_shell)");
     ioctl(0, TIOCGWINSZ, shell->sz);
-	tputs(tgetstr("vi", NULL), 1, putintc);
+    tputs(tgetstr("vi", NULL), 1, putintc);
     shell->term->c_lflag &= ~(ECHO);
     shell->term->c_lflag &= ~(ICANON);
     apply_mode(shell);
     return (shell);
 }
 
-/*
-** initiating the shell and the data required for it
-** setting the shell into what I believe to be canonical
-** mode
-*/
-
-t_shell     *init_shell(int ac, char **av, char **envv)
+t_shell *init_shell(int ac, char **av, char **envv)
 {
     t_shell *shell;
 
@@ -55,6 +48,7 @@ t_shell     *init_shell(int ac, char **av, char **envv)
         fatal("Couldn't allocate shell in (init_shell)");
     shell->history = NULL;
     shell->env = init_env(envv);
+    shell->env_arr = update_env_arr(shell->env);
     shell->argc = 0;
     shell->cmds = NULL;
     shell->path_var = NULL;

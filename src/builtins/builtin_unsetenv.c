@@ -42,7 +42,7 @@ void        remove_elem(t_env **elem, t_env **begin_list)
     del_env_var(elem);
 }
 
-int     sh_unsetenv(char **args, t_shell *shell)
+t_bool     sh_unsetenv(char **args, t_shell *shell)
 {
     int i;
     t_env *tmp;
@@ -67,5 +67,5 @@ int     sh_unsetenv(char **args, t_shell *shell)
         }
         i++;
     }
-    return (1);
+    return (TRUE);
 }
