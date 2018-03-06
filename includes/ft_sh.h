@@ -168,6 +168,7 @@ char				*make_env_string(t_env *env_elem);
 ** redirection functions
 */
 
+void				output_redirect(t_shell *shell);
 char				**assign_redirections(char **cmd);
 t_bool				exec_redirection(t_shell *shell);
 void				input_redirect(t_shell *shell);

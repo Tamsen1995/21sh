@@ -25,11 +25,6 @@ int is_redirection(char *s)
 
 // TODO : dup_it function
 
-void output_redirect(t_shell *shell)
-{
-	shell = NULL;
-}
-
 void output_append_redirect(t_shell *shell)
 {
 	shell = NULL;
@@ -63,7 +58,9 @@ static int got_redirection(char **cmd)
 		if ((ret = is_redirection(cmd[i])))
 		{
 
-			// TODO : error check and make sure the syntax for the redir is proper
+			// TODO : error check and make sure the syntax
+			// for the redir is properly checked,
+			// if it isn't throw an error to the console
 
 			return (ret);
 		}
@@ -84,7 +81,6 @@ t_bool exec_redirection(t_shell *shell)
 		// dup_input,
 		// dup_output
 	};
-
 
 	if ((redirection_index = got_redirection(shell->cmds->args)))
 	{
