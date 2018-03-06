@@ -2,7 +2,7 @@
 
 // Solely responsible for printing of all 
 // envirionment variables
-int        sh_env(t_shell *shell)
+t_bool        sh_env(t_shell *shell)
 {
     t_env *env_var;
 
@@ -23,5 +23,5 @@ int        sh_env(t_shell *shell)
             ft_putendl("");
         env_var = env_var->next;
     }
-    return (1);
+    return (TRUE);
 }

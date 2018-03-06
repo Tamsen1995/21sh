@@ -40,16 +40,10 @@ int sh_execute(t_shell *shell)
 	if (!shell->cmds->args || !shell->cmds->args[0])
 		return (1);
 	shell->cmds->args = assign_redirections(shell->cmds->args); // WIP
-
-	if (shell->cmds->args && *shell->cmds->args && !exec_redirection(shell))
+	if (shell->cmds->args &&
+		*shell->cmds->args &&
+		!exec_redirection(shell) &&
+		!exec_builtin(shell))
 		return (sh_launch(shell));
-
-	//exit(-1); // TESTING
-
 	return (1); // TESTING
-		// if (check_builtins(cmd[0]) == TRUE ||
-		//     check_builtin_path(shell) == TRUE)
-		//     return (exec_builtin(shell));
-
-	// return (sh_launch(envv, shell));
 }

@@ -73,7 +73,7 @@ void        precede_nd_show(t_shell *shell)
 ** A basic cd command
 */
 
-int         sh_cd(char **args, t_shell *shell)
+t_bool         sh_cd(char **args, t_shell *shell)
 {
     char *home_path;
 
@@ -92,10 +92,10 @@ int         sh_cd(char **args, t_shell *shell)
         {
             ft_putstr("My cd: No such file or directory: ");
             ft_putendl(args[1]);
-            return (1);
+            return (TRUE);
         }
     }
     free(home_path);
     home_path = NULL;
-    return (1);
+    return (TRUE);
 }
