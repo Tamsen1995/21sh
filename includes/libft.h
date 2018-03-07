@@ -91,6 +91,12 @@ typedef struct 		s_fields
 	long long int	st_blocks;
 }					t_fields;
 
+typedef struct		s_string
+{
+	struct s_string		*next;
+   char					*string;
+}					t_string;
+
 typedef struct		 s_stack
 {
 	char 			*path; // done
@@ -103,6 +109,8 @@ typedef struct		 s_stack
 	struct s_stack 	*prev;
 }					t_stack;
 
+t_string			*ft_strlst_new(char *string);
+void				ft_strlst_push_back(t_string **alst, char *string);
 char 				**ft_alloc_twod_arr_with_mem(int arr_len, int arr_ptrs_len);
 char 				**ft_split_str_from_sub(char *string, char *substring);
 char				**ft_copy_twod_arr(char **array);

@@ -16,11 +16,7 @@ void dup_it(t_shell *shell, int default_left_fd)
 	ft_putendl(cmd[i]);
 	default_left_fd = 0;
 	exit(-1);
-	// if (cmd[i])
-	// {
-	// 	if (fd_left = get_fd(cmd[i]) == -1)
-	// 		fd_left = default_left_fd;
-	// }
+
 }
 
 /*

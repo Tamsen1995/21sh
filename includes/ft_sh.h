@@ -103,14 +103,10 @@ typedef struct			s_line
 
 typedef struct		s_cmds
 {
-	struct s_fds		*in_fds;
-	struct s_fds		*out_fds;
 	struct s_fds		*err_fds;
 	struct s_cmds		*next;
 	struct s_cmds		*prev;
 	char 				**args;
-
-
 }					t_cmds;
 
 /*
@@ -162,10 +158,11 @@ t_cursor			*get_first_c(t_line *line);
 char				**update_env_arr(t_env *env_list);
 char				*make_env_string(t_env *env_elem);
 
-
 /*
-** redirection functions
+** redirections functions here
 */
+
+int 				is_redirection(char *s);
 void				dup_exec(t_shell *shell, int *pipe_fd, int fd_left);
 void				output_append_redirect(t_shell *shell);
 void				output_redirect(t_shell *shell);
@@ -176,6 +173,8 @@ void				do_redirect(t_shell *shell, enum e_replacement c, \
 int o_flag, void (*do_stuff_with_cmd_and_fd_now)(t_shell *, int, int));
 void				pipeline(t_shell *shell);
 void				dup_output(t_shell *shell);
+char				**sanitize_file_duping(char **cmd);
+
 
 /*
 ** command line history functions:

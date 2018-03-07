@@ -3,14 +3,6 @@
 
 #include <unistd.h>
 
-
-typedef struct		s_fds
-{
-	struct s_fds		*next;
-    int                 fd;
-}					t_fds;
-
-
 /*
 ** enum
 */
@@ -27,8 +19,5 @@ enum					e_replacement
 	R_DUP_INPUT = -35,
 	R_DUP_OUTPUT = -34
 };
-
-int is_redirection(char *s);
-
 
 #endif
