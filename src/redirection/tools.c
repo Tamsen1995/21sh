@@ -1,6 +1,5 @@
 #include "../../includes/ft_sh.h"
 
-// TEST function
 int get_fd(char *s)
 {
 	int fd;
@@ -22,7 +21,7 @@ int get_fd(char *s)
 ** deletes the redirection symbol as well as the redirection file from the cmds array
 */
 
-void do_redirect(t_shell *shell, enum e_replacement c, int o_flag, void (*do_stuff_with_cmd_and_fd_now)(t_shell *, int, int))
+void  do_redirect(t_shell *shell, enum e_replacement c, int o_flag, void (*do_stuff_with_cmd_and_fd_now)(t_shell *, int, int))
 {
 	int i;
 	char *tmp;

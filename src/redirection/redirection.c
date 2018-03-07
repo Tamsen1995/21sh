@@ -9,7 +9,6 @@ int is_redirection(char *s)
 	char *ret;
 
 	ret = NULL;
-
 	if (s && ((ret = ft_strchr(s, R_OUTPUT)) ||
 			  (ret = ft_strchr(s, R_OUTPUT_APPEND)) ||
 			  (ret = ft_strchr(s, R_DUP_OUTPUT)) ||
@@ -18,6 +17,31 @@ int is_redirection(char *s)
 			  (ret = ft_strchr(s, R_DUP_INPUT)) ||
 			  (ret = ft_strchr(s, R_PIPELINE))))
 		return (*ret);
+	return (FALSE);
+}
+
+/*
+** Since pipes get priority, 
+** I need to check for a pipe after redirection
+*/
+
+t_bool got_pipe_after_dup(char **cmd)
+{
+	int i;
+	t_bool got_dup;
+
+	i = 0;
+	got_dup = FALSE;
+	while (cmd[i])
+	{
+		if (ft_strchr(cmd[i], R_PIPELINE) && got_dup == TRUE)
+			return (TRUE);
+		else if (ft_strchr(cmd[i], R_DUP_INPUT) || ft_strchr(cmd[i], R_DUP_OUTPUT))
+			got_dup = TRUE;
+		else if (is_redirection(cmd[i]))
+			return (FALSE);
+		i++;
+	}
 	return (FALSE);
 }
 
@@ -41,8 +65,11 @@ static int got_redirection(char **cmd)
 
 	i = 0;
 	ret = 0;
+	if (got_pipe_after_dup(cmd))
+		return (R_PIPELINE);
 	while (cmd[i])
 	{
+
 		if ((ret = is_redirection(cmd[i])))
 		{
 
@@ -57,6 +84,30 @@ static int got_redirection(char **cmd)
 	return (FALSE);
 }
 
+/*
+** function stub
+*/
+
+void here_doc(t_shell *shell)
+{
+	int i = 0;
+	while (shell->cmds->args[i])
+		i++;
+	exit(-1);
+}
+
+/*
+** function stub
+*/
+
+void dup_input(t_shell *shell)
+{
+	int i = 0;
+	while (shell->cmds->args[i])
+		i++;
+	exit(-1);
+}
+
 t_bool exec_redirection(t_shell *shell)
 {
 	int redirection_index;
@@ -65,9 +116,9 @@ t_bool exec_redirection(t_shell *shell)
 		output_append_redirect,
 		input_redirect,
 		pipeline,
-		// here_doc,
-		// dup_input,
-		// dup_output
+		here_doc,
+		dup_input,
+		dup_output,
 	};
 	if ((redirection_index = got_redirection(shell->cmds->args)))
 	{

@@ -6,7 +6,6 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <stdlib.h>
 #include <sys/wait.h>
 #include <sys/param.h>
 #include <signal.h>
@@ -176,6 +175,7 @@ void				input_redirect(t_shell *shell);
 void				do_redirect(t_shell *shell, enum e_replacement c, \
 int o_flag, void (*do_stuff_with_cmd_and_fd_now)(t_shell *, int, int));
 void				pipeline(t_shell *shell);
+void				dup_output(t_shell *shell);
 
 /*
 ** command line history functions:
