@@ -2,6 +2,10 @@
 
 //ft_split_str_from_sub(cmd[i], ">&");
 
+void add_sanitation_to_list(t_string **begin_lst)
+{
+	*begin_lst = NULL; // TESTING
+}
 /*
 ** in the case of a shorthand fd redirection ">&" or "<&"
 ** there could be fds right after, and before the redirections.
@@ -12,37 +16,21 @@
 
 char **sanitize_file_duping(char **cmd)
 {
-	// char **ret;
-	// char **redir;
 	int i;
+	char **redir;
 	t_string *lst;
 
 	i = 0;
 	lst = NULL;
 	while (cmd[i])
 	{
-		// if (ft_strstr(cmd[i], ">&"))
-		// {
-		// 	/////////////////////
-		// 	int k = 0;
-		// 	redir = ft_split_str_from_sub(cmd[i], ">&");
-		// 	while (redir[k])
-		// 	{
-		// 		if (ft_strlen(redir[k]) == 0)
-		// 		{
-		// 			exit (-1);
-		// 			// do not put this into the list
-		// 		}
-		// 		k++;
-		// 	}
-		// 	////////////
-		// }
-
-		// put into list here
-
-		//cmd = sanitize_redirection(cmd);
-
-
+		if (ft_strstr(cmd[i], ">&"))
+		{
+			redir = ft_split_str_from_sub(cmd[i], ">&"); // makes a sanitized twod arr
+			add_sanitation_to_list(&lst); // adds the sanitized twod arr to the list
+		}
+		else
+			ft_strlst_push_back(&lst, cmd[i]); // adds the normal array elements to the list
 		i++;
 	}
 
