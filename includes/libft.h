@@ -109,6 +109,7 @@ typedef struct		 s_stack
 	struct s_stack 	*prev;
 }					t_stack;
 
+char				**ft_list_to_arr(t_string *lst);
 t_string			*ft_strlst_new(char *string);
 void				ft_strlst_push_back(t_string **alst, char *string);
 char 				**ft_alloc_twod_arr_with_mem(int arr_len, int arr_ptrs_len);

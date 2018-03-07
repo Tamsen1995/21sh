@@ -41,5 +41,6 @@ char **sanitize_file_duping(char **cmd)
 		i++;
 	}
 	ret = ft_list_to_arr(lst);
+	free_twod_arr(cmd);
 	return (ret);
 }
