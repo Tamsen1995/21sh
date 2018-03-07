@@ -1,10 +1,18 @@
 #include "../../includes/ft_sh.h"
 
-//ft_split_str_from_sub(cmd[i], ">&");
-
-void add_sanitation_to_list(t_string **begin_lst)
+void add_sanitation_to_list(t_string **begin_lst, char *string, char *substr)
 {
-	*begin_lst = NULL; // TESTING
+	int i;
+	char **redir;
+
+	i = 0;
+	redir = ft_split_str_from_sub(string, substr); // makes a sanitized twod arr
+	while (redir[i])
+	{
+		if (ft_strlen(redir[i]) > 0)
+			ft_strlst_push_back(begin_lst, redir[i]); // adds the normal array elements to the list
+		i++;
+	}
 }
 /*
 ** in the case of a shorthand fd redirection ">&" or "<&"
@@ -17,31 +25,21 @@ void add_sanitation_to_list(t_string **begin_lst)
 char **sanitize_file_duping(char **cmd)
 {
 	int i;
-	char **redir;
 	t_string *lst;
+	char **ret;
 
 	i = 0;
 	lst = NULL;
 	while (cmd[i])
 	{
 		if (ft_strstr(cmd[i], ">&"))
-		{
-			redir = ft_split_str_from_sub(cmd[i], ">&"); // makes a sanitized twod arr
-			add_sanitation_to_list(&lst); // adds the sanitized twod arr to the list
-		}
+			add_sanitation_to_list(&lst, cmd[i], ">&"); // adds the sanitized twod arr to the list
+		else if (ft_strstr(cmd[i], "<&"))
+			add_sanitation_to_list(&lst, cmd[i], "<&"); // adds the sanitized twod arr to the list
 		else
 			ft_strlst_push_back(&lst, cmd[i]); // adds the normal array elements to the list
 		i++;
 	}
-
-	// at the end turn list into a sanitized array
-
-	exit(-1);
-
-	// TODO : I need something that will seperate a substring from a string and neatly split it into a twod arr
-
-	// if found check for both potential fds before AND after
-
-	// if found then make a new array with these in a seperate array pointer
-	return (NULL);
+	ret = ft_list_to_arr(lst);
+	return (ret);
 }
