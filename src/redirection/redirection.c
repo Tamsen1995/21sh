@@ -96,18 +96,6 @@ void here_doc(t_shell *shell)
 	exit(-1);
 }
 
-/*
-** function stub
-*/
-
-void dup_input(t_shell *shell)
-{
-	int i = 0;
-	while (shell->cmds->args[i])
-		i++;
-	exit(-1);
-}
-
 t_bool exec_redirection(t_shell *shell)
 {
 	int redirection_index;

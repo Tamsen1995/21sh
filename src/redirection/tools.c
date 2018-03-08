@@ -6,6 +6,9 @@ int get_fd(char *s)
 
 	if (!s)
 		return (-1);
+       
+	//ft_putendl(s);
+
 	while (*s && !ft_isdigit(*s) && *s != '-')
 		s++;
 	if (!*s)

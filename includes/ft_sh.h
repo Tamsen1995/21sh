@@ -161,7 +161,10 @@ char				*make_env_string(t_env *env_elem);
 /*
 ** redirections functions here
 */
-
+void				dup_input(t_shell *shell);
+char 				**remove_redir_from_array(char **cmd, int redir_index);
+void				simply_dup_it(t_shell *shell, int fd_left, int fd_right);
+void				dup_it(t_shell *shell, int default_left_fd);
 int					get_fd(char *s);
 int 				is_redirection(char *s);
 void				dup_exec(t_shell *shell, int *pipe_fd, int fd_left);
