@@ -4,7 +4,6 @@ char *here_prompt_loop(t_hist *history)
 {
 	char buf[KEY_BUF_SIZE + 1];
 	char *cmd_line;
-	char *cmd_line_w_newline;
 	t_line *line;
 
 	line = init_line(history);
@@ -19,9 +18,7 @@ char *here_prompt_loop(t_hist *history)
 	}
 	cmd_line = stringify_buffer(line->buffer);
 	free_line_struct(line);
-	cmd_line_w_newline = ft_strjoin(cmd_line, "\n");
-	free(cmd_line);
-	return (cmd_line_w_newline);
+	return (cmd_line);
 }
 
 void here_doc(t_shell *shell)
@@ -45,6 +42,7 @@ void here_doc(t_shell *shell)
 
 	while (ft_strcmp(buf, eof) != 0)
 	{
+		
 		buf = here_prompt_loop(NULL);
 		ft_strlst_push_back(&str_list, buf);
 		ft_strfree(buf);
