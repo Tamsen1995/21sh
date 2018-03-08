@@ -91,6 +91,12 @@ typedef struct 		s_fields
 	long long int	st_blocks;
 }					t_fields;
 
+typedef struct		s_string
+{
+	struct s_string		*next;
+   char					*string;
+}					t_string;
+
 typedef struct		 s_stack
 {
 	char 			*path; // done
@@ -103,6 +109,11 @@ typedef struct		 s_stack
 	struct s_stack 	*prev;
 }					t_stack;
 
+char				**ft_list_to_arr(t_string *lst);
+t_string			*ft_strlst_new(char *string);
+void				ft_strlst_push_back(t_string **alst, char *string);
+char 				**ft_alloc_twod_arr_with_mem(int arr_len, int arr_ptrs_len);
+char 				**ft_split_str_from_sub(char *string, char *substring);
 char				**ft_copy_twod_arr(char **array);
 char 				**ft_arrdelone(char **arr, char *del_str);
 void				print_twod_arr(char **cmd);
@@ -158,7 +169,7 @@ int					ft_tolower(int c);
 int					ft_toupper(int c);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);
-int					ft_strncmp(const char *s1, const char *s2, size_t n);
+int					ft_strncmp(const char *s1, const char *s2, int n);
 int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
 char				*ft_strcat(char *s1, const char *s2);
