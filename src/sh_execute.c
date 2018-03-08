@@ -40,7 +40,6 @@ char **assign_redirections(char **cmd)
 	return (ret_cmd);
 }
 
-
 /*
 ** will redirect towards the redirections flow
 ** , the builtin flow
