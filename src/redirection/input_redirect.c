@@ -14,8 +14,6 @@ void write_to_pipe(int *pipe_fd, int fd_right)
 	dup2(save_fd_out, STDOUT_FILENO);
 	close(save_fd_out);
 	close(fd_right);
-
-	wait(NULL);
 }
 
 /*
