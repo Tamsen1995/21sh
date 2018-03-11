@@ -49,11 +49,31 @@ char **delete_redir_from_array(char **cmds)
 ** inserts the here_doc string into the command array
 */
 
-// void insert_heredoc_str()
-// {
+char **insert_heredoc_str(char **cmds, t_string *str_list)
+{
+	char *here_doc_str;
+	char **ret;
+	int i;
+	int k;
 
-// 	ft_stringify_strlst(str_list);
-// }
+	k = 1;
+	i = 2;
+	here_doc_str = ft_stringify_strlst(str_list);
+	ret = ft_alloc_twod_arr(ft_count_arr_size(cmds) + 1);
+	ret[0] = ft_strdup(cmds[0]);
+	ret[1] = ft_strdup(here_doc_str);
+	while (cmds[k])
+	{
+		ret[i] = ft_strdup(cmds[k]);
+		i++;
+		k++;
+	}
+
+	print_twod_arr(ret); // TESTING
+
+	free_twod_arr(cmds);
+	return (ret);
+}
 
 void here_doc(t_shell *shell)
 {
@@ -74,25 +94,17 @@ void here_doc(t_shell *shell)
 	while (ft_strcmp(buf, eof) != 0)
 	{
 		buf = here_prompt_loop(NULL);
-		ft_strlst_push_back(&str_list, buf);
+		ft_strlst_push_back(&str_list, ft_strjoin(buf, "\n"));
 		ft_strfree(buf);
 	}
 	shell->cmds->args = delete_redir_from_array(shell->cmds->args);
-
-
-	//	shell->cmds->args = insert_heredoc_str(shell->cmds->args, str_list);
-
-	print_twod_arr(shell->cmds->args); // TESTING
-
-
-
-	// at the end stringify the entire list
+	shell->cmds->args = insert_heredoc_str(shell->cmds->args, str_list);
 
 	// TODO :
 
 	// and feed it into the program to be executed
 
-	// delete the redirection symbol and the eof args out of the cmd array
-	// insert the string into the cmd array
+	print_twod_arr(shell->cmds->args); // TESTING
+
 	exit(-1); // TESTING
 }
