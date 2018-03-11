@@ -44,8 +44,6 @@ void dup_it(t_shell *shell, int default_left_fd)
 	cmd = shell->cmds->args;
 	fd_left = -1;
 	fd_right = -1;
-
-
 	while (cmd[i] && !ft_strchr(cmd[i], R_DUP_OUTPUT) && !ft_strchr(cmd[i], R_DUP_INPUT))
 		i++;
 	if ((fd_left = get_fd(cmd[i - 1])) == -1)
