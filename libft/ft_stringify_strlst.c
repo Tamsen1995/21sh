@@ -11,8 +11,9 @@ char *ft_stringify_strlst(t_string *str_list)
 
 	tmp = str_list;
 	str_len = 0;
-	while (tmp)
+	while (tmp->next)
 	{
+		ft_putendl(tmp->string); // TESTING
 		str_len = str_len + ft_strlen(tmp->string);
 		tmp = tmp->next;
 	}
