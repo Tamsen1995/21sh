@@ -45,66 +45,39 @@ char **delete_redir_from_array(char **cmds)
 	return (ret);
 }
 
-/*
-** inserts the here_doc string into the command array
-*/
-
-char **insert_heredoc_str(char **cmds, t_string *str_list)
-{
-	char *here_doc_str;
-	char **ret;
-	int i;
-	int k;
-
-	k = 1;
-	i = 2;
-	here_doc_str = ft_stringify_strlst(str_list);
-	ret = ft_alloc_twod_arr(ft_count_arr_size(cmds) + 1);
-	ret[0] = ft_strdup(cmds[0]);
-	ret[1] = ft_strdup(here_doc_str);
-	while (cmds[k])
-	{
-		ret[i] = ft_strdup(cmds[k]);
-		i++;
-		k++;
-	}
-
-	print_twod_arr(ret); // TESTING
-
-	free_twod_arr(cmds);
-	return (ret);
-}
-
-void here_doc(t_shell *shell)
+t_string *get_here_doc_string_list(char *eof)
 {
 	char *buf;
-	char *eof;
 	t_string *str_list;
-	int i;
 
-	i = 0;
 	buf = NULL;
-	eof = NULL;
 	str_list = NULL;
-	while (shell->cmds->args[i] && !ft_strchr(shell->cmds->args[i], R_HERE_DOC))
-		i++;
-	if (shell->cmds->args[i + 1])
-		eof = shell->cmds->args[i + 1];
-
 	while (ft_strcmp(buf, eof) != 0)
 	{
 		buf = here_prompt_loop(NULL);
 		ft_strlst_push_back(&str_list, ft_strjoin(buf, "\n"));
 		ft_strfree(buf);
 	}
+	return (str_list);
+}
+
+void here_doc(t_shell *shell)
+{
+	char *eof;
+	t_string *str_list;
+	char *here_doc_string;
+	int i;
+
+	i = 0;
+	eof = NULL;
+	str_list = NULL;
+	here_doc_string = NULL;
+	while (shell->cmds->args[i] && !ft_strchr(shell->cmds->args[i], R_HERE_DOC))
+		i++;
+	if (shell->cmds->args[i + 1])
+		eof = shell->cmds->args[i + 1];
+	str_list = get_here_doc_string_list(eof);
 	shell->cmds->args = delete_redir_from_array(shell->cmds->args);
-	shell->cmds->args = insert_heredoc_str(shell->cmds->args, str_list);
-
-	// TODO :
-
-	// and feed it into the program to be executed
-
-	print_twod_arr(shell->cmds->args); // TESTING
-
-	exit(-1); // TESTING
+	here_doc_string = ft_stringify_strlst(str_list);
+	fork_and_write(shell, STDIN_FILENO, here_doc_string);
 }

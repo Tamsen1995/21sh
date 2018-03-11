@@ -162,6 +162,8 @@ char				*make_env_string(t_env *env_elem);
 ** redirections functions here
 */
 
+void 				fork_and_write(t_shell *shell, int fd_left, char *here_doc_string);
+void				write_to_pipe(int *pipe_fd, int fd_right);
 void				here_doc(t_shell *shell);
 void				dup_input(t_shell *shell);
 char 				**remove_redir_from_array(char **cmd, int redir_index);

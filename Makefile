@@ -58,6 +58,7 @@ SRC = src/main.c \
 	src/redirection/dup_output.c \
 	src/redirection/sanitize_file_duping.c \
 	src/redirection/here_doc.c \
+	src/redirection/fork_and_write.c \
 	src/test_helpers/print_list_test.c \
 
 OBJ = $(addsuffix .o, $(basename $(SRC)))
