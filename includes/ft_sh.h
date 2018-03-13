@@ -241,7 +241,7 @@ int					sh_launch(t_shell *shell);
 t_bool				sh_cd(char **args, t_shell *shell);
 t_bool				sh_exit(void);
 t_bool				sh_echo(char **args);
-t_shell				*init_shell(int ac, char **av, char **envv);
+t_shell				*init_shell(char **envv);
 char				*prompt_loop(t_hist *history);
 
 #endif

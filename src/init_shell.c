@@ -37,13 +37,11 @@ t_shell *make_shell(t_shell *shell)
     return (shell);
 }
 
-t_shell *init_shell(int ac, char **av, char **envv)
+t_shell *init_shell(char **envv)
 {
     t_shell *shell;
 
     shell = NULL;
-    av = NULL;
-    ac = 0;
     if (!(shell = (t_shell *)malloc(sizeof(t_shell) * 1)))
         fatal("Couldn't allocate shell in (init_shell)");
     shell->history = NULL;
@@ -64,15 +62,13 @@ t_shell *init_shell(int ac, char **av, char **envv)
 ** in between function calls
 ** thus creating a quasi global variable
 
-
-t_shell            *get_shell(void)
-{
-    static t_shell *shell = NULL;
-
-    if (shell == NULL)
-        shell = make_shell();
-    update_window_size(shell);
-    return (shell);
-}
-
 */
+
+// t_shell *get_shell(void)
+// {
+//     static t_shell *shell = NULL;
+
+//     if (shell == NULL)
+//         shell = init_shell();
+//     return (shell);
+// }
