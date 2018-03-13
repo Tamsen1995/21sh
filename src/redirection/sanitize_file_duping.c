@@ -36,6 +36,8 @@ char **sanitize_file_duping(char **cmd)
 			add_sanitation_to_list(&lst, cmd[i], ">&"); // adds the sanitized twod arr to the list
 		else if (ft_strstr(cmd[i], "<&"))
 			add_sanitation_to_list(&lst, cmd[i], "<&"); // adds the sanitized twod arr to the list
+		else if (ft_strstr(cmd[i], "<<"))
+			add_sanitation_to_list(&lst, cmd[i], "<<");
 		else
 			ft_strlst_push_back(&lst, cmd[i]); // adds the normal array elements to the list
 		i++;

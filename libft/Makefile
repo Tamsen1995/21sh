@@ -72,6 +72,7 @@ SRC = ft_atoi.c \
 	ft_alloc_twod_arr_with_mem.c \
 	ft_strlst_push_back.c \
 	ft_list_to_arr.c \
+	ft_stringify_strlst.c \
 	fatal.c \
 	make_file_path.c \
 

@@ -162,6 +162,13 @@ char				*make_env_string(t_env *env_elem);
 ** redirections functions here
 */
 
+void 				fork_and_write(t_shell *shell, int fd_left, char *here_doc_string);
+void				write_to_pipe(int *pipe_fd, int fd_right);
+void				here_doc(t_shell *shell);
+void				dup_input(t_shell *shell);
+char 				**remove_redir_from_array(char **cmd, int redir_index);
+void				simply_dup_it(t_shell *shell, int fd_left, int fd_right);
+void				dup_it(t_shell *shell, int default_left_fd);
 int					get_fd(char *s);
 int 				is_redirection(char *s);
 void				dup_exec(t_shell *shell, int *pipe_fd, int fd_left);
@@ -206,6 +213,7 @@ void 			    set_cursor(t_line *line);
 void      		    check_input(t_line *line, char *buf);
 void 		       	prompt_cursor(t_line *line);
 void  				insert_buffer(t_line *line, char *key);
+void    		    modify_buffer(t_line *line, char *buf);
 t_buf  			    *ft_new_buf(char *key);
 t_buf				*get_cur_buffer(t_line *line);
 

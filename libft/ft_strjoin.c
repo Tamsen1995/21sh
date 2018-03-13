@@ -17,6 +17,8 @@ static int	my_strlen(const char *str)
 	int		i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (*str != '\0')
 	{
 		i++;
@@ -31,19 +33,19 @@ char		*ft_strjoin(char const *s1, char const *s2)
 	char	*conc;
 	int		mem;
 
-	if (!s1 || !s2)
-		return (NULL);
+//	if (!s1 || !s2)
+//		return (NULL);
 	mem = my_strlen(s1) + my_strlen(s2);
 	if (!(conc = (char *)malloc(sizeof(char) * mem + 1)))
 		return (NULL);
 	tmp = conc;
-	while (*s1 != '\0')
+	while (s1 && *s1 != '\0')
 	{
 		*tmp = *s1;
 		tmp++;
 		s1++;
 	}
-	while (*s2 != '\0')
+	while (s2 && *s2 != '\0')
 	{
 		*tmp = *s2;
 		tmp++;
