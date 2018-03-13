@@ -37,7 +37,7 @@ t_shell *make_shell(t_shell *shell)
     return (shell);
 }
 
-t_shell *init_shell(char **envv)
+t_shell *init_shell()
 {
     t_shell *shell;
 

@@ -136,7 +136,7 @@ typedef struct		s_shell
 
 }					t_shell;
 
-void        launch_error_check(char **envv);
+void        launch_error_check(void);
 
 /*
 ** Testing functions
