@@ -53,7 +53,7 @@ void sh_loop(t_shell *shell) // WIP
 
     status = 1;
     buf = NULL;
-    history = NULL;
+    history = shell->history;
     while (status == 1)
     {
         buf = prompt_loop(history);

@@ -1,15 +1,26 @@
 
 #include "../includes/ft_sh.h"
+#include <signal.h>
 
-
+pid_t				g_pid;
 
 void sig_handl(int sig)
 {
 	t_shell *shell;
+	t_hist *tmp; // TESTING
 
+	tmp = NULL;
 	shell = get_shell();
 	if (sig == SIGINT)
-		sh_loop(shell);
+	{
+		if (!g_pid)
+		{
+			ft_putendl("");
+			ft_putstr("tamshell $> ");
+		}
+		else
+			ft_putstr("You too");
+	}
 
 }
 
