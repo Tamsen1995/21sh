@@ -64,11 +64,11 @@ t_shell *init_shell()
 
 */
 
-// t_shell *get_shell(void)
-// {
-//     static t_shell *shell = NULL;
+t_shell *get_shell(void)
+{
+    static t_shell *shell = NULL;
 
-//     if (shell == NULL)
-//         shell = init_shell();
-//     return (shell);
-// }
+    if (shell == NULL)
+        shell = init_shell();
+    return (shell);
+}

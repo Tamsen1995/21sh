@@ -221,6 +221,7 @@ t_buf				*get_cur_buffer(t_line *line);
 ** 21sh ending here
 */
 
+t_shell 			*get_shell(void);
 T_BOOL				check_builtin_path(t_shell *shell);
 int					exec_builtin(t_shell *shell);
 T_BOOL				check_builtins(char *cmd);
