@@ -234,14 +234,14 @@ void				ft_putenv(t_env **begin_list, char *name, char *value);
 T_BOOL  		    check_bin_cmd(t_shell *shell);
 int      			sh_env(t_shell *shell);
 t_bool   			sh_setenv(char **args, t_shell *shell);
-t_env   		    *init_env(char **envv);
+t_env   		    *init_env();
 int					get_next_line(int const fd, char **line);
 int					sh_execute(t_shell *shell);
 int					sh_launch(t_shell *shell);
 t_bool				sh_cd(char **args, t_shell *shell);
 t_bool				sh_exit(void);
 t_bool				sh_echo(char **args);
-t_shell				*init_shell(char **envv);
+t_shell				*init_shell();
 char				*prompt_loop(t_hist *history);
 
 #endif

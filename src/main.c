@@ -84,6 +84,11 @@ int main(int ac, char **av, char **envv)
     char buf[MAX_BUF_SIZE];
 
     shell = NULL;
+    ac = 0; // TESTING
+    av = NULL; // TESTING
+
+
+
     launch_error_check(envv);
     term_name = ft_secure_getenv("TERM");
     if (tgetent(buf, term_name) == -1)

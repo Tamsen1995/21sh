@@ -57,21 +57,22 @@ t_env           *get_first_env_elem(char **envv)
 ** and allocates a list with all the env vars in it
 */
 
-t_env       *init_env(char **envv)
+t_env       *init_env(void)
 {
     
     t_env   *env_list;    
     char    **env_var;
     int     i;
+    extern char	**environ;
 
     i = 1;
     env_var = NULL;
-    if (!envv)
+    if (!environ)
         fatal("No environment present (init_env)");
-    env_list = get_first_env_elem(envv);
-    while (envv[i])
+    env_list = get_first_env_elem(environ);
+    while (environ[i])
     {
-        env_var = ft_strsplit(envv[i], '=');
+        env_var = ft_strsplit(environ[i], '=');
         ft_putenv(&env_list, env_var[0], env_var[1]);
         free_twod_arr(env_var);
         i++;
