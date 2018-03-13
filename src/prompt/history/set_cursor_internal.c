@@ -55,6 +55,7 @@ void        set_cursor_internal(t_line *line)
     while (tmp_buf) 
     {
         line->current_c = line->current_c->next;
+        line->last_c = line->last_c->next;
         tmp_buf = tmp_buf->next;
     }
 }

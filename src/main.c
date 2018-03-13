@@ -88,6 +88,7 @@ int main(void)
     term_name = ft_secure_getenv("TERM");
     if (tgetent(buf, term_name) == -1)
         fatal("Could not get terminal description (main)");
+    signals();
     shell = get_shell();
     sh_loop(shell);
     free_shell(shell);

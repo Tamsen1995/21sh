@@ -157,6 +157,8 @@ T_BOOL        		term_action(char *buf);
 t_cursor			*get_first_c(t_line *line);
 char				**update_env_arr(t_env *env_list);
 char				*make_env_string(t_env *env_elem);
+void				signals(void);
+void				sh_loop(t_shell *shell);
 
 /*
 ** redirections functions here
