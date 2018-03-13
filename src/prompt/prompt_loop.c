@@ -23,7 +23,7 @@ char            *prompt_loop(t_hist *history)
     char        *cmd_line;
     t_line      *line;
 
-    line = init_line(history);  
+    line = init_line(history);
     ft_putstr(line->prompt);
     while (ft_strcmp(buf, K_RETURN) != 0)
     {
