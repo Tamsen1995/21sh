@@ -24,8 +24,6 @@ void          init_buf_ind(t_buf    *buffer)
 
     tmp = NULL;
     i = 0;
-    if (!buffer)
-        fatal("Error (init_buf_ind)");
     tmp = buffer;
     while (tmp)
     {

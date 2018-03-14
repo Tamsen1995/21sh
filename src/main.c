@@ -53,7 +53,7 @@ void sh_loop(t_shell *shell) // WIP
 
     status = 1;
     buf = NULL;
-    history = NULL;
+    history = shell->history;
     while (status == 1)
     {
         buf = prompt_loop(history);
@@ -77,18 +77,19 @@ void sh_loop(t_shell *shell) // WIP
 ** programs main loop
 */
 
-int main(int ac, char **av, char **envv)
+int main(void)
 {
     t_shell *shell;
     char *term_name;
     char buf[MAX_BUF_SIZE];
 
     shell = NULL;
-    launch_error_check(envv);
+    launch_error_check();
     term_name = ft_secure_getenv("TERM");
     if (tgetent(buf, term_name) == -1)
         fatal("Could not get terminal description (main)");
-    shell = init_shell(ac, av, envv);
+    signals();
+    shell = get_shell();
     sh_loop(shell);
     free_shell(shell);
     return (0);

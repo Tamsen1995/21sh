@@ -37,17 +37,15 @@ t_shell *make_shell(t_shell *shell)
     return (shell);
 }
 
-t_shell *init_shell(int ac, char **av, char **envv)
+t_shell *init_shell()
 {
     t_shell *shell;
 
     shell = NULL;
-    av = NULL;
-    ac = 0;
     if (!(shell = (t_shell *)malloc(sizeof(t_shell) * 1)))
         fatal("Couldn't allocate shell in (init_shell)");
     shell->history = NULL;
-    shell->env = init_env(envv);
+    shell->env = init_env();
     shell->env_arr = update_env_arr(shell->env);
     shell->argc = 0;
     shell->cmds = NULL;
@@ -64,15 +62,13 @@ t_shell *init_shell(int ac, char **av, char **envv)
 ** in between function calls
 ** thus creating a quasi global variable
 
+*/
 
-t_shell            *get_shell(void)
+t_shell *get_shell(void)
 {
     static t_shell *shell = NULL;
 
     if (shell == NULL)
-        shell = make_shell();
-    update_window_size(shell);
+        shell = init_shell();
     return (shell);
 }
-
-*/

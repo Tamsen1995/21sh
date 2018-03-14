@@ -1,7 +1,6 @@
 #include "../../includes/ft_sh.h"
 
-
-void        modify_buffer(t_line *line, char *buf)
+void modify_buffer(t_line *line, char *buf)
 {
     if (term_action(buf) == TRUE)
         check_input(line, buf);
@@ -17,18 +16,18 @@ void        modify_buffer(t_line *line, char *buf)
 ** Display the updated contents of the text buffer on screen.
 */
 
-char            *prompt_loop(t_hist *history)
+char *prompt_loop(t_hist *history)
 {
-	char		buf[KEY_BUF_SIZE + 1];
-    char        *cmd_line;
-    t_line      *line;
+    char buf[KEY_BUF_SIZE + 1];
+    char *cmd_line;
+    t_line *line;
 
-    line = init_line(history);  
+    line = get_line(history);
     ft_putstr(line->prompt);
     while (ft_strcmp(buf, K_RETURN) != 0)
     {
         ft_bzero(buf, KEY_BUF_SIZE + 1);
-        read(STDIN_FILENO, buf, KEY_BUF_SIZE); 
+        read(STDIN_FILENO, buf, KEY_BUF_SIZE);
         modify_buffer(line, buf);
         print_buffer(line);
     }

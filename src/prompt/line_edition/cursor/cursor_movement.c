@@ -29,6 +29,9 @@ void        move_left(t_line *line)
 
 void          cursor_movement(char *key, t_line *line)
 {
+
+   
+
     if (!line)
         fatal("Error (cursor_movement)");
     if (!key || !line->buffer)

@@ -1,11 +1,10 @@
 #include "../../../includes/ft_sh.h"
 
-
 /*
 ** frees the cursor index linked list
 */
 
-void            free_cursor(t_cursor *cur)
+void free_cursor(t_cursor *cur)
 {
     t_cursor *tmp;
 
@@ -21,19 +20,20 @@ void            free_cursor(t_cursor *cur)
         free(tmp->next);
     }
     free(tmp);
+    cur = NULL;
 }
 
 /*
 ** freeing the line buffer
 */
 
-void            free_buffer(t_buf *buffer)
+void free_buffer(t_buf *buffer)
 {
     t_buf *tmp;
 
     tmp = NULL;
     if (!buffer)
-        return ;
+        return;
     tmp = buffer;
     while (tmp->next)
         tmp = tmp->next;
@@ -53,14 +53,18 @@ void            free_buffer(t_buf *buffer)
 ** structure
 */
 
-
-void            free_line_struct(t_line *line)
+void free_line_struct(t_line *line)
 {
+
     if (!line || !line->sz)
         fatal("Error (free_line_struct)");
     reset_cursor();
     free_buffer(line->buffer);
+    line->buffer = NULL;
     free_cursor(line->cursor);
+    line->cursor = NULL;
+    line->current_c = NULL;
+    line->first_c = NULL;
     if (line->sz)
         free(line->sz);
     ft_putendl("");

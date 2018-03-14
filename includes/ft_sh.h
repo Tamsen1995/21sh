@@ -136,7 +136,7 @@ typedef struct		s_shell
 
 }					t_shell;
 
-void        launch_error_check(char **envv);
+void        launch_error_check(void);
 
 /*
 ** Testing functions
@@ -148,6 +148,7 @@ void           print_list_test(t_buf *buffer);
 ** 21sh starting here
 */
 
+t_line				*get_line(t_hist *history);
 t_cmds      		*store_commands(char *commands);
 int             	putintc(int c);
 void				print_buffer(t_line *line);
@@ -157,6 +158,8 @@ T_BOOL        		term_action(char *buf);
 t_cursor			*get_first_c(t_line *line);
 char				**update_env_arr(t_env *env_list);
 char				*make_env_string(t_env *env_elem);
+void				signals(void);
+void				sh_loop(t_shell *shell);
 
 /*
 ** redirections functions here
@@ -208,6 +211,7 @@ void				free_line_struct(t_line *line); // Freeing the struct
 t_buf          		*del_buf_elem(t_line *line);
 void  		        init_buf_ind(t_buf	*buffer);
 void     	       	free_buffer(t_buf *buffer);
+void				free_cursor(t_cursor *cur);
 void  			    reset_cursor();
 void 			    set_cursor(t_line *line);
 void      		    check_input(t_line *line, char *buf);
@@ -221,6 +225,7 @@ t_buf				*get_cur_buffer(t_line *line);
 ** 21sh ending here
 */
 
+t_shell 			*get_shell(void);
 T_BOOL				check_builtin_path(t_shell *shell);
 int					exec_builtin(t_shell *shell);
 T_BOOL				check_builtins(char *cmd);
@@ -234,14 +239,14 @@ void				ft_putenv(t_env **begin_list, char *name, char *value);
 T_BOOL  		    check_bin_cmd(t_shell *shell);
 int      			sh_env(t_shell *shell);
 t_bool   			sh_setenv(char **args, t_shell *shell);
-t_env   		    *init_env(char **envv);
+t_env   		    *init_env();
 int					get_next_line(int const fd, char **line);
 int					sh_execute(t_shell *shell);
 int					sh_launch(t_shell *shell);
 t_bool				sh_cd(char **args, t_shell *shell);
 t_bool				sh_exit(void);
 t_bool				sh_echo(char **args);
-t_shell				*init_shell(int ac, char **av, char **envv);
+t_shell				*init_shell();
 char				*prompt_loop(t_hist *history);
 
 #endif
