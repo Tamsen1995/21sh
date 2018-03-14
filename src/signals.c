@@ -2,7 +2,7 @@
 #include "../includes/ft_sh.h"
 #include <signal.h>
 
-pid_t				g_pid;
+pid_t g_pid;
 
 void sig_handl(int sig)
 {
@@ -15,13 +15,13 @@ void sig_handl(int sig)
 	{
 		if (!g_pid)
 		{
+			get_line(NULL);
 			ft_putendl("");
 			ft_putstr("tamshell $> ");
 		}
 		else
 			ft_putstr("You too");
 	}
-
 }
 
 void signals(void)

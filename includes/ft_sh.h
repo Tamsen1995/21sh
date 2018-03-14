@@ -148,6 +148,7 @@ void           print_list_test(t_buf *buffer);
 ** 21sh starting here
 */
 
+t_line				*get_line(t_hist *history);
 t_cmds      		*store_commands(char *commands);
 int             	putintc(int c);
 void				print_buffer(t_line *line);
@@ -210,6 +211,7 @@ void				free_line_struct(t_line *line); // Freeing the struct
 t_buf          		*del_buf_elem(t_line *line);
 void  		        init_buf_ind(t_buf	*buffer);
 void     	       	free_buffer(t_buf *buffer);
+void				free_cursor(t_cursor *cur);
 void  			    reset_cursor();
 void 			    set_cursor(t_line *line);
 void      		    check_input(t_line *line, char *buf);
