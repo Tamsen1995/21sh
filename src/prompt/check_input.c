@@ -5,7 +5,7 @@
 ** might have to be executed
 */
 
-void            check_input(t_line *line, char *buf)
+void            check_input(t_line *line, t_hist *history, char *buf)
 {
     if (!line)
         fatal("Error (check_input)");
@@ -13,9 +13,9 @@ void            check_input(t_line *line, char *buf)
         return ;
     cursor_movement(buf, line);
     if (ft_strcmp(buf, K_UP) == 0)
-        check_hist(line);
+        check_hist(line, history);
     if (ft_strcmp(buf, K_DOWN) == 0)
-        check_hist_down(line);
+        check_hist_down(line, history);
     if (ft_strcmp(buf, K_BACKSPACE) == 0)
         line->buffer = del_buf_elem(line);
 }

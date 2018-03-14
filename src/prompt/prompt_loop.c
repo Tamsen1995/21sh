@@ -1,9 +1,9 @@
 #include "../../includes/ft_sh.h"
 
-void modify_buffer(t_line *line, char *buf)
+void modify_buffer(t_line *line, t_hist *history, char *buf)
 {
     if (term_action(buf) == TRUE)
-        check_input(line, buf);
+        check_input(line, history, buf);
     else if (term_action(buf) == FALSE)
         insert_buffer(line, buf);
 }
@@ -22,13 +22,14 @@ char *prompt_loop(t_hist *history)
     char *cmd_line;
     t_line *line;
 
-    line = get_line(history);
+    line = get_line();
+    init_hist_index(history);
     ft_putstr(line->prompt);
     while (ft_strcmp(buf, K_RETURN) != 0)
     {
         ft_bzero(buf, KEY_BUF_SIZE + 1);
         read(STDIN_FILENO, buf, KEY_BUF_SIZE);
-        modify_buffer(line, buf);
+        modify_buffer(line, history, buf);
         print_buffer(line);
     }
     cmd_line = stringify_buffer(line->buffer);

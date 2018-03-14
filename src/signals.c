@@ -15,7 +15,7 @@ void sig_handl(int sig)
 	{
 		if (!g_pid)
 		{
-			get_line(NULL);
+			get_line();
 			ft_putendl("");
 			ft_putstr("tamshell $> ");
 		}

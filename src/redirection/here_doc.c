@@ -13,7 +13,7 @@ char *here_prompt_loop(t_hist *history)
 	{
 		ft_bzero(buf, KEY_BUF_SIZE + 1);
 		read(STDIN_FILENO, buf, KEY_BUF_SIZE);
-		modify_buffer(line, buf);
+		modify_buffer(line, history, buf);
 		print_buffer(line);
 	}
 	cmd_line = stringify_buffer(line->buffer);
