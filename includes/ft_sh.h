@@ -84,7 +84,6 @@ typedef struct		s_buf
 typedef struct			s_line
 {	
 	int					his_index;
-	struct s_hist		*history;
 	struct s_buf		*buffer;
 	struct s_cursor		*cursor;
 	struct s_cursor		*first_c; // the cursor cannot go past this ever because this is where the prompt starts
@@ -148,7 +147,7 @@ void           print_list_test(t_buf *buffer);
 ** 21sh starting here
 */
 
-t_line				*get_line(t_hist *history);
+t_line				*get_line(void);
 t_cmds      		*store_commands(char *commands);
 int             	putintc(int c);
 void				print_buffer(t_line *line);
@@ -191,8 +190,8 @@ char				**sanitize_file_duping(char **cmd);
 ** command line history functions:
 */
 
-void        		check_hist(t_line *line);
-void    			check_hist_down(t_line *line);
+void        		check_hist(t_line *line, t_hist *history);
+void    			check_hist_down(t_line *line, t_hist *history);
 void        		add_history(t_hist **history, char *buf);
 t_buf      			*replace_buffer(char *string);
 void        		set_cursor_internal(t_line *line);
@@ -202,7 +201,7 @@ int         		get_last_index(t_hist *history);
 ** line buffer/edition functions:
 */
 
-t_line     		    *init_line(t_hist *history);
+t_line     		    *init_line();
 void				ft_add_buf(t_buf **begin_list, char *key);
 char     		   	*stringify_buffer(t_buf  *buffer);
 int					list_len(t_buf *buffer);
@@ -214,10 +213,10 @@ void     	       	free_buffer(t_buf *buffer);
 void				free_cursor(t_cursor *cur);
 void  			    reset_cursor();
 void 			    set_cursor(t_line *line);
-void      		    check_input(t_line *line, char *buf);
+void      		    check_input(t_line *line, t_hist *history, char *buf);
 void 		       	prompt_cursor(t_line *line);
 void  				insert_buffer(t_line *line, char *key);
-void    		    modify_buffer(t_line *line, char *buf);
+void    		    modify_buffer(t_line *line, t_hist *history, char *buf);
 t_buf  			    *ft_new_buf(char *key);
 t_buf				*get_cur_buffer(t_line *line);
 

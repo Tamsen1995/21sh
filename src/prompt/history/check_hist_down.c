@@ -1,6 +1,6 @@
 #include "../../../includes/ft_sh.h"
 
-void    check_hist_down(t_line *line)
+void    check_hist_down(t_line *line, t_hist *history)
 {
     t_hist  *tmp_his;
     char    *replacement;
@@ -9,16 +9,16 @@ void    check_hist_down(t_line *line)
     replacement = NULL;
     if (!line)
         fatal("Error (check_hist_down)");
-    if (!line->history)
+    if (!history)
         return ;
     if (line->his_index == 0)
         return ;
-    else if (get_last_index(line->history) == line->his_index)
+    else if (get_last_index(history) == line->his_index)
         replacement = "";
     else
     {
         line->his_index++;
-        tmp_his = line->history;
+        tmp_his = history;
         while (tmp_his && tmp_his->index != line->his_index)
             tmp_his = tmp_his->next;
         replacement = tmp_his->cmd;
