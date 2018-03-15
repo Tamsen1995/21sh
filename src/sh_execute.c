@@ -51,7 +51,17 @@ int sh_execute(t_shell *shell)
 	if (!shell->cmds->args || !shell->cmds->args[0])
 		return (1);
 	shell->cmds->args = sanitize_file_duping(shell->cmds->args);
-	shell->cmds->args = assign_redirections(shell->cmds->args); // WIP
+	shell->cmds->args = assign_redirections(shell->cmds->args);
+
+	// Check for a paramater after the redirection here ??
+
+
+	// got_redirection and then check if the parameter afterwards is valid
+
+
+	if (got_redirection(shell->cmds->args) && !redir_has_fd_right(shell->cmds->args))
+		return(1);
+
 	if (shell->cmds->args &&
 		*shell->cmds->args &&
 		!exec_redirection(shell) &&

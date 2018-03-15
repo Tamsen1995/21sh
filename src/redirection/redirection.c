@@ -1,5 +1,6 @@
 #include "../../includes/ft_sh.h"
 
+
 /* 
 ** determines whether the given
 ** string is a redirection or not
@@ -45,20 +46,41 @@ t_bool got_pipe_after_dup(char **cmd)
 	return (FALSE);
 }
 
+
+
+/*
+** it also checks for a possible missing redirect parameter
+*/
+
+t_bool redir_has_fd_right(char **cmd)
+{
+	int i;
+	int ret;
+
+	i = 0;
+	ret = 0;
+	while (cmd[i])
+	{
+		if ((ret = is_redirection(cmd[i])) && cmd[i + 1])
+			return (TRUE);
+		i++;
+	}
+	ft_putendl("tamshell\t:\tparsing error near newline");
+	return (FALSE);
+}
+
 // TODO : got_redirection function
 // got_redirection returns the redirection index which determines the
 // redirection that is supposed to take place.
 // it does so by checking for a pipeline
 // and also checks for syntax errors
 // once a redirection has been found
-// it also checks for a possible missing redirect parameter
-// file
+
 
 // TODO : check for syntactical errors such as:
-// a missing name for the redirect
 // as well as an extraneous redirect after the redirect
 
-static int got_redirection(char **cmd)
+int got_redirection(char **cmd)
 {
 	int ret;
 	int i;
@@ -69,16 +91,8 @@ static int got_redirection(char **cmd)
 		return (R_PIPELINE);
 	while (cmd[i])
 	{
-
 		if ((ret = is_redirection(cmd[i])))
-		{
-
-			// TODO : error check and make sure the syntax
-			// for the redir is properly checked,
-			// if it isn't throw an error to the console
-
 			return (ret);
-		}
 		i++;
 	}
 	return (FALSE);

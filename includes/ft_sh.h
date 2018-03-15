@@ -164,6 +164,7 @@ void				sh_loop(t_shell *shell);
 ** redirections functions here
 */
 
+
 void 				fork_and_write(t_shell *shell, int fd_left, char *here_doc_string);
 void				write_to_pipe(int *pipe_fd, int fd_right);
 void				here_doc(t_shell *shell);
@@ -178,6 +179,8 @@ void				output_append_redirect(t_shell *shell);
 void				output_redirect(t_shell *shell);
 char				**assign_redirections(char **cmd);
 t_bool				exec_redirection(t_shell *shell);
+t_bool 				redir_has_fd_right(char **cmd);
+int					got_redirection(char **cmd);
 void				input_redirect(t_shell *shell);
 void				do_redirect(t_shell *shell, enum e_replacement c, \
 int o_flag, void (*do_stuff_with_cmd_and_fd_now)(t_shell *, int, int));
